@@ -1,0 +1,213 @@
+<!-- Main content -->
+<div style="height: 600px; overflow-y: auto;">
+  <div class="row">
+    <!-- left column -->
+    <div class="col-md-12">
+      <!-- general form elements -->
+      <div class="card card-primary">
+        <div class="card-header">
+          <h3 class="card-title">
+            <span *ngIf="addNew">Add</span>
+            <span *ngIf="!addNew">Edit</span>
+            User
+          </h3>
+        </div>
+        <!-- /.card-header -->
+        <!-- form start -->
+        <form [formGroup]="memberForm" (ngSubmit)="submit()" autocomplete="off">
+          <div class="card-body">
+            <div class="form-group">
+              <input type="text" style="position: absolute; left: -9999px" />
+              <label for="exampleInputEmail1">First Name</label>
+              <input
+                type="text"
+                class="form-control"
+                placeholder="Enter first Name"
+                formControlName="firstName"
+                [class.is-invalid]="
+                  submitted && memberForm.get('firstName')?.errors
+                "
+              />
+            </div>
+            <span
+              class="text-danger"
+              *ngIf="
+                submitted && memberForm.get('firstName')?.hasError('required')
+              "
+            >
+              First Name is required
+            </span>
+            <span
+              class="text-danger"
+              *ngIf="
+                submitted && memberForm.get('firstName')?.hasError('pattern')
+              "
+            >
+              First name can't have numbers
+            </span>
+            <span
+              class="text-danger"
+              *ngIf="
+                (submitted &&
+                  memberForm.get('firstName')?.hasError('minlength')) ||
+                (submitted &&
+                  memberForm.get('firstName')?.hasError('maxlength'))
+              "
+            >
+              First name must be atleast 3,and maximum 15 characters"
+            </span>
+            <div class="form-group">
+              <label for="exampleInputEmail1">Last Name</label>
+              <input
+                type="text"
+                class="form-control"
+                placeholder="Enter Last Name"
+                formControlName="lastName"
+                [class.is-invalid]="
+                  submitted && memberForm.get('lastName')?.errors
+                "
+              />
+            </div>
+            <span
+              class="text-danger"
+              *ngIf="
+                submitted && memberForm.get('lastName')?.hasError('required')
+              "
+            >
+              Last Name is required
+            </span>
+            <span
+              class="text-danger"
+              *ngIf="
+                submitted && memberForm.get('lastName')?.hasError('pattern')
+              "
+            >
+              Last name can't have numbers
+            </span>
+            <span
+              class="text-danger"
+              *ngIf="
+                (submitted &&
+                  memberForm.get('lastName')?.hasError('minlength')) ||
+                (submitted && memberForm.get('lastName')?.hasError('maxlength'))
+              "
+            >
+              First name must be atleast 3,and maximum 15 characters"
+            </span>
+            <div class="form-group">
+              <label for="exampleInputEmail1">Email</label>
+              <input
+                type="email"
+                class="form-control"
+                placeholder="Enter Email"
+                formControlName="userName"
+                [class.is-invalid]="
+                  submitted && memberForm.get('userName')?.errors
+                "
+              />
+            </div>
+            <span
+              class="text-danger"
+              *ngIf="
+                submitted && memberForm.get('userName')?.hasError('required')
+              "
+            >
+              Email is required
+            </span>
+            <span
+              class="text-danger"
+              *ngIf="
+                submitted && memberForm.get('userName')?.hasError('pattern')
+              "
+            >
+              Invalid email address
+            </span>
+            <div class="form-group">
+              <label for="exampleInputPassword1">Password</label>
+              <input
+                type="password"
+                class="form-control"
+                id="exampleInputPassword1"
+                placeholder="Password"
+                formControlName="password"
+                [class.is-invalid]="
+                  submitted && memberForm.get('password')?.errors
+                "
+                (change)="passwordOnChange()"
+              />
+            </div>
+            <span
+              class="text-danger"
+              *ngIf="
+                submitted && memberForm.get('password')?.hasError('required')
+              "
+            >
+              Password is required
+            </span>
+            <span
+              class="text-danger"
+              *ngIf="
+                (submitted &&
+                  memberForm.get('password')?.hasError('minlength')) ||
+                (submitted && memberForm.get('password')?.hasError('maxlength'))
+              "
+            >
+              Password must be atleast 6,and maximum 15 characters"
+            </span>
+
+            <div *ngIf="!addNew">
+              <span class="text-info fw-bold">Note:</span>
+              If you don't intend to change the member password, then leave the
+              password field empty
+            </div>
+            <div class="form-group mt-2">
+              <div class="col-2">
+                <label for="roles">Roles:</label>
+              </div>
+              <div class="col-10">
+                <div class="btn-group">
+                  <ng-container *ngFor="let role of applicationRoles">
+                    <input
+                      type="checkbox"
+                      class="btn-check"
+                      id="{{role}}"
+                      (change)="roleOnChange(role)"
+                      [checked]="existingMemberRoles.includes(role)"
+                      [class.is-invalid]="
+                        submitted && memberForm.get('roles')?.errors
+                      "
+                    />
+                    <label class="btn btn-outline-primary" for="{{ role }}">{{
+                      role
+                    }}</label>
+                  </ng-container>
+                </div>
+              </div>
+            </div>
+            <div class="text-danger" *ngIf="submitted &&memberForm.get('roles')?.hasError('required')">
+              Please select atleast one role
+            </div>
+          </div>
+
+          <!-- roles -->
+     
+        
+          <!-- /.card-body -->
+
+          <div class="card-footer">
+            <button type="submit" class="btn btn-primary">
+              {{ addNew ? "Create" : "Update" }}
+            </button>
+          </div>
+        </form>
+      </div>
+      <!-- /.card -->
+
+      <!-- /.card -->
+    </div>
+    <!--/.col (right) -->
+  </div>
+  <!-- /.row -->
+</div>
+<!-- /.container-fluid -->
+<!-- /.content -->

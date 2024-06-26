@@ -1,0 +1,26 @@
+.button-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .button-container button {
+    margin-right: 5px; /* Adjust as needed */
+    border: none; /* Remove borders */
+    box-shadow: none; /* Remove box shadows */
+    outline: none; /* Remove outlines */
+  }
+  .button-container button:last-child {
+    margin-right: 0; /* Remove margin for the last button */
+  }
+  .button-container button:focus {
+    outline: none; /* Ensure no outline on focus */
+  }
+  
+  .pagination{
+    padding: 20px 16px;
+    float:right;
+
+  }
+  .pagination::ng-deep .ngx-pagination .current{
+background: blue;
+  }

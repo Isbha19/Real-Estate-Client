@@ -1,0 +1,57 @@
+<div class="container-xxl py-5">
+    <div class="container">
+      <div class="bg-light rounded p-3">
+        <div
+          class="bg-white rounded p-4"
+          style="border: 1px dashed rgba(0, 185, 142, 0.3)"
+        >
+          <div class="row g-5 align-items-center">
+          
+            <div class=" wow fadeIn" data-wow-delay="0.5s">
+              <div class="mb-4">
+                <form [formGroup]="emailForm" (ngSubmit)="sendEmail()">
+                  <div class="row g-3">
+                 
+                    <h1 *ngIf="mode?.includes('resend-email-confirmation-link')" class="mb-3 text-center">Enter you email for Confirmation Link</h1>
+                    <h1 *ngIf="mode?.includes('forgot-username-or-password')" class="mb-3 text-center">Retrieve your username or password</h1>
+
+                    <div class="col-12">
+                      <div class="form-floating">
+                        <input
+                          type="email"
+                          class="form-control"
+                          id="email"
+                          placeholder="Email"
+                          formControlName="email"
+                          [class.is-invalid]="submitted && emailForm.get('email')?.errors"
+
+                        />
+                        <label for="Email">Email</label>
+                        <span class="text-danger" *ngIf="submitted&&emailForm.get('email')?.hasError('required')">
+                          Email is required
+                        </span>
+                        <span class="text-danger" *ngIf="submitted&&emailForm.get('email')?.hasError('pattern')">
+                            Invalid email address
+                             </span>
+                      </div>
+                    </div>
+  
+                  
+                    <div
+                      class="col-12 d-flex justify-content-center align-items-center"
+                    >
+                      <button type="submit" class="btn btn-primary px-4 me-2">Send</button>
+                      <button (click)="cancel()" class="btn btn-primary px-4 me-2">Cancel</button>
+
+                    </div>
+         
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  

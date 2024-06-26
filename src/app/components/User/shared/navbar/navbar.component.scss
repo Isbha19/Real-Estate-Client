@@ -1,0 +1,33 @@
+.last-sub-menu {
+    right: 0;
+  left: initial;
+
+    width: 30px; /* Adjust width as needed */
+    padding: 15px; /* Add padding for better spacing */
+}
+.dropdown-text {
+    margin: 0;
+    padding-bottom: 10px;
+    font-size: 14px;
+    color: #333;
+}
+
+/* Ensure the Register button spans the full width */
+.btn.w-100 {
+    width: 100%;
+}
+
+.dropdown-divider {
+    margin: 10px 0;
+}
+
+.dropdown-item {
+    padding: 5px 15px;
+}
+
+
+.nav-item .dropdown-menu {
+    width: 300px; /* Adjust width as needed */
+    padding: 15px; /* Add padding for better spacing */
+}
+

@@ -1,0 +1,75 @@
+<div class="container-xxl py-5" *ngIf="provider&&access_token&&userId">
+    <div class="container">
+      <div class="bg-light rounded p-3">
+        <div
+          class="bg-white rounded p-4"
+          style="border: 1px dashed rgba(0, 185, 142, 0.3)"
+        >
+          <div class="row g-5 align-items-center">
+        
+            <div class="col-lg-5 mx-auto wow fadeIn" data-wow-delay="0.5s">
+                <h1 class="display-5 animated fadeIn mb-4 text-center">Creating an account using your <span class="text-primary">{{provider|titlecase}}</span></h1>
+
+                <form [formGroup]="registerForm" (ngSubmit)="register()">
+                  <div class="row g-3">
+                    <div class="col-12">
+                      <div class="form-floating">
+                        <input
+                          type="text"
+                          class="form-control"
+                          id="firstname"
+                          placeholder="First Name"
+                          formControlName="firstName"
+                          [class.is-invalid]="submitted && registerForm.get('firstName')?.errors"
+                        />
+                        <label for="First Name">First Name</label>
+                        <span class="text-danger" *ngIf="submitted&&registerForm.get('firstName')?.hasError('required')">
+                          First name is required
+                        </span>
+                        <span class="text-danger" *ngIf="submitted&&registerForm.get('firstName')?.hasError('minlength')||submitted&&registerForm.get('firstName')?.hasError('maxlength')">
+                          First name must be atleast 3,and maximum 15 characters" 
+                        </span>
+                        <span class="text-danger" *ngIf="submitted&&registerForm.get('firstName')?.hasError('pattern')">
+                          First name can't have numbers
+                           </span>
+                      </div>
+                    </div>
+                    <div class="col-12">
+                      <div class="form-floating">
+                        <input
+                          type="text"
+                          class="form-control"
+                          id="lastname"
+                          placeholder="Last Name"
+                          formControlName="lastName"
+                          [class.is-invalid]="submitted && registerForm.get('lastName')?.errors"
+  
+                        />
+                        <label for="Last Name">Last Name</label>
+                        <span class="text-danger" *ngIf="submitted&&registerForm.get('lastName')?.hasError('required')">
+                          Last name is required
+                        </span>
+                        <span class="text-danger" *ngIf="submitted&&registerForm.get('lastName')?.hasError('minlength')||submitted&&registerForm.get('lastName')?.hasError('maxlength')">
+                          Last name must be atleast 3,and maximum 15 characters"                      </span>
+                      </div>
+                      <span class="text-danger" *ngIf="submitted&&registerForm.get('lastName')?.hasError('pattern')">
+                        Last name can't have numbers
+                         </span>
+                    </div>
+  
+         
+                    <div >
+                      <button type="submit" href="" class="btn btn-primary px-4 w-100">Create Account</button>
+                    
+                    </div>
+                  
+  
+                  
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>

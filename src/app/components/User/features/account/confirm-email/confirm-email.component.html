@@ -1,0 +1,15 @@
+<div class="text-center p-5 mt-lg-5" *ngIf="success">
+    <h1 class="display-5 animated fadeIn mb-4">Email Confirmation <span class="text-primary">Successful</span></h1>
+    <p class="animated fadeIn mb-4 pb-2">Thank you for confirming your email address! Your account is now fully activated. You can now access all features and services on our platform. Enjoy exploring and finding your next property!</p>
+    <a (click)="LoginPopUp()" class="btn btn-primary py-3 px-5 me-3 animated fadeIn">Login</a>
+</div>
+
+<div class="text-center p-5 mt-lg-5" *ngIf="!success">
+    <h1 class="display-5 animated fadeIn mb-4">Email Confirmation <span class="text-danger">Failed</span></h1>
+    <p class="animated fadeIn mb-4 pb-2">Unfortunately, we were unable to confirm your email address. This might be due to an invalid or expired confirmation link.</p>
+    <p class="animated fadeIn pb-2">Please click the button below to resend the confirmation link to your email address.</p>
+    <a (click)="resendEmailConfirmationLink()" class="btn btn-primary py-3 px-5 me-3 animated fadeIn">Resend Confirmation Link</a>
+    <p class="animated fadeIn mt-4 pb-2">If you have already confirmed your email address, you do not need to click the resend button. Instead, please login to your account.     <a (click)="LoginPopUp()" class="btn btn-primary py-2 px-3 me-3 animated fadeIn">Login</a>
+    </p>
+
+</div>

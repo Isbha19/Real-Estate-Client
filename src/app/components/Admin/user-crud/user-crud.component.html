@@ -1,0 +1,181 @@
+<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper">
+  <!-- Content Header (Page header) -->
+  <section class="content-header">
+    <div class="container-fluid">
+      <div class="row mb-2">
+        <div class="col-sm-6">
+          <h1>DataTables</h1>
+        </div>
+        <div class="col-sm-6">
+          <ol class="breadcrumb float-sm-right">
+            <li class="breadcrumb-item"><a href="#">Home</a></li>
+            <li class="breadcrumb-item active">DataTables</li>
+          </ol>
+        </div>
+      </div>
+    </div>
+    <!-- /.container-fluid -->
+  </section>
+
+  <!-- Main content -->
+  <section class="content">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-12">
+          <div class="card">
+            <div class="card-header">
+              <div class="row">
+                <div class="col-sm-6">
+                  <h1 class="card-title">Users</h1>
+                </div>
+                <div class="col-sm-6 text-end">
+                  <button
+                    type="button"
+                    class="btn btn-primary"
+                    (click)="editAndUpdate()"
+                  >
+                    Create User
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <!-- /.card-header -->
+            <div class="card-body">
+              <div class="table-responsive">
+                <table id="example2" class="table table-bordered table-hover">
+                  <thead>
+                    <tr>
+                      <th>First Name</th>
+                      <th>Last Name</th>
+                      <th>Email</th>
+                      <th>Date Created</th>
+                      <th>Role</th>
+                      <th>Lock/Unlock</th>
+                      <th>Edit/Delete</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngIf="members.length === 0">
+                      <td colspan="7" class="text-center">No Members</td>
+                    </tr>
+                    <tr *ngFor="let member of members |paginate:{itemsPerPage:4,currentPage:page,totalItems:totalLength}">
+                      <td>{{ member.firstName | titlecase }}</td>
+                      <td>{{ member.lastName | titlecase }}</td>
+                      <td>{{ member.userName }}</td>
+                      <td>{{ member.dateCreated | date }}</td>
+                      <td>
+                        <span *ngFor="let role of member.roles; let i = index">
+                          {{ role
+                          }}<span *ngIf="i + 1 < member.roles.length">,</span>
+                        </span>
+                      </td>
+                      <td class="text-center">
+                        <a
+                          class="btn btn-warning btn-sm"
+                          *ngIf="!member.isLocked"
+                          (click)="lockMember(member.id)"
+                        >
+                          Lock
+                        </a>
+                        <a
+                          class="btn btn-warning btn-sm"
+                          *ngIf="member.isLocked"
+                          (click)="unlockMember(member.id)"
+                        >
+                          Unlock
+                        </a>
+                      </td>
+                      <td class="text-center">
+                     <div class="button-container">
+                      <button
+                      class="btn btn-primary btn-sm me-2"
+                      (click)="editAndUpdate(member.id)"
+                    >
+                      Edit
+                    </button>
+                    <button
+                      class="btn btn-danger btn-sm"
+                      (click)="deleteMember(member.id)"
+                    >
+                    
+                      Delete
+                    </button>
+                     </div>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+<!-- pagination -->
+<div class="pagination">
+  <pagination-controls (pageChange)="page=$event"></pagination-controls>
+</div>
+              </div>
+              <!-- Modal -->
+              <div
+                #modal
+                class="modal fade"
+                id="exampleModal"
+                tabindex="-1"
+                role="dialog"
+                aria-labelledby="exampleModalLabel"
+                aria-hidden="true"
+              >
+                <div class="modal-dialog" role="document">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title" id="exampleModalLabel">
+                        Delete User
+                      </h5>
+                      <button
+                        type="button"
+                        class="close"
+                        data-dismiss="modal"
+                        aria-label="Close"
+                      >
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                    </div>
+                    <div class="modal-body">
+                      Are you sure you want to delete the member "{{
+                        memberToDelete?.firstName
+                      }}"?
+                    </div>
+                    <div class="text-center m-3">
+                      <button
+                        type="button"
+                        class="btn btn-primary mx-2"
+                        data-dismiss="modal"
+                        (click)="confirm()"
+                      >
+                        Yes
+                      </button>
+                      <button
+                        type="button"
+                        class="btn btn-primary mx-2"
+                        data-dismiss="modal"
+                        (click)="decline()"
+                      >
+                        No
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- /.card-body -->
+          </div>
+          <!-- /.card -->
+
+          <!-- /.card -->
+        </div>
+        <!-- /.col -->
+      </div>
+      <!-- /.row -->
+    </div>
+    <!-- /.container-fluid -->
+  </section>
+  <!-- /.content -->
+</div>
+<!-- /.content-wrapper -->
