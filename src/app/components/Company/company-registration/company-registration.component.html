@@ -1,1 +1,242 @@
-<p>company-registration works!</p>
+<form [formGroup]="CompanyRegister" (ngSubmit)="HandleSubmit()">
+  <mat-stepper [linear]="isLinear" #stepper>
+    <mat-step [stepControl]="BasicinfoForm">
+      <div formGroupName="companyInformation">
+        <ng-template matStepLabel>Fill out your name</ng-template>
+        <mat-form-field appearance="fill">
+          <mat-label>Company Name</mat-label>
+          <input
+            matInput
+            placeholder="Company Name"
+            formControlName="companyName"
+          />
+        </mat-form-field>
+        <mat-form-field appearance="fill">
+          <mat-label>Trade Name</mat-label>
+          <input
+            matInput
+            placeholder="Trade Name"
+            formControlName="tradeName"
+          />
+        </mat-form-field>
+        <mat-form-field appearance="fill">
+            <mat-label>Company Structure</mat-label>
+            <input
+              matInput
+              placeholder="Company Structure"
+              formControlName="companyStructure"
+            />
+          </mat-form-field>
+          <mat-form-field appearance="fill">
+            <mat-label>company Registration Number</mat-label>
+            <input
+              matInput
+              placeholder="company Registration Number"
+              formControlName="companyRegistrationNumber"
+            />
+          </mat-form-field>
+          <mat-form-field appearance="fill">
+            <mat-label>License Number</mat-label>
+            <input
+              matInput
+              placeholder="License Number"
+              formControlName="licenseNumber"
+            />
+          </mat-form-field>
+          <mat-form-field appearance="fill">
+            <mat-label>Rera Certificate Number</mat-label>
+            <input
+              matInput
+              placeholder="Rera Certificate Number"
+              formControlName="reraCertificateNumber"
+            />
+          </mat-form-field>
+          <mat-form-field appearance="fill">
+            <mat-label>Business Activity Type</mat-label>
+            <input
+              matInput
+              placeholder="Business Activity Type"
+              formControlName="businessActivityType"
+            />
+          </mat-form-field>
+        <div>
+          <button mat-raised-button color="primary" matStepperNext>Next</button>
+        </div>
+      </div>
+    </mat-step>
+    <mat-step [stepControl]="contactInfoForm" label="Fill out your address">
+      <div formGroupName="contactInformation">
+        <mat-form-field>
+          <mat-label>Company Address</mat-label>
+          <input
+            matInput
+            formControlName="companyAddress"
+            placeholder="Ex. 123 Sheikh Zayed Road, Dubai, UAE"
+          />
+        </mat-form-field>
+        <mat-form-field>
+            <mat-label>Phone Number</mat-label>
+            <input
+              matInput
+              formControlName="phoneNumber"
+              placeholder="Ex. +971 50 123 4567"
+            />
+          </mat-form-field>
+          <mat-form-field>
+            <mat-label>Email Address</mat-label>
+            <input
+              matInput
+              formControlName="emailAddress"
+              placeholder="Ex. john@example.com"
+            />
+          </mat-form-field>
+          <mat-form-field>
+            <mat-label>Website URL</mat-label>
+            <input
+              matInput
+              formControlName="websiteUrl"
+              placeholder="Ex. www.example.com"
+            />
+          </mat-form-field>
+        <div>
+          <button mat-raised-button color="primary" matStepperPrevious>
+            Back
+          </button>
+          |
+          <button mat-raised-button color="primary" matStepperNext>Next</button>
+        </div>
+      </div>
+    </mat-step>
+    <mat-step [stepControl]="RepInfoForm" label="Fill out your address">
+      <div formGroupName="RepresentativeInformation">
+        <mat-form-field>
+          <mat-label>Representative Name</mat-label>
+          <input
+            matInput
+            formControlName="repName"
+            placeholder="Representative Name"
+          />
+        </mat-form-field>
+        <mat-form-field>
+            <mat-label>Representative Position</mat-label>
+            <input
+              matInput
+              formControlName="repPosition"
+              placeholder="Representative Position"
+            />
+          </mat-form-field>
+          <mat-form-field>
+            <mat-label>Representative Contact Number</mat-label>
+            <input
+              matInput
+              formControlName="repContactNumber"
+              placeholder="Representative Contact Number"
+            />
+          </mat-form-field>
+          <mat-form-field>
+            <mat-label>Representative Email Address</mat-label>
+            <input
+              matInput
+              formControlName="repEmailAddress"
+              placeholder="Representative Email Address"
+            />
+          </mat-form-field>
+        <div>
+          <button mat-raised-button color="primary" matStepperPrevious>
+            Back
+          </button>
+          |
+          <button mat-raised-button color="primary" matStepperNext>Next</button>
+        </div>
+      </div>
+    </mat-step>
+    <mat-step [stepControl]="legalDocForm" label="Fill out your address">
+      <div formGroupName="legalDocuments">
+        <mat-form-field>
+          <mat-label>Company Registration Document</mat-label>
+          <input
+            matInput
+            formControlName="companyRegistrationDoc"
+            placeholder="company Registration Document"
+          />
+        </mat-form-field>
+        <mat-form-field>
+            <mat-label>Trade License Copy</mat-label>
+            <input
+              matInput
+              formControlName="tradeLicenseCopy"
+              placeholder="Trade License Copy"
+            />
+          </mat-form-field>
+          <mat-form-field>
+            <mat-label>Rera Certificate Copy</mat-label>
+            <input
+              matInput
+              formControlName="reraCertificateCopy"
+              placeholder="Rera Certificate Copy"
+            />
+          </mat-form-field>
+          <mat-form-field>
+            <mat-label>Tenancy Contract</mat-label>
+            <input
+              matInput
+              formControlName="tenancyContract"
+              placeholder="Tenancy Contract"
+            />
+          </mat-form-field>
+        <div>
+          <button mat-raised-button color="primary" matStepperPrevious>
+            Back
+          </button>
+          |
+          <button mat-raised-button color="primary" matStepperNext>Next</button>
+        </div>
+      </div>
+    </mat-step>
+    <mat-step [stepControl]="additionalInfoForm" label="Fill out your address">
+      <div formGroupName="additionalInformation">
+        <mat-form-field>
+          <mat-label>Company logo</mat-label>
+          <input
+            matInput
+            formControlName="companyLogo"
+            placeholder="Company logo"
+          />
+        </mat-form-field>
+        <mat-form-field>
+            <mat-label>Business Description</mat-label>
+            <input
+              matInput
+              formControlName="businessDescription"
+              placeholder="Business Description"
+            />
+          </mat-form-field>
+          <mat-form-field>
+            <mat-label>Number of Employees</mat-label>
+            <input
+              matInput
+              formControlName="numberOfEmployees"
+              placeholder="Number of Employees"
+            />
+          </mat-form-field>
+          <mat-form-field>
+            <mat-label>Terms and Conditions</mat-label>
+            <input
+              matInput
+              formControlName="termsAndCondition"
+              placeholder="Terms and Conditions"
+            />
+          </mat-form-field>
+        <div>
+          <button mat-raised-button color="primary" matStepperPrevious>
+            Back
+          </button>
+          |
+          <button mat-raised-button color="accent" matStepperNext>
+            Submit
+          </button>
+        </div>
+      </div>
+    </mat-step>
+  </mat-stepper>
+</form>

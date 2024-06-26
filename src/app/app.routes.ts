@@ -11,6 +11,7 @@ import { AdminComponent } from './components/Admin/admin/admin.component';
 import { adminGuard } from './core/guards/admin.guard';
 import { SendEmailComponent } from './components/User/features/account/send-email/send-email.component';
 import { RegisterWithThirdPartyComponent } from './components/User/features/account/register-with-third-party/register-with-third-party.component';
+import { CompanyRegistrationComponent } from './components/Company/company-registration/company-registration.component';
 
 export const routes: Routes = [
   {
@@ -25,6 +26,10 @@ export const routes: Routes = [
       {
         path: 'register/third-party/:provider',
         component: RegisterWithThirdPartyComponent,
+      },
+      {
+        path: 'company-registration',
+        component: CompanyRegistrationComponent,
       },
     ],
   },
