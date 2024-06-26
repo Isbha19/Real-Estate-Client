@@ -1,1 +1,21 @@
-node_modules
+# Node modules
+node_modules/
+
+# Output directories
+dist/
+build/
+
+# Cache directories
+.angular/
+
+# Temporary files
+tmp/
+temp/
+
+# Logs
+*.log
+
+# macOS Finder metadata
+.DS_Store
+
+# IDE
