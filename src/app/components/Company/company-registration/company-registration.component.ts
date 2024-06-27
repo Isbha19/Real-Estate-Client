@@ -1,26 +1,42 @@
-import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import {
+  FormBuilder,
+  FormGroup,
+  ReactiveFormsModule,
+  Validators,
+} from '@angular/forms';
 import { Component } from '@angular/core';
 import { MaterialModule } from '../../../material.module';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-company-registration',
   standalone: true,
-  imports: [ReactiveFormsModule,MaterialModule],
+  imports: [ReactiveFormsModule, MaterialModule, CommonModule],
   templateUrl: './company-registration.component.html',
   styleUrl: './company-registration.component.scss',
 })
 export class CompanyRegistrationComponent {
-  isLinear=true;
+  isLinear = false;
+  companyStructures: string[] = [
+    'Sole Proprietorship',
+    ' Limited Liability Company',
+    'Civil Company',
+    'Free Zone Establishment',
+  ];
+  businessActivityTypes: string[] = [
+    'Property management',
+    'Real Estate Brokerage',
+  ];
   constructor(private builder: FormBuilder) {}
   ngOnInit(): void {}
   CompanyRegister = this.builder.group({
     companyInformation: this.builder.group({
-      companyName: this.builder.control('',[
+      companyName: this.builder.control('', [
         Validators.required,
         Validators.minLength(3),
         Validators.maxLength(15),
         Validators.pattern("^[-'a-zA-Z]+$"),
-      ],),
+      ]),
       tradeName: this.builder.control(''),
       companyStructure: this.builder.control('', Validators.required),
       companyRegistrationNumber: this.builder.control('', Validators.required),
@@ -43,35 +59,35 @@ export class CompanyRegistrationComponent {
     legalDocuments: this.builder.group({
       companyRegistrationDoc: this.builder.control('', Validators.required),
       tradeLicenseCopy: this.builder.control('', Validators.required),
-     reraCertificateCopy: this.builder.control('', Validators.required),
+      reraCertificateCopy: this.builder.control('', Validators.required),
       tenancyContract: this.builder.control('', Validators.required),
     }),
     additionalInformation: this.builder.group({
-      companyLogo:this.builder.control('',Validators.required),
+      companyLogo: this.builder.control('', Validators.required),
       businessDescription: this.builder.control('', Validators.required),
       numberOfEmployees: this.builder.control('', Validators.required),
-      termsAndCondition: this.builder.control('', Validators.required),
+      termsAndCondition: this.builder.control(false, Validators.required),
     }),
   });
-  get BasicinfoForm(){
-    return this.CompanyRegister.get("companyInformation") as FormGroup;
+  get BasicinfoForm() {
+    return this.CompanyRegister.get('companyInformation') as FormGroup;
   }
-  get contactInfoForm(){
-    return this.CompanyRegister.get("contactInformation") as FormGroup
+  get contactInfoForm() {
+    return this.CompanyRegister.get('contactInformation') as FormGroup;
   }
-  get RepInfoForm(){
-    return this.CompanyRegister.get("RepresentativeInformation") as FormGroup
+  get RepInfoForm() {
+    return this.CompanyRegister.get('RepresentativeInformation') as FormGroup;
   }
-  get legalDocForm(){
-    return this.CompanyRegister.get("legalDocuments") as FormGroup
+  get legalDocForm() {
+    return this.CompanyRegister.get('legalDocuments') as FormGroup;
   }
-  get additionalInfoForm(){
-    return this.CompanyRegister.get("additionalInformation") as FormGroup
+  get additionalInfoForm() {
+    return this.CompanyRegister.get('additionalInformation') as FormGroup;
   }
-  HandleSubmit(){
-    if(this.CompanyRegister.valid){
+  HandleSubmit() {
+    if (this.CompanyRegister.valid) {
       console.log(this.CompanyRegister.value);
-      
     }
   }
+
 }

@@ -1,8 +1,15 @@
+<div class="container mt-5">
+  <div class="row">
+    <div class="col-12">
+      <h1 class="display-4 text-center text-primary">Company Registration Form</h1>
+      <p class="lead text-center text-secondary">Please complete the following sections to register your company</p>
+    </div>
+  </div>
 <form [formGroup]="CompanyRegister" (ngSubmit)="HandleSubmit()">
   <mat-stepper [linear]="isLinear" #stepper>
     <mat-step [stepControl]="BasicinfoForm">
       <div formGroupName="companyInformation">
-        <ng-template matStepLabel>Fill out your name</ng-template>
+        <ng-template matStepLabel>Fill out Company Information</ng-template>
         <mat-form-field appearance="fill">
           <mat-label>Company Name</mat-label>
           <input
@@ -21,11 +28,11 @@
         </mat-form-field>
         <mat-form-field appearance="fill">
             <mat-label>Company Structure</mat-label>
-            <input
-              matInput
-              placeholder="Company Structure"
-              formControlName="companyStructure"
-            />
+            <mat-select formControlName="companyStructure">
+              <mat-option *ngFor="let structure of companyStructures" [value]="structure">
+                {{ structure }}
+              </mat-option>
+            </mat-select>
           </mat-form-field>
           <mat-form-field appearance="fill">
             <mat-label>company Registration Number</mat-label>
@@ -53,26 +60,28 @@
           </mat-form-field>
           <mat-form-field appearance="fill">
             <mat-label>Business Activity Type</mat-label>
-            <input
-              matInput
-              placeholder="Business Activity Type"
-              formControlName="businessActivityType"
-            />
+            <mat-select formControlName="businessActivityType">
+              <mat-option *ngFor="let activity of businessActivityTypes" [value]="activity">
+                {{ activity }}
+              </mat-option>
+            </mat-select>
           </mat-form-field>
         <div>
           <button mat-raised-button color="primary" matStepperNext>Next</button>
         </div>
       </div>
     </mat-step>
-    <mat-step [stepControl]="contactInfoForm" label="Fill out your address">
+    <mat-step [stepControl]="contactInfoForm" label="Contact Information">
       <div formGroupName="contactInformation">
         <mat-form-field>
           <mat-label>Company Address</mat-label>
-          <input
-            matInput
-            formControlName="companyAddress"
-            placeholder="Ex. 123 Sheikh Zayed Road, Dubai, UAE"
-          />
+      
+          <textarea
+          matInput
+          formControlName="companyAddress"
+          placeholder="Ex. 123 Sheikh Zayed Road, Dubai, UAE"
+          rows="4"
+        ></textarea>
         </mat-form-field>
         <mat-form-field>
             <mat-label>Phone Number</mat-label>
@@ -88,6 +97,7 @@
               matInput
               formControlName="emailAddress"
               placeholder="Ex. john@example.com"
+              type="email"
             />
           </mat-form-field>
           <mat-form-field>
@@ -96,6 +106,7 @@
               matInput
               formControlName="websiteUrl"
               placeholder="Ex. www.example.com"
+              type="url"
             />
           </mat-form-field>
         <div>
@@ -107,7 +118,7 @@
         </div>
       </div>
     </mat-step>
-    <mat-step [stepControl]="RepInfoForm" label="Fill out your address">
+    <mat-step [stepControl]="RepInfoForm" label="Representative Information">
       <div formGroupName="RepresentativeInformation">
         <mat-form-field>
           <mat-label>Representative Name</mat-label>
@@ -150,15 +161,17 @@
         </div>
       </div>
     </mat-step>
-    <mat-step [stepControl]="legalDocForm" label="Fill out your address">
+    <mat-step [stepControl]="legalDocForm" label="Legal Documents">
       <div formGroupName="legalDocuments">
         <mat-form-field>
           <mat-label>Company Registration Document</mat-label>
           <input
             matInput
+
             formControlName="companyRegistrationDoc"
             placeholder="company Registration Document"
           />
+          
         </mat-form-field>
         <mat-form-field>
             <mat-label>Trade License Copy</mat-label>
@@ -193,7 +206,7 @@
         </div>
       </div>
     </mat-step>
-    <mat-step [stepControl]="additionalInfoForm" label="Fill out your address">
+    <mat-step [stepControl]="additionalInfoForm" label="Additional Information">
       <div formGroupName="additionalInformation">
         <mat-form-field>
           <mat-label>Company logo</mat-label>

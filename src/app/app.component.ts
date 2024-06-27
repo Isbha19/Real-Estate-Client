@@ -1,6 +1,6 @@
 import { LoadingSpinnerComponent } from './components/User/shared/loading-spinner/loading-spinner.component';
 import { Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { NavigationEnd, Router, RouterOutlet } from '@angular/router';
 import { CarouselModule } from 'ngx-owl-carousel-o';
 
 import { TestimonialComponent } from './components/User/testimonial/testimonial.component';
@@ -44,11 +44,19 @@ import { ToastrService } from 'ngx-toastr';
 export class AppComponent {
   loading: boolean = true; // Flag to track loading state
   constructor(private accountService: AccountService,
-    private toastr:ToastrService
+    private toastr:ToastrService,private router:Router
   ) {}
   ngOnInit(): void {
-    this.refreshUser();
+    this.router.events.subscribe(x => {
+      if(x instanceof NavigationEnd)
+      {
+        window.scrollTo(0, 0);
+      }
+    });
+    this.refreshUser(); 
+
   }
+  
 
   private refreshUser() {
     const jwt = this.accountService.getjwt();
