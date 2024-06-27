@@ -7,10 +7,12 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 
 import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatCardModule } from '@angular/material/card';
 
 @NgModule({
   exports: [MatDialogModule, MatStepperModule, MatInputModule, MatButtonModule,MatSelectModule, MatFormFieldModule,
-    MatToolbarModule
+    MatToolbarModule,
+    MatCardModule
   ],
 })
 export class MaterialModule {}

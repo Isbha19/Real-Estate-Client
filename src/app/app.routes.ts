@@ -1,3 +1,4 @@
+import { ListPropertyFormComponent } from './components/Company/list-property-form/list-property-form.component';
 import { AdminDashboardComponent } from './components/Admin/admin-dashboard/admin-dashboard.component';
 import { UserCrudComponent } from './components/Admin/user-crud/user-crud.component';
 import { ConfirmEmailComponent } from './components/User/features/account/confirm-email/confirm-email.component';
@@ -31,6 +32,10 @@ export const routes: Routes = [
         path: 'company-registration',
         component: CompanyRegistrationComponent,
       },
+      {
+        path: 'list-property',
+        component: ListPropertyFormComponent,
+      }
     ],
   },
   {

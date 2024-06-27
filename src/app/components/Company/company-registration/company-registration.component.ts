@@ -89,5 +89,6 @@ export class CompanyRegistrationComponent {
       console.log(this.CompanyRegister.value);
     }
   }
+  
 
 }

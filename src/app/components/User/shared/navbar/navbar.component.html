@@ -12,7 +12,7 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarCollapse">
             <div class="navbar-nav ms-auto">
-                <a href="index.html" class="nav-item nav-link active">Home</a>
+                <a routerLink="/" routerLinkActive="router-link-active"  class="nav-item nav-link active">Home</a>
                 <a href="about.html" class="nav-item nav-link">About</a>
 
                 <div class="nav-item dropdown">
@@ -23,16 +23,12 @@
                         <a href="property-agent.html" class="dropdown-item">Property Agent</a>
                     </div>
                 </div>
-                <div class="nav-item dropdown">
-                    <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Pages</a>
-                    <div class="dropdown-menu rounded-0 m-0">
-                        <a href="testimonial.html" class="dropdown-item">Testimonial</a>
-                        <a href="404.html" class="dropdown-item">404 Error</a>
-                    </div>
-                </div>
+              
                 <a href="contact.html" class="nav-item nav-link">Contact</a>
 
+
             </div>
+
   <!-- Admin Dashboard Button -->
   <div class="nav-item mb-3 mb-lg-0 me-lg-3" *ngIf="accountService.user$| async as user">
     <ng-container *ngIf="user && user.data.jwt"> <!-- Assuming 'data' is where the decoded JWT token is stored -->
@@ -56,7 +52,10 @@
                     <p>Saved properties(0)</p>
                     <div class="dropdown-divider"></div>
                     <p>Saved searches(0)</p>
+                    <a  class="btn btn-outline-primary nav-link nav-item" routerLink="list-property">List Property</a>
+
                     </div>
+
                 
                 
             </div>

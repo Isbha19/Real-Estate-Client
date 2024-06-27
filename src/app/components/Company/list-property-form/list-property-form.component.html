@@ -1,0 +1,242 @@
+<div class="container mt-5">
+  <div class="row">
+    <div class="col-12">
+      <h1 class="display-4 text-center text-primary">
+        Property Listing Made Easy
+      </h1>
+      <p class="lead text-center text-secondary">
+        Make your property stand out in the market!
+      </p>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-8">
+      <form [formGroup]="listPropertyForm" (ngSubmit)="HandleSubmit()">
+        <mat-stepper [linear]="isLinear" #stepper class="text-center">
+          <mat-step [stepControl]="propertyOverviewForm">
+            <div formGroupName="propertyOverview">
+              <ng-template matStepLabel>Property Overview </ng-template>
+              <mat-form-field>
+                <mat-label>Property Title</mat-label>
+                <input
+                  matInput
+                  placeholder="property title"
+                  formControlName="propertyTitle"
+                  [(ngModel)]="propertyView.title"
+                />
+              </mat-form-field>
+              <mat-form-field>
+                <mat-label>Description</mat-label>
+                <input
+                  matInput
+                  placeholder="Last name, First name"
+                  formControlName="Description"
+                  
+             
+                />
+              </mat-form-field>
+              <mat-form-field>
+                <mat-label>Property Type</mat-label>
+                <input
+                  matInput
+                  placeholder="Last name, First name"
+                  formControlName="propertyType"
+                  [(ngModel)]="propertyView.propertyType"
+                  
+                />
+              </mat-form-field>
+              <mat-form-field>
+                <mat-label>Listing Type</mat-label>
+                <input
+                  matInput
+                  placeholder="Last name, First name"
+                  formControlName="listingType"
+                  [(ngModel)]="propertyView.listingType"
+
+                />
+              </mat-form-field>
+              <mat-form-field>
+                <mat-label>price</mat-label>
+                <input
+                  matInput
+                  placeholder="Last name, First name"
+                  formControlName="price"
+                  [(ngModel)]="propertyView.price"
+
+                  
+                />
+              </mat-form-field>
+              <mat-form-field>
+                <mat-label>location</mat-label>
+                <input
+                  matInput
+                  placeholder="Last name, First name"
+                  formControlName="location"
+                  [(ngModel)]="propertyView.location"
+
+             
+                />
+              </mat-form-field>
+              <div>
+                <button mat-button matStepperNext>Next</button>
+              </div>
+            </div>
+          </mat-step>
+          <mat-step
+            [stepControl]="propertyDetailsForm"
+            label="Property Details
+    "
+          >
+            <div formGroupName="propertyDetails">
+              <mat-form-field>
+                <mat-label>Bedrooms</mat-label>
+                <input
+                  matInput
+                  formControlName="Bedrooms"
+                  placeholder="Ex. 1 Main St, New York, NY"
+                  [(ngModel)]="propertyView.bedroom"
+
+                />
+              </mat-form-field>
+              <mat-form-field>
+                <mat-label>Bathrooms</mat-label>
+                <input
+                  matInput
+                  formControlName="Bathrooms"
+                  placeholder="Ex. 1 Main St, New York, NY"
+                  [(ngModel)]="propertyView.bathroom"
+
+                />
+              </mat-form-field>
+              <mat-form-field>
+                <mat-label>size</mat-label>
+                <input
+                  matInput
+                  formControlName="size"
+                  placeholder="Ex. 1 Main St, New York, NY"
+                  [(ngModel)]="propertyView.size"
+
+                />
+              </mat-form-field>
+              <mat-form-field>
+                <mat-label>Furnishing</mat-label>
+                <input
+                  matInput
+                  formControlName="Furnishing"
+                  placeholder="Ex. 1 Main St, New York, NY"
+               
+                />
+              </mat-form-field>
+              <mat-form-field>
+                <mat-label>amenities</mat-label>
+                <input
+                  matInput
+                  formControlName="amenities"
+                  placeholder="Ex. 1 Main St, New York, NY"
+               
+                />
+              </mat-form-field>
+              <mat-form-field>
+                <mat-label>Near by Facilities</mat-label>
+                <input
+                  matInput
+                  formControlName="nearByFacilities"
+                  placeholder="Ex. 1 Main St, New York, NY"
+               
+                />
+              </mat-form-field>
+              <div>
+                <button mat-button matStepperPrevious>Back</button>
+                <button mat-button matStepperNext>Next</button>
+              </div>
+            </div>
+          </mat-step>
+          <mat-step [stepControl]="listingAndAgentInfoForm" label="Listing & Agent Information">
+            <div formGroupName="listingAndAgentDetails">
+              <mat-form-field>
+                <mat-label>Images</mat-label>
+                <input
+                  matInput
+                  formControlName="Images"
+                  placeholder="Ex. 1 Main St, New York, NY"
+                  required
+                />
+              </mat-form-field>
+              <mat-form-field>
+                <mat-label>Virtual Tour Url</mat-label>
+                <input
+                  matInput
+                  formControlName="virtualTourUrl"
+                  placeholder="Ex. 1 Main St, New York, NY"
+                  required
+                />
+              </mat-form-field>
+              <mat-form-field>
+                <mat-label>Agent Name</mat-label>
+                <input
+                  matInput
+                  formControlName="agentName"
+                  placeholder="Ex. 1 Main St, New York, NY"
+                  required
+                />
+              </mat-form-field>
+              <mat-form-field>
+                <mat-label>Agent Contact Number</mat-label>
+                <input
+                  matInput
+                  formControlName="agentContactNumber"
+                  placeholder="Ex. 1 Main St, New York, NY"
+                  required
+                />
+              </mat-form-field>
+              <mat-form-field>
+                <mat-label>Email Address</mat-label>
+                <input
+                  matInput
+                  formControlName="emailAddress"
+                  placeholder="Ex. 1 Main St, New York, NY"
+                  required
+                />
+              </mat-form-field>
+              <mat-form-field>
+                <mat-label>Availability Date</mat-label>
+                <input
+                  matInput
+                  formControlName="availabilityDate"
+                  placeholder="Ex. 1 Main St, New York, NY"
+                  required
+                />
+              </mat-form-field>
+              <mat-form-field>
+                <mat-label>Terms And Condition</mat-label>
+                <input
+                  matInput
+                  formControlName="termsAndCondition"
+                  placeholder="Ex. 1 Main St, New York, NY"
+                  required
+                />
+              </mat-form-field>
+              <div>
+                <button mat-button matStepperPrevious>Back</button>
+                <button mat-button matStepperNext>Next</button>
+              </div>
+            </div>
+          </mat-step>
+        </mat-stepper>
+      </form>
+    </div>
+
+    <div class="col-4">
+      <mat-card class="card-class">
+        <mat-card-header>
+          <p class="lead text-center text-secondary">Your Property Preview</p>
+        </mat-card-header>
+        <mat-card-subtitle> </mat-card-subtitle>
+        <mat-card-content>
+          <app-property-card [property]="propertyView"></app-property-card>
+        </mat-card-content>
+        <mat-card-footer> </mat-card-footer>
+      </mat-card>
+    </div>
+  </div>
+</div>

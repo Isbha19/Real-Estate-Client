@@ -171,7 +171,6 @@
             formControlName="companyRegistrationDoc"
             placeholder="company Registration Document"
           />
-          
         </mat-form-field>
         <mat-form-field>
             <mat-label>Trade License Copy</mat-label>
@@ -208,14 +207,12 @@
     </mat-step>
     <mat-step [stepControl]="additionalInfoForm" label="Additional Information">
       <div formGroupName="additionalInformation">
-        <mat-form-field>
           <mat-label>Company logo</mat-label>
           <input
-            matInput
+          type="file"
             formControlName="companyLogo"
             placeholder="Company logo"
           />
-        </mat-form-field>
         <mat-form-field>
             <mat-label>Business Description</mat-label>
             <input
