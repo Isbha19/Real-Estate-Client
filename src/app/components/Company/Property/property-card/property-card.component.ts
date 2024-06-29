@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { PropertyCard } from '../../../core/model/property/propertyCard';
+import { PropertyCard } from '../../../../core/model/property/propertyCard';
 
 @Component({
   selector: 'app-property-card',
@@ -20,7 +20,6 @@ export class PropertyCardComponent {
   price: 0
 };
 ngOnInit(): void {
-console.log(this.property);
 
 }
 }

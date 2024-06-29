@@ -1,5 +1,7 @@
+import { HttpErrorInterceptor } from './core/interceptors/httpErrorHandling.interceptor';
 import { AppEffects } from './shared/store/Common/App.Effects';
 import { jwtInterceptor } from './core/interceptors/jwt.interceptor';
+
 import { ApplicationConfig, isDevMode } from '@angular/core';
 import { provideRouter } from '@angular/router';
 
@@ -16,7 +18,7 @@ import { UserEffects } from './shared/store/user/user.effects';
 export const appConfig: ApplicationConfig = {
   providers: [provideRouter(routes), provideAnimationsAsync(), provideToastr({ closeButton: true }),
     provideHttpClient(withInterceptors([
-        jwtInterceptor
+        jwtInterceptor,HttpErrorInterceptor
     ])), provideStore(), provideState({ name: 'user', reducer: userReducer }), provideStoreDevtools({ maxAge: 25, logOnly: !isDevMode() }),
     provideStoreDevtools({ maxAge: 25, logOnly: !isDevMode() }),provideEffects([UserEffects,AppEffects])]
 };

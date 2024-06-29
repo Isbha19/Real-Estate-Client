@@ -110,11 +110,7 @@ export class RegisterComponent {
           this.toastr.success(response.message);
           this.dialogRef.close();
           this.dialog.open(LoginComponent, { width: '60%' });
-        },
-        error: (error) => {
-          const errorMessage = error.error?.message || 'An error occurred';
-          this.toastr.error(errorMessage);
-        },
+        }
       });
     }
   }

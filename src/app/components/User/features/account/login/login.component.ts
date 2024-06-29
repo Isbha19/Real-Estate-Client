@@ -77,11 +77,9 @@ export class LoginComponent {
           
         },
         error: (error) => {
-          const errorMessage = error.error?.message || 'An error occurred';
-          if (errorMessage.includes('please confirm your email')) {
+          if (error.message.includes('please confirm your email')) {
             this.resendEmail = true;
           }
-          this.toastr.error(errorMessage);
         },
       });
     }
@@ -159,10 +157,8 @@ this.accountService.loginWithThirdParty(new LoginWithExternal(response.credentia
   next:_=>{
     this.toastr.success("logged in with google");
     this.router.navigateByUrl('/');
-  },error:error=>{
-    const errorMessage = error.error?.message || 'An error occurred';
-    this.toastr.error(errorMessage);
   }
+ 
 })
   }
 }

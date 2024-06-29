@@ -1,4 +1,4 @@
-import { ListPropertyFormComponent } from './components/Company/list-property-form/list-property-form.component';
+import { ListPropertyFormComponent } from './components/Company/Property/list-property-form/list-property-form.component';
 import { AdminDashboardComponent } from './components/Admin/admin-dashboard/admin-dashboard.component';
 import { UserCrudComponent } from './components/Admin/user-crud/user-crud.component';
 import { ConfirmEmailComponent } from './components/User/features/account/confirm-email/confirm-email.component';
