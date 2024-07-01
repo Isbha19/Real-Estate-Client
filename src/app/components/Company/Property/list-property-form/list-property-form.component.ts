@@ -1,6 +1,6 @@
 import { ToastrService } from 'ngx-toastr';
 import { PropertyCardComponent } from './../property-card/property-card.component';
-import { Component } from '@angular/core';
+import { Component, ElementRef, Input, ViewChild } from '@angular/core';
 
 import { CommonModule } from '@angular/common';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
@@ -9,6 +9,7 @@ import { Property } from '../../../../core/model/property/property';
 import { GenericKeyValuePair } from '../../../../core/model/property/genericKeyValuePair';
 import { PropertyService } from '../../../../core/service/property.service';
 import { PropertyCard } from '../../../../core/model/property/propertyCard';
+import { } from '@angular/google-maps';
 
 
 @Component({
@@ -36,7 +37,9 @@ export class ListPropertyFormComponent {
   amenitiesOptions: GenericKeyValuePair[] = [];
   ListingType: GenericKeyValuePair[] = [];
   facilites: GenericKeyValuePair[] = [];
-
+  @ViewChild('locationField') locationField!:ElementRef;
+@Input() locationPlaceHolder='';
+autocomplete:google.maps.places.Autocomplete | undefined;
   constructor(private builder: FormBuilder, private propertyService: PropertyService,private toastr:ToastrService) {}
 
   ngOnInit(): void {
@@ -68,6 +71,15 @@ export class ListPropertyFormComponent {
         this.facilites = response;
       }
     });
+  }
+  
+  ngAfterViewInit(): void {
+   this.autocomplete=new google.maps.places.Autocomplete(this.locationField.nativeElement);
+   this.autocomplete.addListener('place_changed',()=>{
+    const place=this.autocomplete?.getPlace();
+    console.log(place);
+    
+   })
   }
 
   listPropertyForm = this.builder.group({
