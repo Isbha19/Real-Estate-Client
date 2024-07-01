@@ -1,0 +1,54 @@
+/* General Styles */
+.container-xxl {
+    padding-top: 5rem;
+    padding-bottom: 5rem;
+}
+
+/* Image Gallery Styles */
+.gallery-img {
+    position: relative;
+    overflow: hidden;
+    border-radius: 10px;
+    transition: transform 0.5s ease-in-out, box-shadow 0.5s ease-in-out;
+}
+
+.gallery-img img {
+    transition: transform 0.5s ease-in-out;
+    display: block;
+    width: 100%;
+    height: auto;
+}
+
+.gallery-img:hover img {
+    transform: scale(1.1);
+}
+
+.gallery-img:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+.primary-img {
+    height: auto; /* Ensures primary image has a similar height */
+}
+
+/* WOW.js Animations */
+.wow {
+    visibility: hidden;
+}
+.wow.fadeIn {
+    animation-name: fadeIn;
+}
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+/* Add custom styles for the About section */
+.about-img {
+    border-radius: 10px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}

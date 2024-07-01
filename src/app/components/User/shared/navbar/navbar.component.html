@@ -12,6 +12,12 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarCollapse">
             <div class="navbar-nav ms-auto">
+                <a routerLink="/properties-list/buy" class="nav-item nav-link">Buy</a>
+
+                <a routerLink="/properties-list/rent" class="nav-item nav-link">Rent</a>
+
+                <a routerLink="/properties-list/commercial" class="nav-item nav-link">Commercial</a>
+
                 <a routerLink="/" routerLinkActive="router-link-active"  class="nav-item nav-link active">Home</a>
                 <a href="about.html" class="nav-item nav-link">About</a>
 
@@ -52,7 +58,6 @@
                     <p>Saved properties(0)</p>
                     <div class="dropdown-divider"></div>
                     <p>Saved searches(0)</p>
-                    <a  class="btn btn-outline-primary nav-link nav-item" routerLink="list-property">List Property</a>
 
                     </div>
 
@@ -65,18 +70,28 @@
 
                 <div class="dropdown-menu rounded-0 m-0 last-sub-menu">
 
-                    <p class="dropdown-text text-center" >Sign in or register to sync your favorite properties across devices</p>
-                    <button (click)="registerPopUp()" class="btn btn-primary  w-100 mt-2">Sign in</button>
-                    <div class="dropdown-divider"></div>
+                    <p class="dropdown-text text-center" >Welcome {{user.data.firstName|capitalize}} {{user.data.lastName|capitalize}}</p>
+                    <ng-container *ngIf="user && user.data.jwt"> <!-- Assuming 'data' is where the decoded JWT token is stored -->
+                        <ng-container *ngIf="isAgent(user)">
+                            <a  class="btn btn-outline-primary nav-link nav-item" routerLink="list-property">List Property</a>
+                        </ng-container>
+                    </ng-container>                    <div class="dropdown-divider"></div>
                     <div class="arrow"></div>
+                    <ng-container *ngIf="user && user.data.jwt"> <!-- Assuming 'data' is where the decoded JWT token is stored -->
+                        <ng-container *ngIf="isAgent(user)">
+                            <p>Listed properties(0)</p>
+                            <div class="dropdown-divider"></div>
 
+                        </ng-container>
+                    </ng-container>  
                     <p>Contacted properties(0)</p>
                     <div class="dropdown-divider"></div>
                     <p>Saved properties(0)</p>
                     <div class="dropdown-divider"></div>
                     <p>Saved searches(0)</p>
+                   
                     </div>
-                
+                    
                 
             </div>
 

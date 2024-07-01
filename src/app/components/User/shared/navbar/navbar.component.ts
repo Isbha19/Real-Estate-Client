@@ -1,3 +1,4 @@
+import { CapitalizePipe } from './../../../../core/pipe/capitalize.pipe';
 import { MatDialog } from '@angular/material/dialog';
 import { Component, Inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -10,7 +11,7 @@ import { jwtDecode } from "jwt-decode";
 @Component({
   selector: 'app-navbar',
   standalone: true,
-  imports: [CommonModule,RouterLink],
+  imports: [CommonModule,RouterLink,CapitalizePipe],
   templateUrl: './navbar.component.html',
   styleUrl: './navbar.component.scss'
 })
@@ -41,5 +42,12 @@ this.OpenPopUp(RegisterComponent)
     }
     return false;
 }
-
+isAgent(user: any): boolean {
+  if (user && user.data.jwt) {
+    
+      const decodedToken: any = jwtDecode(user.data.jwt);
+      return decodedToken.role.includes('Agent');
+  }
+  return false;
+}
 }

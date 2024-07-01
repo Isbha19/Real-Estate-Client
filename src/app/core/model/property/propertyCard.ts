@@ -1,3 +1,5 @@
+import { Image } from "./Image";
+
 export interface PropertyCard{
     title:string;
     propertyType:string;

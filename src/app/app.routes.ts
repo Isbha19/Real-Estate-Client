@@ -1,3 +1,7 @@
+import { authGuard } from './core/guards/authguard';
+import { agentGuard } from './core/guards/agent.guard';
+import { PropertyDetailComponent } from './components/Company/Property/property-detail/property-detail.component';
+import { PropertyListTypeComponent } from './components/Company/Property/property-lists-type/property-lists-type.component';
 import { ListPropertyFormComponent } from './components/Company/Property/list-property-form/list-property-form.component';
 import { AdminDashboardComponent } from './components/Admin/admin-dashboard/admin-dashboard.component';
 import { UserCrudComponent } from './components/Admin/user-crud/user-crud.component';
@@ -7,7 +11,6 @@ import { ResetPasswordComponent } from './components/User/features/account/reset
 import { HomeComponent } from './components/User/pages/home/home.component';
 import { LayoutComponent } from './components/User/layouts/layout/layout.component';
 import { Routes } from '@angular/router';
-import { AppComponent } from './app.component';
 import { AdminComponent } from './components/Admin/admin/admin.component';
 import { adminGuard } from './core/guards/admin.guard';
 import { SendEmailComponent } from './components/User/features/account/send-email/send-email.component';
@@ -30,12 +33,19 @@ export const routes: Routes = [
       },
       {
         path: 'company-registration',
+        canActivate: [authGuard],
+
         component: CompanyRegistrationComponent,
       },
       {
-        path: 'list-property',
+        path: 'list-property', canActivate: [agentGuard],
         component: ListPropertyFormComponent,
-      }
+      },
+      { path: 'properties-list/:listingType',    
+        component:PropertyListTypeComponent   },
+      { path: 'property-detail/:id', component: PropertyDetailComponent }
+
+
     ],
   },
   {

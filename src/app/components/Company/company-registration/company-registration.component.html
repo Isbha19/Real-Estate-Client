@@ -29,8 +29,8 @@
         <mat-form-field appearance="fill">
             <mat-label>Company Structure</mat-label>
             <mat-select formControlName="companyStructure">
-              <mat-option *ngFor="let structure of companyStructures" [value]="structure">
-                {{ structure }}
+              <mat-option *ngFor="let structure of companyStructures" [value]="structure.id">
+                {{ structure.name }}
               </mat-option>
             </mat-select>
           </mat-form-field>
@@ -61,8 +61,8 @@
           <mat-form-field appearance="fill">
             <mat-label>Business Activity Type</mat-label>
             <mat-select formControlName="businessActivityType">
-              <mat-option *ngFor="let activity of businessActivityTypes" [value]="activity">
-                {{ activity }}
+              <mat-option *ngFor="let activity of businessActivityTypes" [value]="activity.id">
+                {{ activity.name }}
               </mat-option>
             </mat-select>
           </mat-form-field>
@@ -207,12 +207,25 @@
     </mat-step>
     <mat-step [stepControl]="additionalInfoForm" label="Additional Information">
       <div formGroupName="additionalInformation">
-          <mat-label>Company logo</mat-label>
-          <input
-          type="file"
-            formControlName="companyLogo"
-            placeholder="Company logo"
-          />
+          <!-- <mat-label>Company logo</mat-label>
+         
+          <div class="file-input-button">
+            <span>Choose File</span>
+            <input type="file" formControlName="companyLogo" class="file-input-label" accept="image/*"
+              (change)="onFileSelected($event)">
+          </div> -->
+                <!-- File Input -->
+      <div class="file-input-container">
+        <mat-label>Company Logo</mat-label>
+        <label class="file-input-button">
+          <span>Choose File</span>
+          <input type="file" formControlName="companyLogo" class="file-input-label" accept="image/*" (change)="onFileSelected($event)">
+        </label>
+      <!-- Display selected file name -->
+      <div *ngIf="selectedCompanyLogoFileName" class="file-name-display">
+        {{ selectedCompanyLogoFileName }}
+      </div>
+      </div>
         <mat-form-field>
             <mat-label>Business Description</mat-label>
             <input
@@ -225,6 +238,7 @@
             <mat-label>Number of Employees</mat-label>
             <input
               matInput
+              type="number"
               formControlName="numberOfEmployees"
               placeholder="Number of Employees"
             />

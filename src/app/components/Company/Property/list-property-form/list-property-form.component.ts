@@ -43,6 +43,8 @@ export class ListPropertyFormComponent {
   
     this.propertyService.getPropertyTypes().subscribe({
       next: (response) => {
+        console.log("property type"+JSON.stringify(response));
+        
         this.propertyType = response;
       }
     });

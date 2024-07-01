@@ -1,7 +1,7 @@
 export interface User{
     data:{
-        FirstName:string;
-        LastName:string;
+        firstName:string;
+        lastName:string;
         jwt:string
     }
 
