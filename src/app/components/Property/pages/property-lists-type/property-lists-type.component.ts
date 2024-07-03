@@ -1,8 +1,8 @@
+import { ListingTypeHeadingPipe } from '../../../../core/pipe/listing-type-heading.pipe';
 import { Component } from '@angular/core';
 import { ActivatedRoute, RouterLink } from '@angular/router';
-import { PropertyService } from '../../../../core/service/property.service';
 import { CommonModule } from '@angular/common';
-import { ListingTypeHeadingPipe } from '../pipe/listing-type-heading.pipe';
+import { PropertyService } from '../../services/property.service';
 
 @Component({
   selector: 'app-property-lists-type',

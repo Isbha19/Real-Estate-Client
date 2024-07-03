@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
-import { PropertyCard } from '../../../../core/model/property/propertyCard';
-import { ListingTypeHeadingPipe } from '../pipe/listing-type-heading.pipe';
+import { PropertyCard } from '../../model/propertyCard';
+
 
 @Component({
   selector: 'app-property-card',

@@ -1,21 +1,21 @@
+import { adminGuard } from './core/guards/admin.guard';
+import { PropertyDetailComponent } from'./components/Property/pages/property-detail/property-detail.component';
+import { PropertyListTypeComponent } from './components/Property/pages/property-lists-type/property-lists-type.component';
+import { UserCrudComponent } from './components/Admin/pages/user-crud/user-crud.component';
+import { AdminDashboardComponent } from './components/Admin/pages/admin-dashboard/admin-dashboard.component';
+import { AdminComponent } from './components/Admin/pages/admin/admin.component';
+import { ListPropertyFormComponent } from './components/Agent/pages/list-property-form/list-property-form.component';
+import { CompanyRegistrationComponent } from './components/Company/pages/company-registration/company-registration.component';
 import { authGuard } from './core/guards/authguard';
 import { agentGuard } from './core/guards/agent.guard';
-import { PropertyDetailComponent } from './components/Company/Property/property-detail/property-detail.component';
-import { PropertyListTypeComponent } from './components/Company/Property/property-lists-type/property-lists-type.component';
-import { ListPropertyFormComponent } from './components/Company/Property/list-property-form/list-property-form.component';
-import { AdminDashboardComponent } from './components/Admin/admin-dashboard/admin-dashboard.component';
-import { UserCrudComponent } from './components/Admin/user-crud/user-crud.component';
 import { ConfirmEmailComponent } from './components/User/features/account/confirm-email/confirm-email.component';
 import { NotFoundComponent } from './components/User/errors/not-found/not-found.component';
 import { ResetPasswordComponent } from './components/User/features/account/reset-password/reset-password.component';
 import { HomeComponent } from './components/User/pages/home/home.component';
 import { LayoutComponent } from './components/User/layouts/layout/layout.component';
 import { Routes } from '@angular/router';
-import { AdminComponent } from './components/Admin/admin/admin.component';
-import { adminGuard } from './core/guards/admin.guard';
 import { SendEmailComponent } from './components/User/features/account/send-email/send-email.component';
 import { RegisterWithThirdPartyComponent } from './components/User/features/account/register-with-third-party/register-with-third-party.component';
-import { CompanyRegistrationComponent } from './components/Company/company-registration/company-registration.component';
 
 export const routes: Routes = [
   {

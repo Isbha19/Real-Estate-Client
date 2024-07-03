@@ -1,7 +1,7 @@
+import { AdminService } from './../../../components/Admin/services/admin.service';
 import { Injectable, inject } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { catchError, exhaustMap, map, of, switchMap } from 'rxjs';
-import { AdminService } from '../../../core/service/admin.service';
 import {
   LOAD_USER,
   ADD_USER,
@@ -21,7 +21,6 @@ import {
 } from '../user/user.action';
 import { ToastrService } from 'ngx-toastr';
 import { MatDialogRef } from '@angular/material/dialog';
-import { AddEditMemberComponent } from '../../../components/Admin/add-edit-member/add-edit-member.component';
 import { showalert } from '../Common/App.Action';
 
 @Injectable()

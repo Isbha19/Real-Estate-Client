@@ -4,8 +4,9 @@ import { AdminNavbarComponent } from './../layout/admin-navbar/admin-navbar.comp
 
 import { ActivatedRouteSnapshot, RouterOutlet } from '@angular/router';
 import { Component } from '@angular/core';
-import { AdminService } from '../../../core/service/admin.service';
-import { MemberView } from '../../../core/model/admin/memberView';
+import { MemberView } from '../../model/memberView';
+import { AdminService } from '../../services/admin.service';
+
 
 @Component({
   selector: 'app-admin',
@@ -15,10 +16,5 @@ import { MemberView } from '../../../core/model/admin/memberView';
   styleUrl: './admin.component.scss'
 })
 export class AdminComponent {
-  members:MemberView[]=[];
-  constructor(private adminService:AdminService){}
 
-ngOnInit(): void {
-   //this.dynamicLoading.loadAdminAssets();
-}
 }

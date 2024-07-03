@@ -1,15 +1,18 @@
-import { ToastrService } from 'ngx-toastr';
+import { Property } from './../../model/property';
 import { PropertyCardComponent } from './../property-card/property-card.component';
+import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 import { Component, ElementRef, Input, ViewChild } from '@angular/core';
 
 import { CommonModule } from '@angular/common';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MaterialModule } from '../../../../material.module';
-import { Property } from '../../../../core/model/property/property';
-import { GenericKeyValuePair } from '../../../../core/model/property/genericKeyValuePair';
-import { PropertyService } from '../../../../core/service/property.service';
-import { PropertyCard } from '../../../../core/model/property/propertyCard';
+
 import { } from '@angular/google-maps';
+import { PropertyService } from '../../../Property/services/property.service';
+import { GenericKeyValuePair } from '../../model/genericKeyValuePair';
+import { PropertyCard } from '../../model/propertyCard';
+import { AgentService } from '../../services/agent.service';
 
 
 @Component({
@@ -38,35 +41,41 @@ export class ListPropertyFormComponent {
   ListingType: GenericKeyValuePair[] = [];
   facilites: GenericKeyValuePair[] = [];
   @ViewChild('locationField') locationField!:ElementRef;
+  @ViewChild('mapContainer') mapContainer!: ElementRef<HTMLDivElement>;
+  map!: google.maps.Map;
+  marker!: google.maps.Marker;
 @Input() locationPlaceHolder='';
 autocomplete:google.maps.places.Autocomplete | undefined;
-  constructor(private builder: FormBuilder, private propertyService: PropertyService,private toastr:ToastrService) {}
+  constructor(private builder: FormBuilder, private toastr:ToastrService,
+    private router:Router,
+    private agentService:AgentService
+  ) {}
 
   ngOnInit(): void {
   
-    this.propertyService.getPropertyTypes().subscribe({
+    this.agentService.getPropertyTypes().subscribe({
       next: (response) => {
         console.log("property type"+JSON.stringify(response));
         
         this.propertyType = response;
       }
     });
-    this.propertyService.getFurnishingTypes().subscribe({
+    this.agentService.getFurnishingTypes().subscribe({
       next: (response) => {
         this.furnishingType = response;
       }
     });
-    this.propertyService.getAmenities().subscribe({
+    this.agentService.getAmenities().subscribe({
       next: (response) => {
         this.amenitiesOptions = response;
       }
     });
-    this.propertyService.getListingTypes().subscribe({
+    this.agentService.getListingTypes().subscribe({
       next: (response) => {
         this.ListingType = response;
       }
     });
-    this.propertyService.getNearbyFacilities().subscribe({
+    this.agentService.getNearbyFacilities().subscribe({
       next: (response) => {
         this.facilites = response;
       }
@@ -81,9 +90,24 @@ autocomplete:google.maps.places.Autocomplete | undefined;
     const place=this.autocomplete?.getPlace(); 
     if (place && place.formatted_address) {
       this.propertyView.location = place.formatted_address;
-      this.listPropertyForm.get('Location')?.setValue(place.formatted_address as string);
-    }   
+      if (place && place.geometry && place.geometry.location) {
+        const location = place.geometry.location;
+      this.marker.setPosition(location);
+      this.map.setCenter(location);
+    }} 
    })
+   this.initMap();
+  }
+  private initMap(): void {
+    this.map = new google.maps.Map(this.mapContainer.nativeElement, {
+      center: { lat: 25.276987, lng: 55.296249 }, // Center map to Dubai initially
+      zoom: 12
+    });
+
+    this.marker = new google.maps.Marker({
+      map: this.map,
+      position: { lat: 25.276987, lng: 55.296249 }, // Center marker to Dubai initially
+    });
   }
 
   listPropertyForm = this.builder.group({
@@ -143,10 +167,10 @@ autocomplete:google.maps.places.Autocomplete | undefined;
         FurnishingTypeId: propertyDetails.FurnishingTypeId,
         // Additional properties as needed
       };
-      this.propertyService.addProperty(property).subscribe({
+      this.agentService.addProperty(property).subscribe({
         next: (response:any) => {
           this.toastr.success(response.message)
-          
+          this.router.navigateByUrl('/');
         }
       });
     }

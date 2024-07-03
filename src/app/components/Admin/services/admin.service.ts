@@ -1,8 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { MemberView } from '../model/admin/memberView';
-import { environment } from '../../../environments/environment';
-import { MemberAddEdit } from '../model/admin/memberAddEdit';
+import { MemberView } from '../model/memberView';
+import { environment } from '../../../../environments/environment';
+import { MemberAddEdit } from '../model/memberAddEdit';
 
 @Injectable({ providedIn: 'root' })
 export class AdminService {

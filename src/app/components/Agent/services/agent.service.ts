@@ -1,14 +1,12 @@
-import { PropertyCard } from './../model/property/propertyCard';
-import { GenericKeyValuePair } from './../model/property/genericKeyValuePair';
+
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { MemberView } from '../model/admin/memberView';
-import { environment } from '../../../environments/environment';
-import { MemberAddEdit } from '../model/admin/memberAddEdit';
-import { propertyDetail } from '../model/property/propertyDetail';
+import { GenericKeyValuePair } from '../model/genericKeyValuePair';
+import { environment } from '../../../../environments/environment';
+
 
 @Injectable({ providedIn: 'root' })
-export class PropertyService {
+export class AgentService {
   constructor(private http: HttpClient) {}
 
   getPropertyTypes() {
@@ -16,16 +14,7 @@ export class PropertyService {
       `${environment.apiUrl}Property/get-property-type`
     );
   }
-  getPropertiesBasedonListType(listingType:string){
-    return this.http.get<PropertyCard[]>(
-      `${environment.apiUrl}Property/get-properties/${listingType}`
-    );
-  }
-  getPropertyById(id:number){
-    return this.http.get<propertyDetail>(
-      `${environment.apiUrl}Property/get-property/${id}`
-    );
-  }
+
   addProperty(property:any) {
     console.log(property);
     

@@ -1,12 +1,9 @@
-import { PropertyCard } from './../model/property/propertyCard';
-import { GenericKeyValuePair } from './../model/property/genericKeyValuePair';
+import { GenericKeyValuePair } from './../../Agent/model/genericKeyValuePair';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { MemberView } from '../model/admin/memberView';
-import { environment } from '../../../environments/environment';
-import { MemberAddEdit } from '../model/admin/memberAddEdit';
-import { propertyDetail } from '../model/property/propertyDetail';
-import { companyRegister } from '../model/company/companyRegister';
+import { environment } from '../../../../environments/environment';
+
+import { companyRegister } from '../model/companyRegister';
 import { Observable } from 'rxjs';
 
 @Injectable({ providedIn: 'root' })

@@ -1,4 +1,4 @@
-import { CompanyService } from './../../../core/service/company.service';
+import { CompanyService } from '../../service/company.service';
 import {
   FormBuilder,
   FormGroup,
@@ -6,14 +6,14 @@ import {
   Validators,
 } from '@angular/forms';
 import { Component } from '@angular/core';
-import { MaterialModule } from '../../../material.module';
+import { MaterialModule } from '../../../../material.module';
 import { CommonModule } from '@angular/common';
-import { AccountService } from '../../../core/service/account.service';
+import { AccountService } from '../../../../core/service/account.service';
 import { jwtDecode } from 'jwt-decode';
-import { GenericKeyValuePair } from '../../../core/model/property/genericKeyValuePair';
-import { companyRegister } from '../../../core/model/company/companyRegister';
+import { companyRegister } from '../../model/companyRegister';
 import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
+import { GenericKeyValuePair } from '../../../Agent/model/genericKeyValuePair';
 
 @Component({
   selector: 'app-company-registration',
@@ -23,7 +23,7 @@ import { Router } from '@angular/router';
   styleUrl: './company-registration.component.scss',
 })
 export class CompanyRegistrationComponent {
-  isLinear = false;
+  isLinear = true;
   companyStructures:  GenericKeyValuePair[] = [];
   businessActivityTypes: GenericKeyValuePair[] = [];
   selectedCompanyLogoFileName: string | null = null;

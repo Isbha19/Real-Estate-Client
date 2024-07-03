@@ -1,10 +1,9 @@
-import { Image } from './../../../../core/model/property/Image';
-import { propertyDetail } from './../../../../core/model/property/propertyDetail';
-import { Property } from './../../../../core/model/property/property';
+
 import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { PropertyService } from '../../../../core/service/property.service';
+import { PropertyService } from '../../services/property.service';
 import { CommonModule } from '@angular/common';
+import { propertyDetail } from '../../model/propertyDetail';
 
 @Component({
   selector: 'app-property-detail',

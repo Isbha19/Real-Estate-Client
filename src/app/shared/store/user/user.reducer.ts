@@ -1,3 +1,4 @@
+import { MemberView } from './../../../components/Admin/model/memberView';
 import { createReducer, on } from '@ngrx/store';
 import {
   addusersuccess,
@@ -10,7 +11,6 @@ import {
   updateUserSuccess,
 } from '../user/user.action';
 import { userState } from './user.state';
-import { MemberView } from '../../../core/model/admin/memberView';
 
 const _userReducer = createReducer(
   userState,

@@ -72,12 +72,13 @@
               <mat-form-field>
                 <mat-select
                   placeholder="Property Type"
-                  [(ngModel)]="propertyView.propertyType"
                   formControlName="PropertyTypeId"
                 >
                   <mat-option
                     *ngFor="let type of propertyType"
                     [value]="type.id"
+                    (click)="propertyView.propertyType=type.name"
+
                   >
                     {{ type.name }}
                   </mat-option>
@@ -98,12 +99,13 @@
 
                 <mat-select
                   placeholder="Listing Type"
-                  [(ngModel)]="propertyView.listingType"
                   formControlName="ListingTypeId"
                 >
                   <mat-option
                     *ngFor="let type of ListingType"
                     [value]="type.id"
+                    (click)="propertyView.listingType=type.name"
+
                   >
                     {{ type.name }}
                   </mat-option>
@@ -181,6 +183,8 @@
                   Property description cannot exceed 200 characters.
                 </mat-error>
               </mat-form-field>
+              <div #mapContainer id="map" style="height: 300px; width: 100%;"></div>
+
               <div>
                 <button  mat-raised-button color="primary" matStepperNext>Next</button>
               </div>

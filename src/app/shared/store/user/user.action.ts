@@ -1,7 +1,7 @@
 import { createAction, props } from "@ngrx/store";
-import { MemberView } from "../../../core/model/admin/memberView";
-import { MemberAddEdit } from "../../../core/model/admin/memberAddEdit";
-import { users } from "./user.model";
+import { MemberAddEdit } from './../../../components/Admin/model/memberAddEdit';
+import { MemberView } from "../../../components/Admin/model/memberView";
+
 
 export const LOAD_USER_SUCCESS='[user page] laod user success'
 export const LOAD_USER_FAIL='[user page] laod user fail'

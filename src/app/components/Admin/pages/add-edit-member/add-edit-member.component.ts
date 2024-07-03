@@ -1,7 +1,5 @@
 import { ToastrService } from 'ngx-toastr';
-import { MemberAddEdit } from './../../../core/model/admin/memberAddEdit';
 import { Router } from '@angular/router';
-import { AdminService } from './../../../core/service/admin.service';
 
 import {  Component, inject } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
@@ -13,17 +11,19 @@ import {
   Validators,
 } from '@angular/forms';
 import { Store } from '@ngrx/store';
-import { users } from '../../../shared/store/user/user.model';
+import { users } from '../../../../shared/store/user/user.model';
 import {
   adduser,
   addusersuccess,
   getuser,
   updateUser,
   updateUserSuccess,
-} from '../../../shared/store/user/user.action';
+} from '../../../../shared/store/user/user.action';
 import { Actions, ofType } from '@ngrx/effects';
 import { take } from 'rxjs';
-import { getUser } from '../../../shared/store/user/user.selectors';
+import { getUser } from '../../../../shared/store/user/user.selectors';
+import { MemberAddEdit } from '../../model/memberAddEdit';
+import { AdminService } from '../../services/admin.service';
 
 @Component({
   selector: 'app-add-edit-member',

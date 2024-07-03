@@ -1,5 +1,5 @@
-import { MaterialModule } from './../../../material.module';
-import { getuser, unlockuser } from './../../../shared/store/user/user.action';
+import { MaterialModule } from '../../../../material.module';
+import { getuser, unlockuser } from '../../../../shared/store/user/user.action';
 import { AddEditMemberComponent } from './../add-edit-member/add-edit-member.component';
 import { MatDialog } from '@angular/material/dialog';
 import {
@@ -9,16 +9,17 @@ import {
   inject,
   viewChild,
 } from '@angular/core';
-import { MemberView } from '../../../core/model/admin/memberView';
-import { AdminService } from '../../../core/service/admin.service';
+
 import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { Store } from '@ngrx/store';
-import { users } from '../../../shared/store/user/user.model';
-import { deleteUser, loaduser,lockuser } from '../../../shared/store/user/user.action';
-import { getUserList } from '../../../shared/store/user/user.selectors';
+import { users } from '../../../../shared/store/user/user.model';
+import { deleteUser, loaduser,lockuser } from '../../../../shared/store/user/user.action';
+import { getUserList } from '../../../../shared/store/user/user.selectors';
 import { NgxPaginationModule } from 'ngx-pagination';
+import { MemberView } from '../../model/memberView';
+import { AdminService } from '../../services/admin.service';
 
 //@ts-ignore
 const $ = window['$'];
