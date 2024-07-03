@@ -8,6 +8,9 @@ import { RouterLink } from '@angular/router';
 import { AccountService } from '../../../../core/service/account.service';
 import { jwtDecode } from "jwt-decode";
 import { JwtDecodedToken } from '../../../../core/model/jwtTokenDecoded';
+import { ComponentType } from 'ngx-toastr';
+import { User } from '../../../../core/model/account/user';
+import { LoginResponse } from '../../../../core/model/response/LoginResponse';
 
 @Component({
   selector: 'app-navbar',
@@ -27,7 +30,7 @@ this.OpenPopUp(LoginComponent)
   registerPopUp(){    
 this.OpenPopUp(RegisterComponent)
   }
-  OpenPopUp(Component:any){
+  OpenPopUp(Component:ComponentType<unknown>){
  this.dialog.open(Component,{
   width:'60%',
   
@@ -36,17 +39,18 @@ this.OpenPopUp(RegisterComponent)
   Logout(){
     this.accountService.logout();
   }
-  isAdmin(user: any): boolean {
-    if (user && user.data.jwt) {
-        const decodedToken: JwtDecodedToken = jwtDecode(user.data.jwt);
+  isAdmin(user: User): boolean {
+    if (user && user.jwt) {
+        const decodedToken: JwtDecodedToken = jwtDecode(user.jwt);
         return decodedToken.role.includes('Admin');
     }
     return false;
 }
-isAgent(user: any): boolean {
-  if (user && user.data.jwt) {
+isAgent(user:User): boolean {
+  
+  if (user && user.jwt) {
     
-      const decodedToken: JwtDecodedToken = jwtDecode(user.data.jwt);
+      const decodedToken: JwtDecodedToken = jwtDecode(user.jwt);
       return decodedToken.role.includes('Agent');
   }
   return false;

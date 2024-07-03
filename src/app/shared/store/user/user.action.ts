@@ -1,6 +1,7 @@
 import { createAction, props } from "@ngrx/store";
 import { MemberAddEdit } from './../../../components/Admin/model/memberAddEdit';
 import { MemberView } from "../../../components/Admin/model/memberView";
+import { userInput } from "./user.model";
 
 
 export const LOAD_USER_SUCCESS='[user page] laod user success'
@@ -24,7 +25,7 @@ export const loaduser=createAction(LOAD_USER);
 export const loaduserSuccess=createAction(LOAD_USER_SUCCESS,props<{userlist:MemberView[]}>());
 export const loaduserFail=createAction(LOAD_USER_FAIL,props<{ErrorText:string}>());
 export const adduser=createAction(ADD_USER,props<{userinput:MemberAddEdit}>())
-export const addusersuccess=createAction(ADD_USER_SUCCESS,  props<{ userinput: { success: boolean; message: string; user: MemberAddEdit }; roles: string }>()
+export const addusersuccess=createAction(ADD_USER_SUCCESS,  props<{ userinput: userInput; roles: string }>()
 );
 export const getuser=createAction(GET_USER,props<{id:string}>())
 export const getusersuccess=createAction(GET_USER_SUCCESS,props<{obj:MemberAddEdit}>())

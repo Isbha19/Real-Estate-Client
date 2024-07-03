@@ -7,3 +7,7 @@ export interface users {
   userobj:MemberAddEdit;
     ErrorMessage: string;
 }
+
+export interface userInput{
+  success: boolean; message: string; user: MemberAddEdit ;
+}

@@ -17,6 +17,7 @@ import { LoginComponent } from '../login/login.component';
 import { CommonModule } from '@angular/common';
 import { User } from '../../../../../core/model/account/user';
 import { AccountService } from '../../../../../core/service/account.service';
+import { ApiResponse } from '../../../../../core/model/response/ApiResponse';
 
 
 @Component({
@@ -81,7 +82,7 @@ export class SendEmailComponent {
         this.accountService
           .resendEmailConfirmation(this.emailForm.get('email')?.value)
           .subscribe({
-            next: (response: any) => {
+            next: (response: ApiResponse) => {
               this.toastr.success(response.message);
               this.dialogref.close();
             },
@@ -94,7 +95,7 @@ export class SendEmailComponent {
         this.accountService
           .forgotUserNameOrPassword(this.emailForm.get('email')?.value)
           .subscribe({
-            next: (response: any) => {
+            next: (response:ApiResponse) => {
               this.toastr.success(response.message);
               this.dialogref.close();
 

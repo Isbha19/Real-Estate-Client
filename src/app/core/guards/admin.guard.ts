@@ -5,6 +5,7 @@ import { map } from 'rxjs';
 import { jwtDecode } from 'jwt-decode';
 import { ToastrService } from 'ngx-toastr';
 import { JwtDecodedToken } from '../model/jwtTokenDecoded';
+import { User } from '../model/account/user';
 
 export const adminGuard: CanActivateFn = () => {
   const router = inject(Router);
@@ -12,10 +13,10 @@ export const adminGuard: CanActivateFn = () => {
   const toastrService = inject(ToastrService);
  
   return accountService.user$.pipe(
-    map((user: any) => {      
+    map((user:User |null) => {      
       if (user) {
         console.log(JSON.stringify(user));
-        const decodedToken: JwtDecodedToken = jwtDecode(user?.data.jwt);
+        const decodedToken: JwtDecodedToken = jwtDecode(user?.jwt);
         console.log(JSON.stringify(decodedToken.role)+"decoded");
         
         if (decodedToken.role.includes('Admin')) {

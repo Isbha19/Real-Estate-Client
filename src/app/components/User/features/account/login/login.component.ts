@@ -1,3 +1,4 @@
+import { FbAuthResponse } from './../../../../../core/model/account/fbAuthResponse';
 import { JwtDecodedToken } from './../../../../../core/model/jwtTokenDecoded';
 import { LoginResponse } from './../../../../../core/model/response/LoginResponse';
 import { ApiResponse } from './../../../../../core/model/response/ApiResponse';
@@ -22,6 +23,7 @@ import { LoginWithExternal } from '../../../../../core/model/account/loginWithEx
 import { AccountService } from '../../../../../core/service/account.service';
 
 declare const FB: any;
+
 @Component({
   selector: 'app-login',
   standalone: true,
@@ -73,16 +75,16 @@ export class LoginComponent {
     this.submitted = true;
     if (this.loginForm.valid) {
       this.accountService.login(this.loginForm.value).subscribe({
-        next: (response:any) => {
+        next: (response:LoginResponse|null) => {
           this.dialogRef.close();
-          this.toastr.success(response.message);
-          
+          this.toastr.success(response?.message);
         },
         error: (error) => {
           if (error.message.includes('please confirm your email')) {
             this.resendEmail = true;
-          }
-        },
+
+        }
+      }
       });
     }
   }
@@ -106,7 +108,7 @@ export class LoginComponent {
     });
   }
   loginWithFacebook() {
-    FB.login(async (fbResult: any) => {
+    FB.login(async (fbResult:FbAuthResponse) => {
       if (fbResult.authResponse) {
         const accessToken = fbResult.authResponse.accessToken;
         const userId = fbResult.authResponse.userID;

@@ -2,7 +2,7 @@ import { ErrorHandler, Injectable } from '@angular/core';
 
 @Injectable()
 export class GlobalErrorHandler implements ErrorHandler {
-  handleError(error: any): void {
+  handleError(error: Error): void {
     if (error instanceof TypeError) {
       //Example: You attempt to perform a mathematical operation on a string.
 

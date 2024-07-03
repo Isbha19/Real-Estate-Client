@@ -1,15 +1,17 @@
+import { User } from './../model/account/user';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Register } from '../model/account/register.model';
 import { Login } from '../model/account/login.model';
-import { User } from '../model/account/user';
-import { ReplaySubject, map, of } from 'rxjs';
+import { Observable, ReplaySubject, map, of } from 'rxjs';
 import { Router } from '@angular/router';
 import { ConfirmEmail } from '../model/account/confirmEmail';
 import { ResetPassword } from '../model/account/resetPassword';
 import { RegisterWithExternal } from '../model/account/registerWithExternal';
 import { LoginWithExternal } from '../model/account/loginWithExternal';
 import { environment } from '../../../environments/environment';
+import { LoginResponse } from '../model/response/LoginResponse';
+import { ApiResponse } from '../model/response/ApiResponse';
 
 @Injectable({ providedIn: 'root' })
 export class AccountService {
@@ -35,25 +37,25 @@ export class AccountService {
         })
       );
   }
-  login(model: Login) {
-    return this.http
-      .post<User>(`${environment.apiUrl}Account/login`, model)
-      .pipe(
-        map((user: User) => {
-          if (user) {
-            this.setUser(user);
-            return user;
-          }
-          return null;
-        })
-      );
-  }
-  register(model: Register) {
-    return this.http.post(`${environment.apiUrl}Account/register`, model);
+  login(model: Login): Observable<LoginResponse |null> {
+    return this.http.post<LoginResponse>(`${environment.apiUrl}Account/login`, model).pipe(
+      map((response: LoginResponse) => {
+        // Assuming LoginResponse has a user property
+        if (response && response.data) {
+          this.setUser(response.data);
+          return response; // Return full LoginResponse
+        }
+        return null; // Or handle invalid response as needed
+      })
+    );
   }
 
-  ConfirmEmail(model: ConfirmEmail) {
-    return this.http.put(`${environment.apiUrl}Account/confirm-email`, model);
+  register(model: Register):Observable<ApiResponse> {
+    return this.http.post<ApiResponse>(`${environment.apiUrl}Account/register`, model);
+  }
+
+  ConfirmEmail(model: ConfirmEmail):Observable<ApiResponse> {
+    return this.http.put<ApiResponse>(`${environment.apiUrl}Account/confirm-email`, model);
   }
   logout() {
     localStorage.removeItem(environment.userKey);
@@ -69,39 +71,40 @@ export class AccountService {
     
     if (key) {
       const user = JSON.parse(key);
-      return user.data.jwt;
+      return user.jwt;
     } else {
       return null;
     }
   }
-  resendEmailConfirmation(email: string) {
-    return this.http.post(
+  resendEmailConfirmation(email: string):Observable<ApiResponse> {
+    return this.http.post<ApiResponse>(
       `${environment.apiUrl}Account/resend-email-confirmation-link/${email}`,
       {}
     );
   }
-  forgotUserNameOrPassword(email: string) {
-    return this.http.post(
+  forgotUserNameOrPassword(email: string):Observable<ApiResponse>{
+    return this.http.post<ApiResponse>(
       `${environment.apiUrl}Account/forgot-username-or-password/${email}`,
       {}
     );
   }
-  resetPassword(model: ResetPassword) {
-    return this.http.put(`${environment.apiUrl}Account/reset-password`, model);
+  resetPassword(model: ResetPassword) :Observable<ApiResponse>{
+    return this.http.put<ApiResponse>(`${environment.apiUrl}Account/reset-password`, model);
   }
-  registerWithThirdParty(model: RegisterWithExternal) {
+  registerWithThirdParty(model: RegisterWithExternal):Observable<LoginResponse> {
     return this.http
-      .post(`${environment.apiUrl}Account/register-with-third-party`, model)
-      .pipe(
-        map((user: any) => {
-          if (user) {
-            console.log("result"+JSON.stringify(user));  
-            this.setUser(user);
-            return user;
-            
-          }
-        })
-      );
+    .post<LoginResponse>(`${environment.apiUrl}Account/register-with-third-party`, model)
+    .pipe(
+      map(response => {
+        if (response && response.data) {
+          const user: User = response.data;
+          this.setUser(user);
+          return response; // Return the full LoginResponse
+        }
+        // Handle the case where response is null or response.data is undefined
+        throw new Error('Invalid response');
+      })
+    );
   }
   loginWithThirdParty(model:LoginWithExternal){
     return this.http.post<User>(

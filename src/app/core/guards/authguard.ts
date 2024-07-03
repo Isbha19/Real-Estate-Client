@@ -3,6 +3,7 @@ import { CanActivateFn, Router } from '@angular/router';
 import { AccountService } from '../service/account.service';
 import { map } from 'rxjs';
 import { ToastrService } from 'ngx-toastr';
+import { User } from '../model/account/user';
 
 export const authGuard: CanActivateFn = () => {
   const router = inject(Router);
@@ -11,7 +12,7 @@ export const authGuard: CanActivateFn = () => {
 
 
   return accountService.user$.pipe(
-    map((user: any) => {
+    map((user:User|null) => {
       if (user) {
         return true;
       }

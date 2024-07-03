@@ -9,6 +9,7 @@ import { SendEmailComponent } from '../send-email/send-email.component';
 import { ConfirmEmail } from '../../../../../core/model/account/confirmEmail';
 import { User } from '../../../../../core/model/account/user';
 import { AccountService } from '../../../../../core/service/account.service';
+import { ApiResponse } from '../../../../../core/model/response/ApiResponse';
 
 @Component({
   selector: 'app-confirm-email',
@@ -34,13 +35,13 @@ export class ConfirmEmailComponent {
           this.router.navigateByUrl('/');
         } else {
           this.activatedRoute.queryParamMap.subscribe({
-            next: (params: any) => {
+            next: (params: { get: (arg0: string) => string | null; }) => {
               const confirmEmail: ConfirmEmail = {
-                token: params.get('token'),
-                email: params.get('email'),
+                token: params.get('token')??"",
+                email: params.get('email')??"",
               };
               this.accountService.ConfirmEmail(confirmEmail).subscribe({
-                next: (response: any) => {
+                next: (response: ApiResponse) => {
                   this.toastr.success(response.message);
                 },
                 error: (error) => {

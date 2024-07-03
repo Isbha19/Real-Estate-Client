@@ -37,7 +37,7 @@
 
   <!-- Admin Dashboard Button -->
   <div class="nav-item mb-3 mb-lg-0 me-lg-3" *ngIf="accountService.user$| async as user">
-    <ng-container *ngIf="user && user.data.jwt"> <!-- Assuming 'data' is where the decoded JWT token is stored -->
+    <ng-container *ngIf="user && user.jwt"> <!-- Assuming 'data' is where the decoded JWT token is stored -->
         <ng-container *ngIf="isAdmin(user)">
             <a  class="btn btn-outline-primary nav-link nav-item" routerLink="admin-dashboard">Admin Dashboard</a>
         </ng-container>
@@ -70,14 +70,14 @@
 
                 <div class="dropdown-menu rounded-0 m-0 last-sub-menu">
 
-                    <p class="dropdown-text text-center" >Welcome {{user.data.firstName|capitalize}} {{user.data.lastName|capitalize}}</p>
-                    <ng-container *ngIf="user && user.data.jwt"> <!-- Assuming 'data' is where the decoded JWT token is stored -->
+                    <p class="dropdown-text text-center" >Welcome {{user.firstName|capitalize}} {{user.lastName|capitalize}}</p>
+                    <ng-container *ngIf="user && user.jwt"> <!-- Assuming 'data' is where the decoded JWT token is stored -->
                         <ng-container *ngIf="isAgent(user)">
                             <a  class="btn btn-outline-primary nav-link nav-item" routerLink="list-property">List Property</a>
                         </ng-container>
                     </ng-container>                    <div class="dropdown-divider"></div>
                     <div class="arrow"></div>
-                    <ng-container *ngIf="user && user.data.jwt"> <!-- Assuming 'data' is where the decoded JWT token is stored -->
+                    <ng-container *ngIf="user && user.jwt"> <!-- Assuming 'data' is where the decoded JWT token is stored -->
                         <ng-container *ngIf="isAgent(user)">
                             <p>Listed properties(0)</p>
                             <div class="dropdown-divider"></div>

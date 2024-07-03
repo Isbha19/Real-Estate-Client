@@ -47,8 +47,7 @@ export class UserEffects {
         return this.service.addEditMember(action.userinput).pipe(
           
           switchMap((data: any) => {  
-            console.log(JSON.stringify(action.userinput)+"debuf");
-          
+          console.log(JSON.stringify(data)+"dattaaa")
             return of(
               addusersuccess({
                 userinput: data,roles:action.userinput.roles

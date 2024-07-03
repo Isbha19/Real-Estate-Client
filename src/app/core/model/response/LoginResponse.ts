@@ -1,5 +1,6 @@
 import { User } from './../account/user';
-export interface LoginResponse extends User{
+export interface LoginResponse{
     success:boolean,
-    message:string
+    message:string,
+    data:User
 }

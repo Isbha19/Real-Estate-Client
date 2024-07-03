@@ -7,6 +7,7 @@ import { CommonModule } from '@angular/common';
 import { RegisterWithExternal } from '../../../../../core/model/account/registerWithExternal';
 import { User } from '../../../../../core/model/account/user';
 import { AccountService } from '../../../../../core/service/account.service';
+import { LoginResponse } from '../../../../../core/model/response/LoginResponse';
 
 
 @Component({
@@ -37,7 +38,7 @@ this.accountService.user$.pipe(take(1)).subscribe({
       this.router.navigateByUrl('/');
     }else{
       this.activatedRoute.queryParamMap.subscribe({
-        next:(params:any)=>{
+        next:(params)=>{
           this.provider=this.activatedRoute.snapshot.paramMap.get('provider');
           this.access_token=params.get('access_token');
           this.userId=params.get('userId');
@@ -90,7 +91,7 @@ register(){
     console.log(model+"ml");
     
     this.accountService.registerWithThirdParty(model).subscribe({
-      next: (response: any) => {
+      next: (response: LoginResponse) => {
         console.log(response+"pl");
         
         if (response && response.message) {

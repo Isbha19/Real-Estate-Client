@@ -23,7 +23,10 @@ import { jwtDecode } from "jwt-decode";
 import { ValidationMessagesComponent } from '../../../errors/validation-messages/validation-messages.component';
 import { AccountService } from '../../../../../core/service/account.service';
 import { JwtDecodedToken } from '../../../../../core/model/jwtTokenDecoded';
-declare const FB: any;
+import { ApiResponse } from '../../../../../core/model/response/ApiResponse';
+import { FbAuthResponse } from '../../../../../core/model/account/fbAuthResponse';
+declare const FB:any;
+
 @Component({
   selector: 'app-register',
   standalone: true,
@@ -107,7 +110,7 @@ export class RegisterComponent {
     this.errorMessages = [];
     if (this.registerForm.valid) {
       this.accountService.register(this.registerForm.value).subscribe({
-        next: (response: any) => {
+        next: (response: ApiResponse) => {
           this.toastr.success(response.message);
           this.dialogRef.close();
           this.dialog.open(LoginComponent, { width: '60%' });
@@ -116,7 +119,7 @@ export class RegisterComponent {
     }
   }
   registerWithFacebook() {
-    FB.login(async (fbResult: any) => {
+    FB.login(async (fbResult: FbAuthResponse) => {
       if (fbResult.authResponse) {
         const accessToken = fbResult.authResponse.accessToken;
         const userId = fbResult.authResponse.userID;

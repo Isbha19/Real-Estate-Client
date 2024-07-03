@@ -16,6 +16,7 @@ import { Router } from '@angular/router';
 import { GenericKeyValuePair } from '../../../Agent/model/genericKeyValuePair';
 import { CompanyRegisterResponse } from '../../model/companyRegisterResponse';
 import { JwtDecodedToken } from '../../../../core/model/jwtTokenDecoded';
+import { ApiResponse } from '../../../../core/model/response/ApiResponse';
 
 @Component({
   selector: 'app-company-registration',
@@ -145,7 +146,7 @@ export class CompanyRegistrationComponent {
           if (this.file) {
           
             this.companyService.uploadCompanyLogo(this.file, companyId).subscribe({
-              next: (logoResponse: any) => {
+              next: _ => {
                 this.router.navigateByUrl('/');
                 this.toastr.success(response.message);
 
@@ -160,9 +161,9 @@ export class CompanyRegistrationComponent {
   populateRepresentativeInformation(): void {
     this.accountService.user$.subscribe(user => {
       if (user) {
-        const decodedToken: JwtDecodedToken = jwtDecode(user?.data.jwt);
+        const decodedToken: JwtDecodedToken = jwtDecode(user?.jwt);
         const repInfo = this.CompanyRegister.get('RepresentativeInformation');
-        repInfo?.get('repName')?.setValue(user.data.firstName+" "+user.data.lastName);
+        repInfo?.get('repName')?.setValue(user.firstName+" "+user.lastName);
         repInfo?.get('repEmailAddress')?.setValue(decodedToken.email);
       }
     });

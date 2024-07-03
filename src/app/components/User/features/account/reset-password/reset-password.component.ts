@@ -13,6 +13,7 @@ import { CommonModule } from '@angular/common';
 import { ResetPassword } from '../../../../../core/model/account/resetPassword';
 import { User } from '../../../../../core/model/account/user';
 import { AccountService } from '../../../../../core/service/account.service';
+import { ApiResponse } from '../../../../../core/model/response/ApiResponse';
 
 
 @Component({
@@ -42,9 +43,9 @@ export class ResetPasswordComponent {
           this.router.navigateByUrl('/');
         } else {
           this.activatedRoute.queryParamMap.subscribe({
-            next: (params: any) => {
-              this.token = params.get('token');
-              this.email = params.get('email');
+            next: (params) => {
+              this.token = params.get('token')??"";
+              this.email = params.get('email')??"";
               if (this.token && this.email) {
                 this.initializaForm(this.email);
               } else {
@@ -84,7 +85,7 @@ export class ResetPasswordComponent {
         newPassword: this.resetPasswordForm.get('newPassword')?.value,
       };
       this.accountService.resetPassword(model).subscribe({
-        next: (response: any) => {
+        next: (response: ApiResponse) => {
           this.toastr.success(response.message);
           this.router.navigateByUrl('/');
         },
