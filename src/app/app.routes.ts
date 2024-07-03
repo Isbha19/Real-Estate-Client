@@ -1,64 +1,116 @@
 import { adminGuard } from './core/guards/admin.guard';
-import { PropertyDetailComponent } from'./components/Property/pages/property-detail/property-detail.component';
-import { PropertyListTypeComponent } from './components/Property/pages/property-lists-type/property-lists-type.component';
-import { UserCrudComponent } from './components/Admin/pages/user-crud/user-crud.component';
-import { AdminDashboardComponent } from './components/Admin/pages/admin-dashboard/admin-dashboard.component';
-import { AdminComponent } from './components/Admin/pages/admin/admin.component';
-import { ListPropertyFormComponent } from './components/Agent/pages/list-property-form/list-property-form.component';
-import { CompanyRegistrationComponent } from './components/Company/pages/company-registration/company-registration.component';
 import { authGuard } from './core/guards/authguard';
 import { agentGuard } from './core/guards/agent.guard';
-import { ConfirmEmailComponent } from './components/User/features/account/confirm-email/confirm-email.component';
-import { NotFoundComponent } from './components/User/errors/not-found/not-found.component';
-import { ResetPasswordComponent } from './components/User/features/account/reset-password/reset-password.component';
-import { HomeComponent } from './components/User/pages/home/home.component';
-import { LayoutComponent } from './components/User/layouts/layout/layout.component';
 import { Routes } from '@angular/router';
-import { SendEmailComponent } from './components/User/features/account/send-email/send-email.component';
-import { RegisterWithThirdPartyComponent } from './components/User/features/account/register-with-third-party/register-with-third-party.component';
 
 export const routes: Routes = [
   {
     path: '',
-    component: LayoutComponent,
+    loadComponent: () => import('./components/User/layouts/layout/layout.component').then(m => m.LayoutComponent),
     children: [
-      { path: '', component: HomeComponent },
-      { path: 'reset-password', component: ResetPasswordComponent },
-      { path: 'not-found', component: NotFoundComponent },
-      { path: 'confirm-email', component: ConfirmEmailComponent },
-      { path: 'send-email/:mode', component: SendEmailComponent },
+      {
+        path: '',
+        loadComponent: () =>
+          import('./components/User/pages/home/home.component').then(
+            (m) => m.HomeComponent
+          ),
+      },
+      {
+        path: 'reset-password',
+        loadComponent: () =>
+          import(
+            './components/User/features/account/reset-password/reset-password.component'
+          ).then((m) => m.ResetPasswordComponent),
+      },
+      {
+        path: 'not-found',
+        loadComponent: () =>
+          import('./components/User/errors/not-found/not-found.component').then(
+            (m) => m.NotFoundComponent
+          ),
+      },
+      {
+        path: 'confirm-email',
+        loadComponent: () =>
+          import(
+            './components/User/features/account/confirm-email/confirm-email.component'
+          ).then((m) => m.ConfirmEmailComponent),
+      },
+      {
+        path: 'send-email/:mode',
+        loadComponent: () =>
+          import(
+            './components/User/features/account/send-email/send-email.component'
+          ).then((m) => m.SendEmailComponent),
+      },
       {
         path: 'register/third-party/:provider',
-        component: RegisterWithThirdPartyComponent,
+        loadComponent: () =>
+          import(
+            './components/User/features/account/register-with-third-party/register-with-third-party.component'
+          ).then((m) => m.RegisterWithThirdPartyComponent),
       },
       {
         path: 'company-registration',
         canActivate: [authGuard],
 
-        component: CompanyRegistrationComponent,
+        loadComponent: () =>
+          import(
+            './components/Company/pages/company-registration/company-registration.component'
+          ).then((m) => m.CompanyRegistrationComponent),
       },
       {
-        path: 'list-property', canActivate: [agentGuard],
-        component: ListPropertyFormComponent,
+        path: 'list-property',
+        canActivate: [agentGuard],
+        loadComponent: () =>
+          import(
+            './components/Agent/pages/list-property-form/list-property-form.component'
+          ).then((m) => m.ListPropertyFormComponent),
       },
-      { path: 'properties-list/:listingType',    
-        component:PropertyListTypeComponent   },
-      { path: 'property-detail/:id', component: PropertyDetailComponent }
-
-
+      {
+        path: 'properties-list/:listingType',
+        loadComponent: () =>
+          import(
+            './components/Property/pages/property-lists-type/property-lists-type.component'
+          ).then((m) => m.PropertyListTypeComponent),
+      },
+      {
+        path: 'property-detail/:id',
+        loadComponent: () =>
+          import(
+            './components/Property/pages/property-detail/property-detail.component'
+          ).then((m) => m.PropertyDetailComponent),
+      },
     ],
   },
   {
     path: 'admin-dashboard',
     runGuardsAndResolvers: 'always',
     canActivate: [adminGuard],
-    component: AdminComponent,
-children: [
-   
-     { path: '', component: AdminDashboardComponent },
-   { path: 'user-crud', component: UserCrudComponent }
-]
+    loadComponent: () => import('./components/Admin/pages/admin/admin.component').then(m => m.AdminComponent),
+    children: [
+      {
+        path: '',
+        loadComponent: () =>
+          import(
+            './components/Admin/pages/admin-dashboard/admin-dashboard.component'
+          ).then((m) => m.AdminDashboardComponent),
+      },
+      {
+        path: 'user-crud',
+        loadComponent: () =>
+          import('./components/Admin/pages/user-crud/user-crud.component').then(
+            (m) => m.UserCrudComponent
+          ),
+      },
+    ],
   },
- 
-  { path: '**', component: NotFoundComponent },
+
+  {
+    path: '**',
+    loadComponent: () =>
+      import('./components/User/errors/not-found/not-found.component').then(
+        (m) => m.NotFoundComponent
+      ),
+  },
 ];
