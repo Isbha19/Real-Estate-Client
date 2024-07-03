@@ -1,3 +1,6 @@
+import { JwtDecodedToken } from './../../../../../core/model/jwtTokenDecoded';
+import { LoginResponse } from './../../../../../core/model/response/LoginResponse';
+import { ApiResponse } from './../../../../../core/model/response/ApiResponse';
 import { Component, ElementRef, Inject, InjectionToken, Renderer2, ViewChild } from '@angular/core';
 import {
   FormBuilder,
@@ -70,9 +73,8 @@ export class LoginComponent {
     this.submitted = true;
     if (this.loginForm.valid) {
       this.accountService.login(this.loginForm.value).subscribe({
-        next: (response: any) => {
+        next: (response:any) => {
           this.dialogRef.close();
-
           this.toastr.success(response.message);
           
         },
@@ -115,7 +117,7 @@ export class LoginComponent {
             new LoginWithExternal(accessToken, userId, 'facebook')
           )
           .subscribe({
-            next: (response:any) => {
+            next: (response) => {
           this.dialogRef.close();
             },
             error:error=>{
@@ -149,7 +151,7 @@ export class LoginComponent {
     };
   }
   private async googleCallBack(response: CredentialResponse) {
-const decodedToken:any=jwtDecode(response.credential);
+const decodedToken:JwtDecodedToken=jwtDecode(response.credential);
 this.dialogRef.close();
 
 this.accountService.loginWithThirdParty(new LoginWithExternal(response.credential,decodedToken.sub,"google"))

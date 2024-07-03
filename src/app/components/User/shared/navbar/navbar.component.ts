@@ -7,6 +7,7 @@ import { RegisterComponent } from '../../features/account/register/register.comp
 import { RouterLink } from '@angular/router';
 import { AccountService } from '../../../../core/service/account.service';
 import { jwtDecode } from "jwt-decode";
+import { JwtDecodedToken } from '../../../../core/model/jwtTokenDecoded';
 
 @Component({
   selector: 'app-navbar',
@@ -37,7 +38,7 @@ this.OpenPopUp(RegisterComponent)
   }
   isAdmin(user: any): boolean {
     if (user && user.data.jwt) {
-        const decodedToken: any = jwtDecode(user.data.jwt);
+        const decodedToken: JwtDecodedToken = jwtDecode(user.data.jwt);
         return decodedToken.role.includes('Admin');
     }
     return false;
@@ -45,7 +46,7 @@ this.OpenPopUp(RegisterComponent)
 isAgent(user: any): boolean {
   if (user && user.data.jwt) {
     
-      const decodedToken: any = jwtDecode(user.data.jwt);
+      const decodedToken: JwtDecodedToken = jwtDecode(user.data.jwt);
       return decodedToken.role.includes('Agent');
   }
   return false;

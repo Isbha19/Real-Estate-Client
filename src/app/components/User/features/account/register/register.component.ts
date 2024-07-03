@@ -22,6 +22,7 @@ import { CredentialResponse } from 'google-one-tap';
 import { jwtDecode } from "jwt-decode";
 import { ValidationMessagesComponent } from '../../../errors/validation-messages/validation-messages.component';
 import { AccountService } from '../../../../../core/service/account.service';
+import { JwtDecodedToken } from '../../../../../core/model/jwtTokenDecoded';
 declare const FB: any;
 @Component({
   selector: 'app-register',
@@ -151,7 +152,7 @@ export class RegisterComponent {
     };
   }
   private async googleCallBack(response: CredentialResponse) {
-const decodedToken:any=jwtDecode(response.credential);
+const decodedToken:JwtDecodedToken=jwtDecode(response.credential);
 this.dialogRef.close();
 
 this.router.navigateByUrl(

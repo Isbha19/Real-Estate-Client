@@ -1,8 +1,11 @@
+import { Property } from './../model/property';
 
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { GenericKeyValuePair } from '../model/genericKeyValuePair';
 import { environment } from '../../../../environments/environment';
+import { Observable } from 'rxjs';
+import { ApiResponse } from '../../../core/model/response/ApiResponse';
 
 
 @Injectable({ providedIn: 'root' })
@@ -15,10 +18,10 @@ export class AgentService {
     );
   }
 
-  addProperty(property:any) {
+  addProperty(property:Property):Observable<ApiResponse> {
     console.log(property);
     
-    return this.http.post(
+    return this.http.post<ApiResponse>(
       `${environment.apiUrl}Property/add-property`,
       property
     );

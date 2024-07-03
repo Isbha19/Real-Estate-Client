@@ -4,6 +4,7 @@ import { AccountService } from '../service/account.service';
 import { map } from 'rxjs';
 import { jwtDecode } from 'jwt-decode';
 import { ToastrService } from 'ngx-toastr';
+import { JwtDecodedToken } from '../model/jwtTokenDecoded';
 
 export const adminGuard: CanActivateFn = () => {
   const router = inject(Router);
@@ -14,8 +15,8 @@ export const adminGuard: CanActivateFn = () => {
     map((user: any) => {      
       if (user) {
         console.log(JSON.stringify(user));
-        const decodedToken: any = jwtDecode(user?.data.jwt);
-        console.log(decodedToken+"decoded");
+        const decodedToken: JwtDecodedToken = jwtDecode(user?.data.jwt);
+        console.log(JSON.stringify(decodedToken.role)+"decoded");
         
         if (decodedToken.role.includes('Admin')) {
           return true;

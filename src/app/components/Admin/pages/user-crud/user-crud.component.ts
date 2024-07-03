@@ -32,7 +32,7 @@ const $ = window['$'];
 })
 export class UserCrudComponent {
   storeNgrx = inject(Store<{ user: { user: users } }>);
-totalLength:any;
+totalLength:number=0;
 page:number=1;
   members: MemberView[] = [];
 

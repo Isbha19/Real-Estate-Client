@@ -4,6 +4,7 @@ import { AccountService } from '../service/account.service';
 import { map } from 'rxjs';
 import { jwtDecode } from 'jwt-decode';
 import { ToastrService } from 'ngx-toastr';
+import { JwtDecodedToken } from '../model/jwtTokenDecoded';
 
 export const agentGuard: CanActivateFn = () => {
   const router = inject(Router);
@@ -11,10 +12,11 @@ export const agentGuard: CanActivateFn = () => {
   const toastrService = inject(ToastrService);
  
   return accountService.user$.pipe(
-    map((user: any) => {      
+    map((user) => {      
       if (user) {
         console.log(JSON.stringify(user));
-        const decodedToken: any = jwtDecode(user?.data.jwt);
+        const decodedToken: JwtDecodedToken = jwtDecode(user?.data.jwt);
+        
         console.log(decodedToken+"decoded");
         
         if (decodedToken.role.includes('Agent')) {

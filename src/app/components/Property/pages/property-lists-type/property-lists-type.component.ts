@@ -3,6 +3,7 @@ import { Component } from '@angular/core';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { PropertyService } from '../../services/property.service';
+import { PropertyListing } from '../../model/propertyList';
 
 @Component({
   selector: 'app-property-lists-type',
@@ -13,7 +14,7 @@ import { PropertyService } from '../../services/property.service';
 })
 export class PropertyListTypeComponent {
   constructor(private route: ActivatedRoute, private propertyService: PropertyService) {}
-  properties: any[] = [];
+  properties: PropertyListing[] = [];
   listingType: string="";
 
   ngOnInit(): void {
@@ -24,7 +25,7 @@ export class PropertyListTypeComponent {
   }
   loadProperties(): void {
     this.propertyService.getPropertiesBasedonListType(this.listingType).subscribe({
-      next: (properties: any[]) => { 
+      next: (properties: PropertyListing[]) => { 
         console.log(JSON.stringify(properties));
              
         this.properties = properties;

@@ -1,7 +1,7 @@
 import { ActivatedRoute, Router } from '@angular/router';
 import { Component } from '@angular/core';
 import { take } from 'rxjs';
-import { ToastrService } from 'ngx-toastr';
+import { ComponentType, ToastrService } from 'ngx-toastr';
 import { CommonModule } from '@angular/common';
 import { LoginComponent } from '../login/login.component';
 import { MatDialog } from '@angular/material/dialog';
@@ -62,7 +62,7 @@ export class ConfirmEmailComponent {
       }
     
     
-      OpenPopUp(Component:any,width:string,mode=""){
+      OpenPopUp(Component:ComponentType<unknown>,width:string,mode=""){
      this.dialog.open(Component,{
       width:width,
       data:{

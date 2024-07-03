@@ -5,15 +5,14 @@ import { environment } from '../../../../environments/environment';
 
 import { companyRegister } from '../model/companyRegister';
 import { Observable } from 'rxjs';
+import { CompanyRegisterResponse } from '../model/companyRegisterResponse';
 
 @Injectable({ providedIn: 'root' })
 export class CompanyService {
   constructor(private http: HttpClient) {}
 
-  addCompany(company:companyRegister) {  
-    console.log("companyService worked");
-      
-    return this.http.post(
+  addCompany(company:companyRegister) {        
+    return this.http.post<CompanyRegisterResponse>(
       `${environment.apiUrl}Company/add-company`,
       company
     );

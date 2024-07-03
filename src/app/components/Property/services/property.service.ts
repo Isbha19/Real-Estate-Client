@@ -4,6 +4,7 @@ import { PropertyCard } from './../../Agent/model/propertyCard';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from '../../../../environments/environment';
+import { PropertyListing } from '../model/propertyList';
 
 @Injectable({ providedIn: 'root' })
 export class PropertyService {
@@ -11,7 +12,7 @@ export class PropertyService {
 
   
   getPropertiesBasedonListType(listingType:string){
-    return this.http.get<PropertyCard[]>(
+    return this.http.get<PropertyListing[]>(
       `${environment.apiUrl}Property/get-properties/${listingType}`
     );
   }

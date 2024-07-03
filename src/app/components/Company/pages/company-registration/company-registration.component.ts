@@ -14,6 +14,8 @@ import { companyRegister } from '../../model/companyRegister';
 import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
 import { GenericKeyValuePair } from '../../../Agent/model/genericKeyValuePair';
+import { CompanyRegisterResponse } from '../../model/companyRegisterResponse';
+import { JwtDecodedToken } from '../../../../core/model/jwtTokenDecoded';
 
 @Component({
   selector: 'app-company-registration',
@@ -27,11 +29,15 @@ export class CompanyRegistrationComponent {
   companyStructures:  GenericKeyValuePair[] = [];
   businessActivityTypes: GenericKeyValuePair[] = [];
   selectedCompanyLogoFileName: string | null = null;
-  file:any;
+  file:File;
   constructor(private builder: FormBuilder,private accountService:AccountService,
     private companyService:CompanyService,private toastr:ToastrService,
     private router:Router
-  ) {}
+  ) {
+
+    this.file = {} as File; // Initialize file in the constructor
+
+  }
   ngOnInit(): void {
     this.populateRepresentativeInformation();
     this.companyService.getCompanyStructures().subscribe({
@@ -81,7 +87,7 @@ export class CompanyRegistrationComponent {
       tenancyContract: this.builder.control('', Validators.required),
     }),
     additionalInformation: this.builder.group({
-      companyLogo: this.builder.control(''),
+      companyLogo: this.builder.control(null),
       businessDescription: this.builder.control('', Validators.required),
       numberOfEmployees: this.builder.control('', Validators.required),
       termsAndCondition: this.builder.control(false, Validators.required),
@@ -133,11 +139,9 @@ export class CompanyRegistrationComponent {
       };
       
       this.companyService.addCompany(companyData).subscribe({
-        next: (response: any) => {
+        next: (response: CompanyRegisterResponse) => {
           
-          const companyId = response.id; // Adjust according to your API response structure
-console.log(this.file+"filee");
-
+          const companyId = response.id; 
           if (this.file) {
           
             this.companyService.uploadCompanyLogo(this.file, companyId).subscribe({
@@ -156,22 +160,22 @@ console.log(this.file+"filee");
   populateRepresentativeInformation(): void {
     this.accountService.user$.subscribe(user => {
       if (user) {
-        const decodedToken: any = jwtDecode(user?.data.jwt);
+        const decodedToken: JwtDecodedToken = jwtDecode(user?.data.jwt);
         const repInfo = this.CompanyRegister.get('RepresentativeInformation');
         repInfo?.get('repName')?.setValue(user.data.firstName+" "+user.data.lastName);
         repInfo?.get('repEmailAddress')?.setValue(decodedToken.email);
       }
     });
   }  
-  onFileSelected(event: any): void {
+  onFileSelected(event: Event): void {
 
-   this.file = event.target.files[0];
-  
-    
-    this.selectedCompanyLogoFileName=this.file.name;
-    const additionalInfo = this.CompanyRegister.get('additionalInformation');
-    additionalInfo?.get('companyLogo')?.setValue(this.file);
-   
+    const inputElement = event.target as HTMLInputElement;
+    if (inputElement.files && inputElement.files.length > 0) {
+      this.file = inputElement.files[0];
+      this.selectedCompanyLogoFileName = this.file.name;
+      const additionalInfo = this.CompanyRegister.get('additionalInformation');
+      // additionalInfo?.get('companyLogo')?.setValue(this.file);
+    }
     
     
     

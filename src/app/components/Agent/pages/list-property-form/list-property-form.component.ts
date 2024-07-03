@@ -1,3 +1,4 @@
+import { ApiResponse } from './../../../../core/model/response/ApiResponse';
 import { Property } from './../../model/property';
 import { PropertyCardComponent } from './../property-card/property-card.component';
 import { Router } from '@angular/router';
@@ -168,8 +169,8 @@ autocomplete:google.maps.places.Autocomplete | undefined;
         // Additional properties as needed
       };
       this.agentService.addProperty(property).subscribe({
-        next: (response:any) => {
-          this.toastr.success(response.message)
+        next: (response:ApiResponse) => {
+          this.toastr.success(response.message);
           this.router.navigateByUrl('/');
         }
       });
