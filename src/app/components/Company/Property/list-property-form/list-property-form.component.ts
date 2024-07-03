@@ -74,11 +74,15 @@ autocomplete:google.maps.places.Autocomplete | undefined;
   }
   
   ngAfterViewInit(): void {
-   this.autocomplete=new google.maps.places.Autocomplete(this.locationField.nativeElement);
+   this.autocomplete=new google.maps.places.Autocomplete(this.locationField.nativeElement, {
+    componentRestrictions: { country: 'ae' } // Restrict to United Arab Emirates
+  });
    this.autocomplete.addListener('place_changed',()=>{
-    const place=this.autocomplete?.getPlace();
-    console.log(place);
-    
+    const place=this.autocomplete?.getPlace(); 
+    if (place && place.formatted_address) {
+      this.propertyView.location = place.formatted_address;
+      this.listPropertyForm.get('Location')?.setValue(place.formatted_address as string);
+    }   
    })
   }
 
@@ -89,7 +93,7 @@ autocomplete:google.maps.places.Autocomplete | undefined;
       PropertyTypeId: this.builder.control('', Validators.required),
       ListingTypeId: this.builder.control('', Validators.required),
       Price: this.builder.control('', [Validators.required, Validators.min(700),  Validators.pattern('^[0-9]*$')      ]),
-      Location: this.builder.control('', [Validators.required, Validators.maxLength(200)]),
+      Location: this.builder.control<string>('', [Validators.required, Validators.maxLength(200)]),
     }),
     propertyDetails: this.builder.group({
       Bedrooms: this.builder.control('', [Validators.required, Validators.min(1)]),
