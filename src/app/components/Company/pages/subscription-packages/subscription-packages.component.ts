@@ -8,5 +8,9 @@ import { Component } from '@angular/core';
   styleUrl: './subscription-packages.component.scss'
 })
 export class SubscriptionPackagesComponent {
-
+  checkOut(plan:number){
+    //create subscription checkout from api
+    //send plan and userId
+    //res (if ok) payment
+  }
 }

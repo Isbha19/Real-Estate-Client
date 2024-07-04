@@ -36,5 +36,6 @@ export class CompanyService {
 
     return this.http.post<any>(`${environment.apiUrl}Company/add-company-logo?companyId=${companyId}`, formData);
   }
+  
 
 }
