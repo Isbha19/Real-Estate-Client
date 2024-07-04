@@ -1,35 +1,42 @@
 <div class="container mt-5">
   <div class="row">
     <div class="col-12">
-      <h1 class="display-4 text-center text-primary">Company Registration Form</h1>
-      <p class="lead text-center text-secondary">Please complete the following sections to register your company</p>
+      <h1 class="display-4 text-center text-primary">
+        Company Registration Form
+      </h1>
+      <p class="lead text-center text-secondary">
+        Please complete the following sections to register your company
+      </p>
     </div>
   </div>
-<form [formGroup]="CompanyRegister" (ngSubmit)="HandleSubmit()">
-  <mat-stepper [linear]="isLinear" #stepper>
-    <mat-step [stepControl]="BasicinfoForm">
-      <div formGroupName="companyInformation">
-        <ng-template matStepLabel>Fill out Company Information</ng-template>
-        <mat-form-field appearance="fill">
-          <mat-label>Company Name</mat-label>
-          <input
-            matInput
-            placeholder="Company Name"
-            formControlName="companyName"
-          />
-        </mat-form-field>
-        <mat-form-field appearance="fill">
-          <mat-label>Trade Name</mat-label>
-          <input
-            matInput
-            placeholder="Trade Name"
-            formControlName="tradeName"
-          />
-        </mat-form-field>
-        <mat-form-field appearance="fill">
+  <form [formGroup]="CompanyRegister" >
+    <mat-stepper [linear]="isLinear" #stepper>
+      <mat-step [stepControl]="BasicinfoForm">
+        <div formGroupName="companyInformation">
+          <ng-template matStepLabel>Fill out Company Information</ng-template>
+          <mat-form-field appearance="fill">
+            <mat-label>Company Name</mat-label>
+            <input
+              matInput
+              placeholder="Company Name"
+              formControlName="companyName"
+            />
+          </mat-form-field>
+          <mat-form-field appearance="fill">
+            <mat-label>Trade Name</mat-label>
+            <input
+              matInput
+              placeholder="Trade Name"
+              formControlName="tradeName"
+            />
+          </mat-form-field>
+          <mat-form-field appearance="fill">
             <mat-label>Company Structure</mat-label>
             <mat-select formControlName="companyStructure">
-              <mat-option *ngFor="let structure of companyStructures" [value]="structure.id">
+              <mat-option
+                *ngFor="let structure of companyStructures"
+                [value]="structure.id"
+              >
                 {{ structure.name }}
               </mat-option>
             </mat-select>
@@ -61,29 +68,34 @@
           <mat-form-field appearance="fill">
             <mat-label>Business Activity Type</mat-label>
             <mat-select formControlName="businessActivityType">
-              <mat-option *ngFor="let activity of businessActivityTypes" [value]="activity.id">
+              <mat-option
+                *ngFor="let activity of businessActivityTypes"
+                [value]="activity.id"
+              >
                 {{ activity.name }}
               </mat-option>
             </mat-select>
           </mat-form-field>
-        <div>
-          <button mat-raised-button color="primary" matStepperNext>Next</button>
+          <div>
+            <button mat-raised-button color="primary" matStepperNext>
+              Next
+            </button>
+          </div>
         </div>
-      </div>
-    </mat-step>
-    <mat-step [stepControl]="contactInfoForm" label="Contact Information">
-      <div formGroupName="contactInformation">
-        <mat-form-field>
-          <mat-label>Company Address</mat-label>
-      
-          <textarea
-          matInput
-          formControlName="companyAddress"
-          placeholder="Ex. 123 Sheikh Zayed Road, Dubai, UAE"
-          rows="4"
-        ></textarea>
-        </mat-form-field>
-        <mat-form-field>
+      </mat-step>
+      <mat-step [stepControl]="contactInfoForm" label="Contact Information">
+        <div formGroupName="contactInformation">
+          <mat-form-field>
+            <mat-label>Company Address</mat-label>
+
+            <textarea
+              matInput
+              formControlName="companyAddress"
+              placeholder="Ex. 123 Sheikh Zayed Road, Dubai, UAE"
+              rows="4"
+            ></textarea>
+          </mat-form-field>
+          <mat-form-field>
             <mat-label>Phone Number</mat-label>
             <input
               matInput
@@ -109,26 +121,28 @@
               type="url"
             />
           </mat-form-field>
-        <div>
-          <button mat-raised-button color="primary" matStepperPrevious>
-            Back
-          </button>
-          |
-          <button mat-raised-button color="primary" matStepperNext>Next</button>
+          <div>
+            <button mat-raised-button color="primary" matStepperPrevious>
+              Back
+            </button>
+            |
+            <button mat-raised-button color="primary" matStepperNext>
+              Next
+            </button>
+          </div>
         </div>
-      </div>
-    </mat-step>
-    <mat-step [stepControl]="RepInfoForm" label="Representative Information">
-      <div formGroupName="RepresentativeInformation">
-        <mat-form-field>
-          <mat-label>Representative Name</mat-label>
-          <input
-            matInput
-            formControlName="repName"
-            placeholder="Representative Name"
-          />
-        </mat-form-field>
-        <mat-form-field>
+      </mat-step>
+      <mat-step [stepControl]="RepInfoForm" label="Representative Information">
+        <div formGroupName="RepresentativeInformation">
+          <mat-form-field>
+            <mat-label>Representative Name</mat-label>
+            <input
+              matInput
+              formControlName="repName"
+              placeholder="Representative Name"
+            />
+          </mat-form-field>
+          <mat-form-field>
             <mat-label>Representative Position</mat-label>
             <input
               matInput
@@ -152,27 +166,28 @@
               placeholder="Representative Email Address"
             />
           </mat-form-field>
-        <div>
-          <button mat-raised-button color="primary" matStepperPrevious>
-            Back
-          </button>
-          |
-          <button mat-raised-button color="primary" matStepperNext>Next</button>
+          <div>
+            <button mat-raised-button color="primary" matStepperPrevious>
+              Back
+            </button>
+            |
+            <button mat-raised-button color="primary" matStepperNext>
+              Next
+            </button>
+          </div>
         </div>
-      </div>
-    </mat-step>
-    <mat-step [stepControl]="legalDocForm" label="Legal Documents">
-      <div formGroupName="legalDocuments">
-        <mat-form-field>
-          <mat-label>Company Registration Document</mat-label>
-          <input
-            matInput
-
-            formControlName="companyRegistrationDoc"
-            placeholder="company Registration Document"
-          />
-        </mat-form-field>
-        <mat-form-field>
+      </mat-step>
+      <mat-step [stepControl]="legalDocForm" label="Legal Documents">
+        <div formGroupName="legalDocuments">
+          <mat-form-field>
+            <mat-label>Company Registration Document</mat-label>
+            <input
+              matInput
+              formControlName="companyRegistrationDoc"
+              placeholder="company Registration Document"
+            />
+          </mat-form-field>
+          <mat-form-field>
             <mat-label>Trade License Copy</mat-label>
             <input
               matInput
@@ -196,17 +211,22 @@
               placeholder="Tenancy Contract"
             />
           </mat-form-field>
-        <div>
-          <button mat-raised-button color="primary" matStepperPrevious>
-            Back
-          </button>
-          |
-          <button mat-raised-button color="primary" matStepperNext>Next</button>
+          <div>
+            <button mat-raised-button color="primary" matStepperPrevious>
+              Back
+            </button>
+            |
+            <button mat-raised-button color="primary" matStepperNext>
+              Next
+            </button>
+          </div>
         </div>
-      </div>
-    </mat-step>
-    <mat-step [stepControl]="additionalInfoForm" label="Additional Information">
-      <div formGroupName="additionalInformation">
+      </mat-step>
+      <mat-step
+        [stepControl]="additionalInfoForm"
+        label="Additional Information"
+      >
+        <div formGroupName="additionalInformation">
           <!-- <mat-label>Company logo</mat-label>
          
           <div class="file-input-button">
@@ -214,19 +234,25 @@
             <input type="file" formControlName="companyLogo" class="file-input-label" accept="image/*"
               (change)="onFileSelected($event)">
           </div> -->
-                <!-- File Input -->
-      <div class="file-input-container">
-        <mat-label>Company Logo</mat-label>
-        <label class="file-input-button">
-          <span>Choose File</span>
-          <input type="file" formControlName="companyLogo" class="file-input-label" accept="image/*" (change)="onFileSelected($event)">
-        </label>
-      <!-- Display selected file name -->
-      <div *ngIf="selectedCompanyLogoFileName" class="file-name-display">
-        {{ selectedCompanyLogoFileName }}
-      </div>
-      </div>
-        <mat-form-field>
+          <!-- File Input -->
+          <div class="file-input-container">
+            <mat-label>Company Logo</mat-label>
+            <label class="file-input-button">
+              <span>Choose File</span>
+              <input
+                type="file"
+                formControlName="companyLogo"
+                class="file-input-label"
+                accept="image/*"
+                (change)="onFileSelected($event)"
+              />
+            </label>
+            <!-- Display selected file name -->
+            <div *ngIf="selectedCompanyLogoFileName" class="file-name-display">
+              {{ selectedCompanyLogoFileName }}
+            </div>
+          </div>
+          <mat-form-field>
             <mat-label>Business Description</mat-label>
             <input
               matInput
@@ -251,16 +277,24 @@
               placeholder="Terms and Conditions"
             />
           </mat-form-field>
-        <div>
-          <button mat-raised-button color="primary" matStepperPrevious>
-            Back
-          </button>
-          |
-          <button mat-raised-button color="accent" matStepperNext>
-            Submit
-          </button>
+          <div>
+            <button mat-raised-button color="primary" matStepperPrevious>
+              Back
+            </button>
+            |
+
+            <button
+              mat-raised-button
+              color="accent"
+              type="submit"
+              (click)="HandleSubmit()"
+            >
+              Submit
+            </button>
+
+          </div>
         </div>
-      </div>
-    </mat-step>
-  </mat-stepper>
-</form>
+      </mat-step>
+    </mat-stepper>
+  </form>
+</div>

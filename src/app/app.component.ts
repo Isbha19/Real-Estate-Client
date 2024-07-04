@@ -62,7 +62,6 @@ export class AppComponent {
     const jwt = this.accountService.getjwt();
     
     if (jwt) {
-      console.log(jwt);
       
       this.accountService.refreshUser(jwt).subscribe({
         next: (_) => {
@@ -76,6 +75,8 @@ export class AppComponent {
         },
       });
     } else {
+      console.log("no jwttt");
+      
       this.accountService.refreshUser(null).subscribe();
       this.loading = false;
     }

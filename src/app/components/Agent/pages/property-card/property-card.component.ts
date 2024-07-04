@@ -21,6 +21,7 @@ export class PropertyCardComponent {
   price: 0
 };
 ngOnInit(): void {
-
+ 
 }
+
 }

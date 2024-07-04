@@ -11,7 +11,7 @@
   </div>
   <div class="row">
     <div class="col-8">
-      <form [formGroup]="listPropertyForm" (ngSubmit)="HandleSubmit()">
+      <form [formGroup]="listPropertyForm" >
         <mat-stepper [linear]="isLinear" #stepper class="text-center">
           <mat-step [stepControl]="propertyOverviewForm">
             <div formGroupName="propertyOverview">
@@ -397,7 +397,7 @@
               </mat-form-field>
               <div>
                 <button mat-raised-button color="primary" matStepperPrevious>Back</button> |
-                <button mat-raised-button color="accent" matStepperNext>Submit</button>
+                <button (click)="HandleSubmit()" type="submit" mat-raised-button color="accent" matStepperNext>Submit</button>
               </div>
             </div>
           </mat-step>

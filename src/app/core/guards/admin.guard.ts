@@ -15,9 +15,7 @@ export const adminGuard: CanActivateFn = () => {
   return accountService.user$.pipe(
     map((user:User |null) => {      
       if (user) {
-        console.log(JSON.stringify(user));
         const decodedToken: JwtDecodedToken = jwtDecode(user?.jwt);
-        console.log(JSON.stringify(decodedToken.role)+"decoded");
         
         if (decodedToken.role.includes('Admin')) {
           return true;

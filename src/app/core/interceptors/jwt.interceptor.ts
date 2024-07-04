@@ -6,7 +6,6 @@ import { ToastrService } from 'ngx-toastr';
 
 export const jwtInterceptor: HttpInterceptorFn = (req, next) => {
   const accountService=inject(AccountService);
-  console.log("interceptor called");
 
   accountService.user$.pipe(take(1)).subscribe({
     next:user=>{

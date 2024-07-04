@@ -46,6 +46,8 @@ export class ListPropertyFormComponent {
   map!: google.maps.Map;
   marker!: google.maps.Marker;
 @Input() locationPlaceHolder='';
+listPropertyForm!: FormGroup; 
+
 autocomplete:google.maps.places.Autocomplete | undefined;
   constructor(private builder: FormBuilder, private toastr:ToastrService,
     private router:Router,
@@ -53,10 +55,9 @@ autocomplete:google.maps.places.Autocomplete | undefined;
   ) {}
 
   ngOnInit(): void {
-  
+    this.InitializeForm();
     this.agentService.getPropertyTypes().subscribe({
       next: (response) => {
-        console.log("property type"+JSON.stringify(response));
         
         this.propertyType = response;
       }
@@ -81,8 +82,25 @@ autocomplete:google.maps.places.Autocomplete | undefined;
         this.facilites = response;
       }
     });
+    this.loadFormData();
+    this.listPropertyForm.valueChanges.subscribe(() => {
+      this.saveFormData();
+    });
   }
+  saveFormData() {
+    localStorage.setItem('listPropertyForm', JSON.stringify(this.listPropertyForm.value));
   
+  }
+  loadFormData() {
+    const savedFormData = localStorage.getItem('listPropertyForm');
+    
+    if (savedFormData) {
+      const formData = JSON.parse(savedFormData);
+      this.listPropertyForm.get('propertyOverview')?.patchValue(formData.propertyOverview);
+      this.listPropertyForm.get('propertyDetails')?.patchValue(formData.propertyDetails);
+      this.listPropertyForm.get('listingAndAgentDetails')?.patchValue(formData.listingAndAgentDetails);
+    }
+  }
   ngAfterViewInit(): void {
    this.autocomplete=new google.maps.places.Autocomplete(this.locationField.nativeElement, {
     componentRestrictions: { country: 'ae' } // Restrict to United Arab Emirates
@@ -111,7 +129,8 @@ autocomplete:google.maps.places.Autocomplete | undefined;
     });
   }
 
-  listPropertyForm = this.builder.group({
+InitializeForm(){
+  this.listPropertyForm = this.builder.group({
     propertyOverview: this.builder.group({
       PropertyTitle: this.builder.control('', [Validators.required, Validators.maxLength(100)]),
       PropertyDescription: this.builder.control('', [Validators.required, Validators.maxLength(1000)]),
@@ -138,6 +157,7 @@ autocomplete:google.maps.places.Autocomplete | undefined;
       termsAndCondition: this.builder.control(false, Validators.required),
     })
   });
+}
 
   get propertyOverviewForm() {
     return this.listPropertyForm.get('propertyOverview') as FormGroup;
@@ -150,7 +170,6 @@ autocomplete:google.maps.places.Autocomplete | undefined;
   }
   HandleSubmit() {
     if (this.listPropertyForm.valid) {
-      console.log(this.listPropertyForm.value.propertyOverview?.PropertyTitle);
       const propertyOverview = this.propertyOverviewForm.value;
       const propertyDetails = this.propertyDetailsForm.value;
       const listingAndAgentDetails = this.listingAndAgentInfoForm.value;
