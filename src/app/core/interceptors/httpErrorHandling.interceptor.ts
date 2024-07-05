@@ -10,6 +10,8 @@ export const HttpErrorInterceptor: HttpInterceptorFn = (req, next) => {
 
   return next(req).pipe(
     catchError((error: HttpErrorResponse) => {
+      console.log(error);
+      
         let errorMessage="";
       if(error?.status==0){
         toastr.error("server temporarily unavailable");

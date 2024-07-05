@@ -37,5 +37,9 @@ export class CompanyService {
     return this.http.post<any>(`${environment.apiUrl}Company/add-company-logo?companyId=${companyId}`, formData);
   }
   
-
+  createCustomerPortalSession(customerId: string): Observable<any> {
+    console.log("came here");
+    
+    return this.http.post<any>(`${environment.apiUrl}Company/create-customer-portal-session`, { customerId });
+  }
 }

@@ -11,11 +11,12 @@ import { JwtDecodedToken } from '../../../../core/model/jwtTokenDecoded';
 import { ComponentType } from 'ngx-toastr';
 import { User } from '../../../../core/model/account/user';
 import { LoginResponse } from '../../../../core/model/response/LoginResponse';
+import { CustomerPortalComponentComponent } from '../../../Company/pages/customer-portal-component/customer-portal-component.component';
 
 @Component({
   selector: 'app-navbar',
   standalone: true,
-  imports: [CommonModule,RouterLink,CapitalizePipe],
+  imports: [CommonModule,RouterLink,CapitalizePipe,CustomerPortalComponentComponent],
   templateUrl: './navbar.component.html',
   styleUrl: './navbar.component.scss'
 })

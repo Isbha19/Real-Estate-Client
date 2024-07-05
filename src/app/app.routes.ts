@@ -1,3 +1,5 @@
+import { CustomerPortalComponentComponent } from './components/Company/pages/customer-portal-component/customer-portal-component.component';
+import { PaymentSuccessComponent } from './components/Company/pages/payment-success/payment-success.component';
 import { SubscriptionPackagesComponent } from './components/Company/pages/subscription-packages/subscription-packages.component';
 import { adminGuard } from './core/guards/admin.guard';
 import { PropertyDetailComponent } from'./components/Property/pages/property-detail/property-detail.component';
@@ -45,7 +47,11 @@ export const routes: Routes = [
       { path: 'properties-list/:listingType',    
         component:PropertyListTypeComponent   },
       { path: 'property-detail/:id', component: PropertyDetailComponent },
-      {path:'subscription-package',component:SubscriptionPackagesComponent}
+      {path:'subscription-package',component:SubscriptionPackagesComponent},
+      {path:'payment-success',component:PaymentSuccessComponent},
+      {path:'customer-portal',component:CustomerPortalComponentComponent},
+
+
 
 
     ],
