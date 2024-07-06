@@ -3,6 +3,7 @@ import { unverifiedcompanies } from "./unVerifiedCompany.model";
 export const unverifiedcompanyState:unverifiedcompanies={
     unVerifiedcompanyList: [],
     unVerifiedcompanyobj:{
+        companyId:0,
         companyName: "",
         companyStructure: "",
         companyRegistrationNumber: "",

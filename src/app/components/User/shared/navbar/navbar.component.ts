@@ -1,3 +1,4 @@
+import { NotificationsComponent } from './../notifications/notifications.component';
 import { CapitalizePipe } from './../../../../core/pipe/capitalize.pipe';
 import { MatDialog } from '@angular/material/dialog';
 import { Component, Inject } from '@angular/core';
@@ -16,7 +17,7 @@ import { CustomerPortalComponentComponent } from '../../../Company/pages/custome
 @Component({
   selector: 'app-navbar',
   standalone: true,
-  imports: [CommonModule,RouterLink,CapitalizePipe,CustomerPortalComponentComponent],
+  imports: [CommonModule,RouterLink,CapitalizePipe,CustomerPortalComponentComponent,NotificationsComponent],
   templateUrl: './navbar.component.html',
   styleUrl: './navbar.component.scss'
 })

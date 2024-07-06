@@ -1,4 +1,5 @@
 export interface CompanyDetails {
+  companyId:number;
   companyName: string;
   companyStructure: string;
   companyRegistrationNumber: string;

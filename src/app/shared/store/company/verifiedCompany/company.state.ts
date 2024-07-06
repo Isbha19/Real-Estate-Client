@@ -3,6 +3,7 @@ import { companies } from "./company.model";
 export const companyState:companies={
     companyList: [],
     companyobj:{
+        companyId:0,
         companyName: "",
         companyStructure: "",
         companyRegistrationNumber: "",

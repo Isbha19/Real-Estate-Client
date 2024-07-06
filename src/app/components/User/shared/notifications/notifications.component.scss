@@ -1,0 +1,21 @@
+.dropdown-menu {
+    width: 400px; /* Adjust the width as per your design */
+  }
+  
+  .dropdown-item {
+    white-space: normal; /* Allow text to wrap within the dropdown item */
+    word-wrap: break-word; /* Break words that exceed the item's width */
+  }
+  .notification-item {
+    white-space: normal; /* Allow notification text to wrap */
+  }
+  
+  .time-ago {
+    color: #888; /* Dimmed gray color for time ago */
+    font-size: 12px; /* Adjust font size as needed */
+    margin-left: 5px; /* Add spacing between message and time */
+  }
+  .notification-item.unread {
+    background-color: rgb(241, 238, 238);
+  }
+  

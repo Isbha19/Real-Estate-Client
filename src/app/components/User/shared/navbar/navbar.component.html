@@ -17,20 +17,10 @@
                 <a routerLink="/properties-list/rent" class="nav-item nav-link">Rent</a>
 
                 <a routerLink="/properties-list/commercial" class="nav-item nav-link">Commercial</a>
-                <div class="nav-item dropdown me-3">
-                    <a class="nav-link hidden-arrow" href="#" id="navbarDropdownMenuLink"
-                    role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                    <i class="fas fa-bell text-black"></i>
-                    <span class="badge rounded-pill badge-notification bg-danger">1</span>
-                 </a>
-                 
-                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownMenuLink">
-                        <li><a class="dropdown-item" href="#">Some news</a></li>
-                        <li><a class="dropdown-item" href="#">Another news</a></li>
-                        <li><a class="dropdown-item" href="#">Something else here</a></li>
-                    </ul>
-                </div>
-                <app-customer-portal-component></app-customer-portal-component>
+                <ng-container *ngIf="(accountService.user$ | async) as user">
+                    <app-notifications *ngIf="user"></app-notifications>
+                    <app-customer-portal-component></app-customer-portal-component>
+                  </ng-container>
                 <!-- <a routerLink="/" routerLinkActive="router-link-active"  class="nav-item nav-link active">Home</a>
                 <a href="about.html" class="nav-item nav-link">About</a>
 

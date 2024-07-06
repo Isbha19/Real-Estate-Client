@@ -24,6 +24,19 @@ export class unVerifiedCompanyEffects {
       })
     )
   );
+  _verifyCompany = createEffect(() =>
+    this.action$.pipe(
+      ofType(LOAD_UNVERIFIEDCOMPANY),
+      exhaustMap((action) => {
+        return this.service.getUnVerifiedCompanies().pipe(
+          map((data) => {
+            return loadunverifiedcompanySuccess({ companylist: data });
+          }),
+          catchError((error) => of(loadunverifiedcompanyFail({ ErrorText: error.message })))
+        );
+      })
+    )
+  );
 
 
 }

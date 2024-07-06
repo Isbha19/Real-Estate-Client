@@ -66,7 +66,7 @@
                         <td>{{ company.phoneNumber }}</td>
                         <td>
                           <div class="d-flex align-items-center justify-content-between action-buttons">
-                            <button class="btn btn-success btn-sm me-1">Verify</button>
+                            <button class="btn btn-success btn-sm me-1" (click)="verifyCompany(company.companyId)" >Verify</button>
                             <button class="btn btn-danger btn-sm me-1">Reject</button>
                             <button class="btn btn-primary btn-sm">Details</button>
                           </div>
