@@ -11,14 +11,23 @@ import { provideAnimationsAsync } from '@angular/platform-browser/animations/asy
 import { provideToastr } from 'ngx-toastr';
 import { provideState, provideStore } from '@ngrx/store';
 import { userReducer } from './shared/store/user/user.reducer';
+
 import { provideStoreDevtools } from '@ngrx/store-devtools';
 import { provideEffects } from '@ngrx/effects';
 import { UserEffects } from './shared/store/user/user.effects';
+import { unverifiedcompanyReducer } from './shared/store/company/unVerifiedCompany/unVerifiedCompany.reducer';
+import { companyReducer } from './shared/store/company/verifiedCompany/company.reducer';
+import { CompanyEffects } from './shared/store/company/verifiedCompany/company.effects';
+import { unVerifiedCompanyEffects } from './shared/store/company/unVerifiedCompany/unVerifiedCompany.effects';
+
 
 export const appConfig: ApplicationConfig = {
   providers: [provideRouter(routes), provideAnimationsAsync(), provideToastr({ closeButton: true }),
     provideHttpClient(withInterceptors([
         jwtInterceptor,HttpErrorInterceptor
-    ])), provideStore(), provideState({ name: 'user', reducer: userReducer }), provideStoreDevtools({ maxAge: 25, logOnly: !isDevMode() }),
-    provideStoreDevtools({ maxAge: 25, logOnly: !isDevMode() }),provideEffects([UserEffects,AppEffects])]
+    ])), provideStore(), provideState({ name: 'user', reducer: userReducer }),
+    provideState({ name: 'company', reducer: companyReducer }),
+    provideState({ name: 'unverifiedcompanies', reducer: unverifiedcompanyReducer }),
+    provideStoreDevtools({ maxAge: 25, logOnly: !isDevMode() }),
+    provideStoreDevtools({ maxAge: 25, logOnly: !isDevMode() }),provideEffects([UserEffects,AppEffects,CompanyEffects,unVerifiedCompanyEffects])]
 };

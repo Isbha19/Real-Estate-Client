@@ -1,3 +1,5 @@
+import { UnverifiedCompaniesComponent } from './components/Admin/pages/unverified-companies/unverified-companies.component';
+import { VerifiedCompaniesComponent } from './components/Admin/pages/verified-companies/verified-companies.component';
 import { CustomerPortalComponentComponent } from './components/Company/pages/customer-portal-component/customer-portal-component.component';
 import { PaymentSuccessComponent } from './components/Company/pages/payment-success/payment-success.component';
 import { SubscriptionPackagesComponent } from './components/Company/pages/subscription-packages/subscription-packages.component';
@@ -49,7 +51,8 @@ export const routes: Routes = [
       { path: 'property-detail/:id', component: PropertyDetailComponent },
       {path:'subscription-package',component:SubscriptionPackagesComponent},
       {path:'payment-success',component:PaymentSuccessComponent},
-      {path:'customer-portal',component:CustomerPortalComponentComponent},
+      {path:'customer-portal',component:CustomerPortalComponentComponent}
+     
 
 
 
@@ -64,7 +67,11 @@ export const routes: Routes = [
 children: [
    
      { path: '', component: AdminDashboardComponent },
-   { path: 'user-crud', component: UserCrudComponent }
+   { path: 'user-crud', component: UserCrudComponent },
+   {path:'verified-companies',component:VerifiedCompaniesComponent},
+   {path:'unverified-companies',component:UnverifiedCompaniesComponent}
+
+
 ]
   },
  

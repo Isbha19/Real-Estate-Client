@@ -53,11 +53,7 @@ page:number=1;
     this.storeNgrx.select(getUserList).subscribe((item) => {
       this.members = item;
     });
-    this.adminService.getMembers().subscribe({
-      next: (members) => {
-        this.members = members;
-      },
-    });
+   
   }
   lockMember(id: string) {
     this.storeNgrx.dispatch(lockuser({ id: id }));
