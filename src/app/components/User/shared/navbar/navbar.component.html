@@ -17,10 +17,7 @@
                 <a routerLink="/properties-list/rent" class="nav-item nav-link">Rent</a>
 
                 <a routerLink="/properties-list/commercial" class="nav-item nav-link">Commercial</a>
-                <ng-container *ngIf="(accountService.user$ | async) as user">
-                    <app-notifications *ngIf="user"></app-notifications>
-                    <app-customer-portal-component></app-customer-portal-component>
-                  </ng-container>
+               
                 <!-- <a routerLink="/" routerLinkActive="router-link-active"  class="nav-item nav-link active">Home</a>
                 <a href="about.html" class="nav-item nav-link">About</a>
 
@@ -43,6 +40,13 @@
     <ng-container *ngIf="user && user.jwt"> <!-- Assuming 'data' is where the decoded JWT token is stored -->
         <ng-container *ngIf="isAdmin(user)">
             <a  class="btn btn-outline-primary nav-link nav-item" routerLink="admin-dashboard">Admin Dashboard</a>
+        </ng-container>
+    </ng-container>
+</div>
+<div class="nav-item mb-3 mb-lg-0 me-lg-3" *ngIf="accountService.user$| async as user">
+    <ng-container *ngIf="user && user.jwt"> <!-- Assuming 'data' is where the decoded JWT token is stored -->
+        <ng-container *ngIf="isCompanyAdmin(user)">
+            <a  class="btn btn-outline-primary nav-link nav-item" routerLink="company-dashboard">Company Dashboard</a>
         </ng-container>
     </ng-container>
 </div>
@@ -98,7 +102,10 @@
                 
             </div>
 
-           
+            <ng-container *ngIf="(accountService.user$ | async) as user">
+                <app-notifications *ngIf="user"></app-notifications>
+                <!-- <app-customer-portal-component></app-customer-portal-component> -->
+              </ng-container>
         </div>
     </nav>
 </div>

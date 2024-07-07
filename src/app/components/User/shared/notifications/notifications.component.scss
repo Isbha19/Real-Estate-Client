@@ -1,5 +1,5 @@
 .dropdown-menu {
-    width: 400px; /* Adjust the width as per your design */
+    width: 380px; /* Adjust the width as per your design */
   }
   
   .dropdown-item {
@@ -19,3 +19,7 @@
     background-color: rgb(241, 238, 238);
   }
   
+  .dropdown-menu{
+    right: 0;
+  left: initial;
+  }

@@ -6,6 +6,8 @@ import { environment } from '../../../../environments/environment';
 import { companyRegister } from '../model/companyRegister';
 import { Observable } from 'rxjs';
 import { CompanyRegisterResponse } from '../model/companyRegisterResponse';
+import { ApiResponse } from '../../../core/model/response/ApiResponse';
+import { CompanyDetails } from '../../Admin/model/company/companyDetail';
 
 @Injectable({ providedIn: 'root' })
 export class CompanyService {
@@ -38,8 +40,17 @@ export class CompanyService {
   }
   
   createCustomerPortalSession(customerId: string): Observable<any> {
-    console.log("came here");
     
     return this.http.post<any>(`${environment.apiUrl}Company/create-customer-portal-session`, { customerId });
+  }
+  validateUserPayment(){
+    return this.http.get<ApiResponse>(
+      `${environment.apiUrl}Company/validate-user-for-payment`
+    );
+  }
+  getCompanyDetails(){
+    return this.http.get<CompanyDetails>(
+      `${environment.apiUrl}Company/Get-company-by-User`
+    );
   }
 }

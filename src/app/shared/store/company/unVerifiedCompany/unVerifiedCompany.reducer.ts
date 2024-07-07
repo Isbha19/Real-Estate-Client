@@ -1,7 +1,7 @@
 import { createReducer, on } from '@ngrx/store';
 
 import { unverifiedcompanyState } from './unVerifiedCompany.state';
-import { loadunverifiedcompanyFail, loadunverifiedcompanySuccess } from './unVerifiedCompany.action';
+import { loadunverifiedcompanyFail, loadunverifiedcompanySuccess, verifyCompanySuccess } from './unVerifiedCompany.action';
 
 const _unverifiedcompanyReducer = createReducer(
     unverifiedcompanyState,
@@ -19,6 +19,10 @@ const _unverifiedcompanyReducer = createReducer(
       ErrorMessage: action.ErrorText,
     };
   }),
+  on(verifyCompanySuccess, (state, { companyId }) => ({
+    ...state,
+    unVerifiedcompanyList: state.unVerifiedcompanyList.filter(company => company.companyId !== companyId), 
+  })),
 
 );
 

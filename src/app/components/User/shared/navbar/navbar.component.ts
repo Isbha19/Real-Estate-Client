@@ -13,6 +13,7 @@ import { ComponentType } from 'ngx-toastr';
 import { User } from '../../../../core/model/account/user';
 import { LoginResponse } from '../../../../core/model/response/LoginResponse';
 import { CustomerPortalComponentComponent } from '../../../Company/pages/customer-portal-component/customer-portal-component.component';
+import { BooleanInput } from '@angular/cdk/coercion';
 
 @Component({
   selector: 'app-navbar',
@@ -56,5 +57,14 @@ isAgent(user:User): boolean {
       return decodedToken.role.includes('Agent');
   }
   return false;
+}
+isCompanyAdmin(user:User):boolean{
+   
+  if (user && user.jwt) {
+    
+    const decodedToken: JwtDecodedToken = jwtDecode(user.jwt);
+    return decodedToken.role.includes('Company Admin');
+}
+return false;
 }
 }

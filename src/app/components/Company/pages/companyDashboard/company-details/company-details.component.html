@@ -1,0 +1,41 @@
+<!-- company-details.component.html -->
+
+<div class="container mt-4">
+    <div class="row">
+      <div class="col-md-8">
+        <h2>Company Details</h2>
+        <hr>
+        <!-- Company Name -->
+        <div class="form-group">
+          <label for="companyName">Company Name:</label>
+          <input type="text" id="companyName" class="form-control" [(ngModel)]="company.companyName" disabled>
+        </div>
+        
+        <!-- Company Logo -->
+        <div class="form-group">
+          <label>Company Logo:</label>
+          <div *ngIf="company.companyLogo">
+            <img [src]="company.companyLogo" alt="Company Logo" class="img-thumbnail" style="max-width: 200px;">
+          </div>
+          <div *ngIf="!company.companyLogo">
+            <p>No logo uploaded</p>
+          </div>
+        </div>
+        
+        <!-- Other Company Details -->
+        <div class="form-group">
+          <label for="companyEmail">Email:</label>
+          <input type="email" id="companyEmail" class="form-control" [(ngModel)]="company.EmailAddress" disabled>
+        </div>
+        <div class="form-group">
+          <label for="companyPhone">Phone:</label>
+          <input type="tel" id="companyPhone" class="form-control" [(ngModel)]="company.phoneNumber" disabled>
+        </div>
+        <div class="form-group">
+          <label for="companyAddress">Address:</label>
+          <textarea id="companyAddress" class="form-control" rows="3" [(ngModel)]="company.companyAddress" disabled></textarea>
+        </div>
+      </div>
+    </div>
+  </div>
+  

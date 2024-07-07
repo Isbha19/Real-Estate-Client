@@ -1,10 +1,13 @@
+import { CompanyDetailsComponent } from './components/Company/pages/companyDashboard/company-details/company-details.component';
+import { CompanyDetails } from './components/Admin/model/company/companyDetail';
+import { CompanyAdminDashboardComponent } from './components/Company/pages/companyDashboard/company-admin-dashboard/company-admin-dashboard.component';
 import { UnverifiedCompaniesComponent } from './components/Admin/pages/unverified-companies/unverified-companies.component';
 import { VerifiedCompaniesComponent } from './components/Admin/pages/verified-companies/verified-companies.component';
 import { CustomerPortalComponentComponent } from './components/Company/pages/customer-portal-component/customer-portal-component.component';
 import { PaymentSuccessComponent } from './components/Company/pages/payment-success/payment-success.component';
 import { SubscriptionPackagesComponent } from './components/Company/pages/subscription-packages/subscription-packages.component';
 import { adminGuard } from './core/guards/admin.guard';
-import { PropertyDetailComponent } from'./components/Property/pages/property-detail/property-detail.component';
+import { PropertyDetailComponent } from './components/Property/pages/property-detail/property-detail.component';
 import { PropertyListTypeComponent } from './components/Property/pages/property-lists-type/property-lists-type.component';
 import { UserCrudComponent } from './components/Admin/pages/user-crud/user-crud.component';
 import { AdminDashboardComponent } from './components/Admin/pages/admin-dashboard/admin-dashboard.component';
@@ -43,20 +46,28 @@ export const routes: Routes = [
         component: CompanyRegistrationComponent,
       },
       {
-        path: 'list-property', canActivate: [agentGuard],
+        path: 'list-property',
+        canActivate: [agentGuard],
         component: ListPropertyFormComponent,
       },
-      { path: 'properties-list/:listingType',    
-        component:PropertyListTypeComponent   },
+      {
+        path: 'properties-list/:listingType',
+        component: PropertyListTypeComponent,
+      },
       { path: 'property-detail/:id', component: PropertyDetailComponent },
-      {path:'subscription-package',component:SubscriptionPackagesComponent},
-      {path:'payment-success',component:PaymentSuccessComponent},
-      {path:'customer-portal',component:CustomerPortalComponentComponent}
-     
+      {
+        path: 'subscription-package',
+        canActivate: [authGuard],
+        component: SubscriptionPackagesComponent,
+      },
+      { path: 'payment-success', component: PaymentSuccessComponent },
+      { path: 'customer-portal', component: CustomerPortalComponentComponent },
+      { path: 'company-dashboard', component: CompanyAdminDashboardComponent,
+        children:[
+          { path: 'company-details', component: CompanyDetailsComponent }
 
-
-
-
+        ]
+       },
     ],
   },
   {
@@ -64,16 +75,13 @@ export const routes: Routes = [
     runGuardsAndResolvers: 'always',
     canActivate: [adminGuard],
     component: AdminComponent,
-children: [
-   
-     { path: '', component: AdminDashboardComponent },
-   { path: 'user-crud', component: UserCrudComponent },
-   {path:'verified-companies',component:VerifiedCompaniesComponent},
-   {path:'unverified-companies',component:UnverifiedCompaniesComponent}
-
-
-]
+    children: [
+      { path: '', component: AdminDashboardComponent },
+      { path: 'user-crud', component: UserCrudComponent },
+      { path: 'verified-companies', component: VerifiedCompaniesComponent },
+      { path: 'unverified-companies', component: UnverifiedCompaniesComponent },
+    ],
   },
- 
+
   { path: '**', component: NotFoundComponent },
 ];
