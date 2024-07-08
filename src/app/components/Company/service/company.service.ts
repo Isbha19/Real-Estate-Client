@@ -29,9 +29,7 @@ export class CompanyService {
       `${environment.apiUrl}Company/get-business-activity-types`
     );
   }
-  uploadCompanyLogo(file: File, companyId: number): Observable<any> {
-    console.log("uploasdd");
-    
+  uploadCompanyLogo(file: File, companyId: number): Observable<any> {    
     const formData = new FormData();
     formData.append('file', file);
     const headers=new HttpHeaders().append('Content-Disposition','multipart/form-data')

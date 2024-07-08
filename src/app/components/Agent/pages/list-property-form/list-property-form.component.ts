@@ -1,3 +1,4 @@
+import { AgentPropertyService } from './../../services/agentProperty.service';
 import { ApiResponse } from './../../../../core/model/response/ApiResponse';
 import { Property } from './../../model/property';
 import { PropertyCardComponent } from './../property-card/property-card.component';
@@ -51,7 +52,7 @@ listPropertyForm!: FormGroup;
 autocomplete:google.maps.places.Autocomplete | undefined;
   constructor(private builder: FormBuilder, private toastr:ToastrService,
     private router:Router,
-    private agentService:AgentService
+    private agentService:AgentPropertyService
   ) {}
 
   ngOnInit(): void {

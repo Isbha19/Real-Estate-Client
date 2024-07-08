@@ -1,0 +1,167 @@
+<form [formGroup]="agentForm" (ngSubmit)="onSubmit()" class="agent-form">
+  <div class="card">
+    <div class="card-header">
+      <h2>Agent Registration Form</h2>
+    </div>
+    <div class="card-body">
+      <div
+        class="form-group"
+        [ngClass]="{ 'has-error': isControlInvalid('agentName') }"
+      >
+        <label for="agentName">Agent Name</label>
+        <input
+          type="text"
+          id="agentName"
+          formControlName="agentName"
+          required
+        />
+      </div>
+      <div
+        class="form-group"
+        [ngClass]="{ 'has-error': isControlInvalid('email') }"
+      >
+        <label for="email">Agent Email</label>
+        <input type="text" id="email" formControlName="email" required />
+      </div>
+      <div
+        class="form-group"
+        [ngClass]="{ 'has-error': isControlInvalid('phone') }"
+      >
+        <label for="phone">Phone</label>
+        <input type="text" id="phone" formControlName="phone" required />
+        <div class="error" *ngIf="isControlInvalid('phone')">
+          Phone is required and must be a valid number.
+        </div>
+      </div>
+      <div
+        class="form-group"
+        [ngClass]="{ 'has-error': isControlInvalid('nationality') }"
+      >
+        <label for="nationality">Nationality</label>
+        <input
+          type="text"
+          id="nationality"
+          formControlName="nationality"
+          required
+        />
+        <div class="error" *ngIf="isControlInvalid('nationality')">
+          Nationality is required.
+        </div>
+      </div>
+      <div
+        class="form-group"
+        [ngClass]="{ 'has-error': isControlInvalid('languagesKnown') }"
+      >
+        <label for="languagesKnown">Languages Known</label>
+        <input
+          type="text"
+          id="languagesKnown"
+          formControlName="languagesKnown"
+          required
+        />
+        <div class="error" *ngIf="isControlInvalid('languagesKnown')">
+          Languages Known is required.
+        </div>
+      </div>
+      <div
+        class="form-group"
+        [ngClass]="{ 'has-error': isControlInvalid('specialization') }"
+      >
+        <label for="specialization">Specialization</label>
+        <input
+          type="text"
+          id="specialization"
+          formControlName="specialization"
+          required
+        />
+        <div class="error" *ngIf="isControlInvalid('specialization')">
+          Specialization Known is required.
+        </div>
+      </div>
+      <div
+        class="form-group"
+        [ngClass]="{ 'has-error': isControlInvalid('whatsapp') }"
+      >
+        <label for="whatsapp">WhatsApp Number</label>
+        <input type="text" id="whatsapp" formControlName="whatsapp" />
+        <div class="error" *ngIf="isControlInvalid('whatsapp')">
+          WhatsApp must be a valid number.
+        </div>
+      </div>
+      <div
+        class="form-group"
+        [ngClass]="{ 'has-error': isControlInvalid('photo') }"
+      >
+        <label for="photo">Photo</label>
+        <input
+          type="file"
+          id="photo"
+          (change)="onFileSelected($event)"
+          required
+        />
+        <div class="error" *ngIf="isControlInvalid('photo')">
+          Photo is required.
+        </div>
+      </div>
+      <div
+        class="form-group"
+        [ngClass]="{ 'has-error': isControlInvalid('company') }"
+      >
+        <label for="company">Company</label>
+       
+        <input
+          id="company"
+          type="text"
+          placeholder="Type to search..."
+          formControlName="company"
+          [matAutocomplete]="auto"
+          required
+        />
+        <mat-autocomplete
+          #auto
+          autoActiveFirstOption
+          [displayWith]="displayFn"
+        >
+          <mat-option
+            *ngFor="let company of filteredCompanies | async"
+            [value]="company"
+          >
+            {{ company.companyName }}
+          </mat-option>
+
+        </mat-autocomplete>
+        <div class="error" *ngIf="isControlInvalid('company')">
+          Company is required and the company should be a registered and verified company of our platform!.
+        </div>
+      </div>
+      <div
+        class="form-group"
+        [ngClass]="{ 'has-error': isControlInvalid('about') }"
+      >
+        <label for="about">About</label>
+        <textarea id="about" formControlName="about" required></textarea>
+        <div class="error" *ngIf="isControlInvalid('about')">
+          About is required.
+        </div>
+      </div>
+      <div
+        class="form-group"
+        [ngClass]="{ 'has-error': isControlInvalid('yearsOfExperience') }"
+      >
+        <label for="yearsOfExperience">Years of Experience</label>
+        <input
+          type="number"
+          id="yearsOfExperience"
+          formControlName="yearsOfExperience"
+          required
+        />
+        <div class="error" *ngIf="isControlInvalid('yearsOfExperience')">
+          Years of Experience is required and must be a non-negative number.
+        </div>
+      </div>
+    </div>
+    <div class="card-footer">
+      <button type="submit" [disabled]="agentForm.invalid">Submit</button>
+    </div>
+  </div>
+</form>

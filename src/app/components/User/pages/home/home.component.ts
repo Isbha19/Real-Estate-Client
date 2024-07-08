@@ -1,3 +1,4 @@
+import { AgentRegCTAComponent } from './../agent-reg-cta/agent-reg-cta.component';
 import { Component } from '@angular/core';
 import { HeaderComponent } from '../../layouts/header/header.component';
 import { SearchComponent } from '../../search/search.component';
@@ -18,7 +19,7 @@ import { TestimonialComponent } from '../../testimonial/testimonial.component';
     PropertyListComponent,
     CallToActionComponent,
     AgentListComponent,
-    TestimonialComponent],
+    TestimonialComponent,AgentRegCTAComponent],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss'
 })

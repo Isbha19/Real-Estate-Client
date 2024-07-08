@@ -1,6 +1,14 @@
 <div class="sidebar">
-    <a routerLink='company-details' routerLinkActive="active" >About Company</a>
-    <a href="#news">Agents</a>
+    <a routerLink='/company-dashboard' routerLinkActive="active" >About Company</a>
+    <div class="dropdown">
+      <a class="dropbtn">Agents</a>
+
+      <div class="dropdown-content">
+        <a routerLink='verified-agents' routerLinkActive="active" >Verified Agents</a>
+        <a routerLink='unverified-agents'>Unverified Agents</a>
+      </div>
+    </div>
+    
     <a href="#contact">Properties</a>
     <a href="#about">Manage Billing</a>
   </div>

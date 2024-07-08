@@ -1,3 +1,6 @@
+import { UnverifiedAgentListComponent } from './components/Company/pages/companyDashboard/unverified-agent-list/unverified-agent-list.component';
+import { VerifiedagentListComponent } from './components/Company/pages/companyDashboard/verifiedagent-list/verifiedagent-list.component';
+import { AgentRegistrationFormComponent } from './components/Agent/pages/agent-registration-form/agent-registration-form.component';
 import { CompanyDetailsComponent } from './components/Company/pages/companyDashboard/company-details/company-details.component';
 import { CompanyDetails } from './components/Admin/model/company/companyDetail';
 import { CompanyAdminDashboardComponent } from './components/Company/pages/companyDashboard/company-admin-dashboard/company-admin-dashboard.component';
@@ -51,6 +54,10 @@ export const routes: Routes = [
         component: ListPropertyFormComponent,
       },
       {
+        path: 'agent-register',
+        component: AgentRegistrationFormComponent,
+      },
+      {
         path: 'properties-list/:listingType',
         component: PropertyListTypeComponent,
       },
@@ -62,14 +69,17 @@ export const routes: Routes = [
       },
       { path: 'payment-success', component: PaymentSuccessComponent },
       { path: 'customer-portal', component: CustomerPortalComponentComponent },
-      { path: 'company-dashboard', component: CompanyAdminDashboardComponent,
-        children:[
-          { path: 'company-details', component: CompanyDetailsComponent }
-
-        ]
-       },
+      
     ],
   },
+  { path: 'company-dashboard', component: CompanyAdminDashboardComponent,
+    children:[
+      { path: '', component: CompanyDetailsComponent },
+      { path: 'verified-agents', component: VerifiedagentListComponent },
+      { path: 'unverified-agents', component: UnverifiedAgentListComponent }
+
+    ]
+   },
   {
     path: 'admin-dashboard',
     runGuardsAndResolvers: 'always',

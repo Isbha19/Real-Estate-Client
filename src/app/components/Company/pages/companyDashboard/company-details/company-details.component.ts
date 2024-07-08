@@ -17,14 +17,13 @@ export class CompanyDetailsComponent {
   constructor(private companyService: CompanyService) { }
 
   ngOnInit(): void {
-    // Fetch company details using a service method
-    this.companyService.getCompanyDetails().subscribe(
-      (data) => {
-        this.company = data; // Assign fetched company data to 'company'
-      },
-      (error) => {
-        console.error('Error fetching company details:', error);
-      }
-    );
+    this.loadData();
+  }
+  loadData(){
+    this.companyService.getCompanyDetails().subscribe({
+      next: (response) => {
+        this.company=response;
+           },
+    });
   }
 }

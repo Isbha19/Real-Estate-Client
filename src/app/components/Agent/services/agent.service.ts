@@ -1,50 +1,35 @@
-import { Property } from './../model/property';
 
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { GenericKeyValuePair } from '../model/genericKeyValuePair';
 import { environment } from '../../../../environments/environment';
-import { Observable } from 'rxjs';
 import { ApiResponse } from '../../../core/model/response/ApiResponse';
-
-
+import { AgentRegister } from '../model/agent/agentRegister';
+import { CompanyNames } from '../model/CompanyName';
 @Injectable({ providedIn: 'root' })
 export class AgentService {
   constructor(private http: HttpClient) {}
 
-  getPropertyTypes() {
-    return this.http.get<GenericKeyValuePair[]>(
-      `${environment.apiUrl}Property/get-property-type`
-    );
-  }
 
-  addProperty(property:Property):Observable<ApiResponse> {
-    console.log(property);
-    
+  addAgent(agentData:AgentRegister) {
+    const formData = new FormData();
+    formData.append('UserName', agentData.UserName);
+    formData.append('phoneNumber', agentData.phoneNumber.toString());
+    formData.append('whatsAppNumber', agentData.whatsAppNumber.toString());
+    formData.append('Nationality', agentData.Nationality);
+    formData.append('LanguagesKnown', agentData.LanguagesKnown);
+    formData.append('Specialization', agentData.Specialization);
+    formData.append('CompanyId', agentData.CompanyId.toString());
+    formData.append('About', agentData.About);
+    formData.append('yearsOfExperience', agentData.yearsOfExperience.toString());
+    formData.append('AgentImage', agentData.AgentImage);
+ 
     return this.http.post<ApiResponse>(
-      `${environment.apiUrl}Property/add-property`,
-      property
+      `${environment.apiUrl}Agent/add-agent`,formData
     );
   }
-  getFurnishingTypes() {
-    return this.http.get<GenericKeyValuePair[]>(
-      `${environment.apiUrl}Property/get-furnishing-type`
-    );
+  getCompanyNames(){
+      return this.http.get<CompanyNames[]>(
+        `${environment.apiUrl}Company/get-company-names`
+      );
   }
-  getListingTypes() {
-    return this.http.get<GenericKeyValuePair[]>(
-      `${environment.apiUrl}Property/get-listing-type`
-    );
-  }
-  getAmenities() {
-    return this.http.get<GenericKeyValuePair[]>(
-      `${environment.apiUrl}Property/get-amenities`
-    );
-  }
-  getNearbyFacilities() {
-    return this.http.get<GenericKeyValuePair[]>(
-      `${environment.apiUrl}Property/get-facilities`
-    );
-  }
-
 }
