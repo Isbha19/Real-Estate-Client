@@ -18,6 +18,7 @@ export class AgentService {
     formData.append('Nationality', agentData.Nationality);
     formData.append('LanguagesKnown', agentData.LanguagesKnown);
     formData.append('Specialization', agentData.Specialization);
+    formData.append('licenseNumber', agentData.licenseNumber);
     formData.append('CompanyId', agentData.CompanyId.toString());
     formData.append('About', agentData.About);
     formData.append('yearsOfExperience', agentData.yearsOfExperience.toString());

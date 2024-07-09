@@ -7,6 +7,7 @@ export interface AgentRegister{
    Specialization:string;
     CompanyId:number;
     AgentImage:File;
+    licenseNumber:string;
     About:string;
     yearsOfExperience:number;
 }

@@ -46,6 +46,8 @@ export class AgentRegistrationFormComponent {
       languagesKnown: ['', Validators.required],
       specialization: ['', Validators.required],
       whatsapp: ['', Validators.pattern(/^[0-9]+$/)],
+      licenseNumber: ['', Validators.required],
+
       photo: [null, Validators.required],
       company: ['', Validators.required],
       about: ['', Validators.required],
@@ -107,6 +109,7 @@ ngAfterViewInit(): void {
         AgentImage:this.agentForm.value.photo,
         CompanyId: this.agentForm.value.company.companyId,
         About: this.agentForm.value.about,
+        licenseNumber:this.agentForm.value.licenseNumber,
         yearsOfExperience: this.agentForm.value.yearsOfExperience      }
       this.agentService.addAgent(Agent).subscribe({
         next: (response) => {

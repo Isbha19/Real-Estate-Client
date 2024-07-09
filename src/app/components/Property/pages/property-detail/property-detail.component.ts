@@ -1,9 +1,11 @@
+import { ImageGalleryComponent } from './../image-gallery/image-gallery.component';
 
 import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { PropertyService } from '../../services/property.service';
 import { CommonModule } from '@angular/common';
 import { propertyDetail } from '../../model/propertyDetail';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-property-detail',
@@ -16,9 +18,12 @@ export class PropertyDetailComponent {
   property!: propertyDetail;
   primaryImageUrl: string | undefined;
   otherImageUrls: string[] = [];
+  isOpen = false;
+
   constructor(
     private route: ActivatedRoute,
-    private propertyService: PropertyService
+    private propertyService: PropertyService,
+    private dialog:MatDialog
   ) {}
   ngOnInit(): void {
     this.route.paramMap.subscribe((params) => {
@@ -58,4 +63,11 @@ export class PropertyDetailComponent {
     }
   }
 
+  OpenGallery(){
+    this.dialog.open(ImageGalleryComponent,{
+     width:'70%',
+     data: { imageUrls: this.otherImageUrls }
+
+   })
+}
 }

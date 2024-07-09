@@ -79,6 +79,21 @@
         </div>
       </div>
       <div
+      class="form-group"
+      [ngClass]="{ 'has-error': isControlInvalid('licenseNumber') }"
+    >
+      <label for="specialization">License Number</label>
+      <input
+        type="text"
+        id="licenseNumber"
+        formControlName="licenseNumber"
+        required
+      />
+      <div class="error" *ngIf="isControlInvalid('licenseNumber')">
+        License Number Known is required.
+      </div>
+    </div>
+      <div
         class="form-group"
         [ngClass]="{ 'has-error': isControlInvalid('whatsapp') }"
       >
@@ -95,6 +110,7 @@
         <label for="photo">Photo</label>
         <input
           type="file"
+          
           id="photo"
           (change)="onFileSelected($event)"
           required

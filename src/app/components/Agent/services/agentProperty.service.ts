@@ -18,9 +18,7 @@ export class AgentPropertyService {
     );
   }
 
-  addProperty(property:Property):Observable<ApiResponse> {
-    console.log(property);
-    
+  addProperty(property:FormData):Observable<ApiResponse> {    
     return this.http.post<ApiResponse>(
       `${environment.apiUrl}Property/add-property`,
       property

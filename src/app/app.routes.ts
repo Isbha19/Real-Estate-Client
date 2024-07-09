@@ -27,6 +27,7 @@ import { LayoutComponent } from './components/User/layouts/layout/layout.compone
 import { Routes } from '@angular/router';
 import { SendEmailComponent } from './components/User/features/account/send-email/send-email.component';
 import { RegisterWithThirdPartyComponent } from './components/User/features/account/register-with-third-party/register-with-third-party.component';
+import { CompanyAdminGuard } from './core/guards/companyAdmin.guard';
 
 export const routes: Routes = [
   {
@@ -72,7 +73,8 @@ export const routes: Routes = [
       
     ],
   },
-  { path: 'company-dashboard', component: CompanyAdminDashboardComponent,
+  { path: 'company-dashboard',    runGuardsAndResolvers: 'always',
+    canActivate: [CompanyAdminGuard], component: CompanyAdminDashboardComponent,
     children:[
       { path: '', component: CompanyDetailsComponent },
       { path: 'verified-agents', component: VerifiedagentListComponent },
