@@ -30,6 +30,7 @@ console.log(this.unverifiedAgents);
   });
 }
 verifyCompany(agentId:number){
+  
   this.storeNgrx.dispatch(verifyagent({ agentId: agentId }));
 }
 }

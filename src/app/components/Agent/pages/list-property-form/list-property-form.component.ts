@@ -287,6 +287,13 @@ export class ListPropertyFormComponent {
       formData.append('Bathrooms', propertyDetails.Bathrooms);
       formData.append('Size', propertyDetails.Size);
       formData.append('FurnishingTypeId', propertyDetails.FurnishingTypeId);
+      formData.append('VirtualTourUrl', listingAndAgentDetails.virtualTourUrl);
+      formData.append('AvailabilityDate', listingAndAgentDetails.availabilityDate);
+      formData.append('PropertyAmenties', JSON.stringify(propertyDetails.amenities));
+
+      formData.append('PropertyNearByFacilities', JSON.stringify(propertyDetails.nearByFacilities));
+
+
 
       // Append images
       for (let i = 0; i < this.selectedFiles.length; i++) {
@@ -297,6 +304,9 @@ export class ListPropertyFormComponent {
         next: (response: ApiResponse) => {
           this.toastr.success(response.message);
           this.router.navigateByUrl('/');
+        },error:()=>{
+          this.loading = false; 
+
         },
         complete: () => {
           this.loading = false; 

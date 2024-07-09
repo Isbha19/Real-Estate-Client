@@ -33,6 +33,7 @@ export class PropertyDetailComponent {
         this.propertyService.getPropertyById(id).subscribe({
           next: (property: propertyDetail) => {
             this.property = property;
+            
             this.extractImages();
 
           },
@@ -43,14 +44,11 @@ export class PropertyDetailComponent {
       }
     });
   }
-  private extractImages(): void {
-    console.log("calleddd");
-    
+  private extractImages(): void {    
     if (this.property.images && this.property.images.length > 0) {
 
       const primaryImage = this.property.images.find(image => image.isPrimary);
       if (primaryImage) {
-        console.log("yes primary");
         
         this.primaryImageUrl = primaryImage.imageUrl;
       }
