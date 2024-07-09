@@ -1,3 +1,5 @@
+import { UnverifiedCompanyPropertiesComponent } from './components/Company/pages/companyDashboard/unverified-company-properties/unverified-company-properties.component';
+import { CompanyPropertiesComponent } from './components/Company/pages/companyDashboard/company-properties/company-properties.component';
 import { UnverifiedAgentListComponent } from './components/Company/pages/companyDashboard/unverified-agent-list/unverified-agent-list.component';
 import { VerifiedagentListComponent } from './components/Company/pages/companyDashboard/verifiedagent-list/verifiedagent-list.component';
 import { AgentRegistrationFormComponent } from './components/Agent/pages/agent-registration-form/agent-registration-form.component';
@@ -78,7 +80,9 @@ export const routes: Routes = [
     children:[
       { path: '', component: CompanyDetailsComponent },
       { path: 'verified-agents', component: VerifiedagentListComponent },
-      { path: 'unverified-agents', component: UnverifiedAgentListComponent }
+      { path: 'unverified-agents', component: UnverifiedAgentListComponent },
+      { path: 'verified-properties', component: CompanyPropertiesComponent },
+      { path: 'unverified-properties', component: UnverifiedCompanyPropertiesComponent },
 
     ]
    },
@@ -91,7 +95,7 @@ export const routes: Routes = [
       { path: '', component: AdminDashboardComponent },
       { path: 'user-crud', component: UserCrudComponent },
       { path: 'verified-companies', component: VerifiedCompaniesComponent },
-      { path: 'unverified-companies', component: UnverifiedCompaniesComponent },
+      { path: 'unverified-companies', component: UnverifiedCompaniesComponent }
     ],
   },
 

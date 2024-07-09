@@ -1,3 +1,4 @@
+import { CompanyDashboardService } from '../../service/company-dashboard.service';
 import { CompanyService } from './../../service/company.service';
 import { Component } from '@angular/core';
 
@@ -5,16 +6,32 @@ import { Component } from '@angular/core';
   selector: 'app-customer-portal-component',
   standalone: true,
   imports: [],
-  template: `<a (click)="openCustomerPortal()" class="nav-item nav-link">Customer Portal</a>`,
+  template: `<a style="cursor:pointer" class="ml-3" (click)="openCustomerPortal()">Manage Billing</a>`,
   styleUrl: './customer-portal-component.component.scss'
 })
 export class CustomerPortalComponentComponent {
-  constructor(private companyService: CompanyService) { }
-
+  customerId:string="";
+  constructor(private companyService: CompanyService,
+    private companyDashboardService:CompanyDashboardService
+  ) { }
+ngOnInit(): void {
+  console.log('Component initialized'); // Check if ngOnInit is called
+  this.fetchStripeCustomerId();
+}
+fetchStripeCustomerId() {
+  this.companyDashboardService.getStripeCustomerId().subscribe({
+    next: (response) => {
+this.customerId=response.stripeCustomerId ;  
+    },
+    error: (error) => {
+      console.log(error+"errorr");
+      
+    }
+  });
+}
   openCustomerPortal() {
-    const customerId = 'cus_QPvq3N0nkaI28D'; // Retrieve the Stripe customer ID for the logged-in user
-
-    this.companyService.createCustomerPortalSession(customerId).subscribe(response => {
+    this.companyService.createCustomerPortalSession(this.customerId).subscribe(response => {
+      
       window.location.href = response.url;
     });
   }
