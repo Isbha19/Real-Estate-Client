@@ -22,10 +22,10 @@
       
         <!-- "Basic" Plan -->
         <div class="pricing-plan">
-          <h2 class="plan-title">Free Trial</h2>
+          <h2 class="plan-title">Starter</h2>
 
           <div class="plan-cost">
-            <p class="plan-price">AED 0</p>
+            <p class="plan-price">AED 100</p>
             <span>|</span> 
           </div>
           <ul class="plan-features">
@@ -35,7 +35,7 @@
             <li><span>Priority placement</span></li>
             <li><span>Advanced features</span></li>
           </ul>
-          <a class="btn-plan" href="">Select Plan</a>
+          <a style="cursor: pointer;" class="btn-plan" (click)="validateAndProceedToPayment('https://buy.stripe.com/test_9AQ00ZfZxao16oo7sw')">Select Plan</a>
         </div>
         <!-- "Premium" Plan -->
         <div class="pricing-plan featured-plan">
