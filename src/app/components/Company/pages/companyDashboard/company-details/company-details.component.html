@@ -1,0 +1,112 @@
+<!-- company-details.component.html -->
+
+<div class="container mt-4">
+    <div class="row">
+        <div class="col-md-8 mx-auto">
+            <h2 class="text-center">Company Details</h2>
+            <hr>
+            <!-- Company Name -->
+            <div class="form-group">
+                <label for="companyName">Company Name:</label>
+                <input type="text" id="companyName" class="form-control" [(ngModel)]="company.companyName" disabled>
+            </div>
+            
+            <!-- Company Logo -->
+            <div class="form-group text-center">
+                <label>Company Logo:</label>
+                <div *ngIf="company.companyLogo">
+                    <img [src]="company.companyLogo" alt="Company Logo" class="img-thumbnail" style="max-width: 200px;">
+                </div>
+                <div *ngIf="!company.companyLogo">
+                    <p>No logo uploaded</p>
+                </div>
+            </div>
+            
+            <!-- Other Company Details -->
+            <div class="form-group">
+                <label for="companyEmail">Email:</label>
+                <input type="email" id="companyEmail" class="form-control" [(ngModel)]="company.emailAddress" disabled>
+            </div>
+            <div class="form-group">
+                <label for="companyPhone">Phone:</label>
+                <input type="tel" id="companyPhone" class="form-control" [(ngModel)]="company.phoneNumber" disabled>
+            </div>
+            <div class="form-group">
+                <label for="companyAddress">Address:</label>
+                <textarea id="companyAddress" class="form-control" rows="3" [(ngModel)]="company.companyAddress" disabled></textarea>
+            </div>
+            <div class="form-group">
+                <label for="websiteUrl">Website:</label>
+                <input type="text" id="websiteUrl" class="form-control" [(ngModel)]="company.websiteUrl" disabled>
+            </div>
+            <div class="form-group">
+                <label for="companyStructure">Company Structure:</label>
+                <input type="text" id="companyStructure" class="form-control" [(ngModel)]="company.companyStructure" disabled>
+            </div>
+            <div class="form-group">
+                <label for="companyRegistrationNumber">Registration Number:</label>
+                <input type="text" id="companyRegistrationNumber" class="form-control" [(ngModel)]="company.companyRegistrationNumber" disabled>
+            </div>
+            <div class="form-group">
+                <label for="licenseNumber">License Number:</label>
+                <input type="text" id="licenseNumber" class="form-control" [(ngModel)]="company.licenseNumber" disabled>
+            </div>
+            <div class="form-group">
+                <label for="reraCertificateNumber">RERA Certificate Number:</label>
+                <input type="text" id="reraCertificateNumber" class="form-control" [(ngModel)]="company.reraCertificateNumber" disabled>
+            </div>
+            <div class="form-group">
+                <label for="businessActivity">Business Activity:</label>
+                <input type="text" id="businessActivity" class="form-control" [(ngModel)]="company.businessActivity" disabled>
+            </div>
+            <div class="form-group">
+                <label for="businessDescription">Business Description:</label>
+                <textarea id="businessDescription" class="form-control" rows="3" [(ngModel)]="company.businessDescription" disabled></textarea>
+            </div>
+            <div class="form-group">
+                <label for="numberOfEmployees">Number of Employees:</label>
+                <input type="number" id="numberOfEmployees" class="form-control" [(ngModel)]="company.numberOfEmployees" disabled>
+            </div>
+            
+            <!-- Representative Details -->
+            <h3 class="mt-4">Representative Details</h3>
+            <hr>
+            <div class="form-group">
+                <label for="representativeName">Name:</label>
+                <input type="text" id="representativeName" class="form-control" [(ngModel)]="company.representativeName" disabled>
+            </div>
+            <div class="form-group">
+                <label for="representativeEmail">Email:</label>
+                <input type="email" id="representativeEmail" class="form-control" [(ngModel)]="company.representativeEmail" disabled>
+            </div>
+            <div class="form-group">
+                <label for="representativePosition">Position:</label>
+                <input type="text" id="representativePosition" class="form-control" [(ngModel)]="company.representativePosition" disabled>
+            </div>
+            <div class="form-group">
+                <label for="representativeContactNumber">Contact Number:</label>
+                <input type="tel" id="representativeContactNumber" class="form-control" [(ngModel)]="company.representativeContactNumber" disabled>
+            </div>
+            
+            <!-- Document Details -->
+            <h3 class="mt-4">Documents</h3>
+            <hr>
+            <div class="form-group">
+                <label for="companyRegistrationDoc">Company Registration Document:</label>
+                <textarea id="companyRegistrationDoc" class="form-control" rows="3" [(ngModel)]="company.companyRegistrationDoc" disabled></textarea>
+            </div>
+            <div class="form-group">
+                <label for="tradeLicenseCopy">Trade License Copy:</label>
+                <textarea id="tradeLicenseCopy" class="form-control" rows="3" [(ngModel)]="company.tradeLicenseCopy" disabled></textarea>
+            </div>
+            <div class="form-group">
+                <label for="reraCertificateCopy">RERA Certificate Copy:</label>
+                <textarea id="reraCertificateCopy" class="form-control" rows="3" [(ngModel)]="company.reraCertificateCopy" disabled></textarea>
+            </div>
+            <div class="form-group">
+                <label for="tenancyContract">Tenancy Contract:</label>
+                <textarea id="tenancyContract" class="form-control" rows="3" [(ngModel)]="company.tenancyContract" disabled></textarea>
+            </div>
+        </div>
+    </div>
+</div>

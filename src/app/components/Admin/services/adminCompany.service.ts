@@ -17,5 +17,10 @@ export class AdminCompanyService {
       `${environment.apiUrl}Company/get-unverified-companies-details`
     );
   }
- 
+  verifyCompany(companyId: number) {
+    return this.http.post(
+      `${environment.apiUrl}Company/verify/${companyId}`,
+      {}
+    );
+  }
 }

@@ -14,10 +14,7 @@ export const agentGuard: CanActivateFn = () => {
   return accountService.user$.pipe(
     map((user) => {      
       if (user) {
-        console.log(JSON.stringify(user));
         const decodedToken: JwtDecodedToken = jwtDecode(user?.jwt);
-        
-        console.log(decodedToken+"decoded");
         
         if (decodedToken.role.includes('Agent')) {
           return true;

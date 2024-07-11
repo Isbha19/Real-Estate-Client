@@ -4,7 +4,8 @@ import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { catchError, exhaustMap, map, of, switchMap } from 'rxjs';
 
 import { ToastrService } from 'ngx-toastr';
-import { LOAD_UNVERIFIEDCOMPANY, loadunverifiedcompanyFail, loadunverifiedcompanySuccess } from './unVerifiedCompany.action';
+import { LOAD_UNVERIFIEDCOMPANY, loadunverifiedcompanyFail, loadunverifiedcompanySuccess, verifyCompany, verifyCompanySuccess } from './unVerifiedCompany.action';
+import { showalert } from '../../Common/App.Action';
 
 
 @Injectable()
@@ -25,5 +26,26 @@ export class unVerifiedCompanyEffects {
     )
   );
 
+  verifyCompany = createEffect(() =>
+    this.action$.pipe(
+      ofType(verifyCompany),
+      switchMap((action) => {
+        return this.service.verifyCompany(action.companyId).pipe(
+          switchMap((data: any) => {
+            return of(
+              verifyCompanySuccess({
+                companyId: action.companyId,
+              }),
+              showalert({ message: data.message, resultType: 'pass' })
+            );
+          }),
+          catchError((error) => {
+            const errorMessage = error.error?.message || 'An error occurred';
+            return of(showalert({ message: errorMessage, resultType: 'fail' })); // Dispatch an action to handle the error
+          })
+        );
+      })
+    )
+  );
 
 }

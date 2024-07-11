@@ -1,25 +1,26 @@
 export interface CompanyDetails {
+  companyId:number;
   companyName: string;
   companyStructure: string;
   companyRegistrationNumber: string;
-  LicenseNumber: string;
-  ReraCertificateNumber: string;
-  BusinessActivity: string;
+  licenseNumber: string;
+  reraCertificateNumber: string;
+  businessActivity: string;
   companyAddress: string;
   phoneNumber: string;
-  EmailAddress: string;
-  WebsiteUrl: string;
+  emailAddress: string;
+  websiteUrl: string;
 
-  RepresentativeName: string;
-  RepresentativeEmail: string;
-  RepresentativePosition: string;
-  RepresentativeContactNumber: string;
-  CompanyRegistrationDoc: string;
+  representativeName: string;
+  representativeEmail: string;
+  representativePosition: string;
+  representativeContactNumber: string;
+  companyRegistrationDoc: string;
 
-  TradeLicenseCopy: string;
-  ReraCertificateCopy: string;
-  TenancyContract: string;
+  tradeLicenseCopy: string;
+  reraCertificateCopy: string;
+  tenancyContract: string;
   companyLogo: string;
-  BusinessDescription: string;
-  NumberOfEmployees: number;
+  businessDescription: string;
+  numberOfEmployees: number;
 }

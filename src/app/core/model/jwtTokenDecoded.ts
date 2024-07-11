@@ -3,5 +3,6 @@ export interface JwtDecodedToken{
     firstName:string;
     lastName:string;
     email:string;
-    sub:string
+    sub:string;
+    nameid:string
 }

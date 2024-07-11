@@ -203,7 +203,7 @@ export class CompanyRegistrationComponent {
               .uploadCompanyLogo(this.file, companyId)
               .subscribe({
                 next: (_) => {
-                  this.router.navigateByUrl('subscription-package');
+                  this.router.navigateByUrl('/');
                   this.toastr.success(response.message);
                 },
               });

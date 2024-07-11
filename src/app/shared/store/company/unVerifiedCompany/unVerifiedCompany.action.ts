@@ -11,3 +11,9 @@ export const LOAD_UNVERIFIEDCOMPANY='[company page] load unverified company '
 export const loadunverifiedcompany=createAction(LOAD_UNVERIFIEDCOMPANY);
 export const loadunverifiedcompanySuccess=createAction(LOAD_UNVERIFIEDCOMPANY_SUCCESS,props<{companylist:CompanyDetails[]}>());
 export const loadunverifiedcompanyFail=createAction(LOAD_UNVERIFIEDCOMPANY_FAIL,props<{ErrorText:string}>());
+
+export const VERIFY_COMPANY = '[Company] Verify Company';
+export const VERIFY_COMPANY_SUCCESS = '[Company] Verify Company Success';
+
+export const verifyCompany = createAction(VERIFY_COMPANY, props<{ companyId: number }>());
+export const verifyCompanySuccess = createAction(VERIFY_COMPANY_SUCCESS, props<{ companyId: number }>());

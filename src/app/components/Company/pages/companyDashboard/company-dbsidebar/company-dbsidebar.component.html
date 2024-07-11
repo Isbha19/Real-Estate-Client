@@ -1,0 +1,22 @@
+<div class="sidebar">
+    <a routerLink='/company-dashboard' routerLinkActive="active" >About Company</a>
+    <div class="dropdown">
+      <a class="dropbtn">Agents</a>
+
+      <div class="dropdown-content">
+        <a routerLink='verified-agents' routerLinkActive="active" >Verified Agents</a>
+        <a routerLink='unverified-agents'>Unverified Agents</a>
+      </div>
+    </div>
+    <div class="dropdown">
+      <a class="dropbtn">Properties</a>
+
+      <div class="dropdown-content">
+        <a routerLink='verified-properties' routerLinkActive="active" >Verified Properties</a>
+        <a routerLink='unverified-properties'>Unverified Properties</a>
+      </div>
+    </div>
+    <app-customer-portal-component></app-customer-portal-component>
+    
+  </div>
+  

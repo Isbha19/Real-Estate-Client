@@ -1,11 +1,13 @@
+import { AdminCompanyService } from './../../services/adminCompany.service';
 import { getUnVerifiedCompanyList } from './../../../../shared/store/company/unVerifiedCompany/unVerifiedCompany.selectors';
 import { Component, inject } from '@angular/core';
 import { CompanyDetails } from '../../model/company/companyDetail';
 import { Store } from '@ngrx/store';
-import { loadunverifiedcompany } from '../../../../shared/store/company/unVerifiedCompany/unVerifiedCompany.action';
+import { loadunverifiedcompany, verifyCompany } from '../../../../shared/store/company/unVerifiedCompany/unVerifiedCompany.action';
 import { unverifiedcompanies } from '../../../../shared/store/company/unVerifiedCompany/unVerifiedCompany.model';
 import { CommonModule } from '@angular/common';
 import { NgxPaginationModule } from 'ngx-pagination';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-unverified-companies',
@@ -20,7 +22,6 @@ export class UnverifiedCompaniesComponent {
   page:number=1;
   totalLength:number=0;
 
-
 ngOnInit(): void {
   this.storeNgrx.dispatch(loadunverifiedcompany());
   this.storeNgrx.select(getUnVerifiedCompanyList).subscribe((item) => {
@@ -29,4 +30,8 @@ ngOnInit(): void {
 
   });
 }
+verifyCompany(companyId:number){
+  this.storeNgrx.dispatch(verifyCompany({ companyId: companyId }));
+}
+
 }

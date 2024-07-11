@@ -2,6 +2,7 @@ import { AccountService } from './../../../../core/service/account.service';
 import { Component } from '@angular/core';
 import { JwtDecodedToken } from '../../../../core/model/jwtTokenDecoded';
 import { jwtDecode } from 'jwt-decode';
+import { CompanyService } from '../../service/company.service';
 
 @Component({
   selector: 'app-subscription-packages',
@@ -11,7 +12,9 @@ import { jwtDecode } from 'jwt-decode';
   styleUrl: './subscription-packages.component.scss'
 })
 export class SubscriptionPackagesComponent {
- constructor(private accountService:AccountService){}
+ constructor(private accountService:AccountService,
+  private companyService:CompanyService
+ ){}
 userEmail:string="";
 
 ngOnInit(): void {
@@ -22,7 +25,14 @@ ngOnInit(): void {
     }
   });
 }
+validateAndProceedToPayment(paymentUrl: string) {
 
+  this.companyService.validateUserPayment().subscribe({
+    next: (response) => {
+      window.location.href=paymentUrl+`?prefilled_email=${this.userEmail}&prefilled_email_readonly=true`;
+    },
+  });
 
  
+}
 }

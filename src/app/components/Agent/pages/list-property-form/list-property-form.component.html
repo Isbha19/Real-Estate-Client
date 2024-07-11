@@ -1,421 +1,448 @@
-<div class="container mt-5">
-  <div class="row">
-    <div class="col-12">
-      <h1 class="display-4 text-center text-primary">
-        Property Listing Made Easy
-      </h1>
-      <p class="lead text-center text-secondary">
-        Make your property stand out in the market!
-      </p>
+<div *ngIf="loading" class="d-flex flex-column align-items-center justify-content-center loader-overlay" style="height: 100vh;">
+  <h3>Your property details are getting submitted...</h3>
+  <mat-spinner diameter="90"></mat-spinner>
+</div>
+
+<div *ngIf="!loading">
+  <div class="container mt-5">
+    <div class="row">
+      <div class="col-12">
+        <h1 class="display-4 text-center text-primary">
+          Property Listing Made Easy
+        </h1>
+        <p class="lead text-center text-secondary">
+          Make your property stand out in the market!
+        </p>
+      </div>
     </div>
-  </div>
-  <div class="row">
-    <div class="col-8">
-      <form [formGroup]="listPropertyForm" >
-        <mat-stepper [linear]="isLinear" #stepper class="text-center">
-          <mat-step [stepControl]="propertyOverviewForm">
-            <div formGroupName="propertyOverview">
-              <ng-template matStepLabel>Property Overview </ng-template>
-              <mat-form-field>
-                <mat-label>Property Title</mat-label>
-                <input
-                  matInput
-                  placeholder="property title"
-                  formControlName="PropertyTitle"
-                  [(ngModel)]="propertyView.title"
-                />
-                <mat-error
-                  *ngIf="
-                    listPropertyForm
-                      .get('propertyOverview.PropertyTitle')
-                      ?.hasError('maxlength')
-                  "
-                >
-                  Property title cannot exceed 100 characters.
-                </mat-error>
-                <mat-error
-                  *ngIf="
-                    listPropertyForm
-                      .get('propertyOverview.PropertyTitle')
-                      ?.hasError('required')
-                  "
-                >
-                  Property title is required.
-                </mat-error>
-              </mat-form-field>
-              <mat-form-field>
-                <mat-label>Description</mat-label>
-                <input
-                  matInput
-                  placeholder="Last name, First name"
-                  formControlName="PropertyDescription"
-                />
-                <mat-error
-                  *ngIf="
-                    listPropertyForm
-                      .get('propertyOverview.PropertyDescription')
-                      ?.hasError('maxlength')
-                  "
-                >
-                  Property description cannot exceed 1000 characters.
-                </mat-error>
-                <mat-error
-                  *ngIf="
-                    listPropertyForm
-                      .get('propertyOverview.PropertyDescription')
-                      ?.hasError('required')
-                  "
-                >
-                  Property description is required.
-                </mat-error>
-              </mat-form-field>
-              <mat-form-field>
-                <mat-select
-                  placeholder="Property Type"
-                  formControlName="PropertyTypeId"
-                >
-                  <mat-option
-                    *ngFor="let type of propertyType"
-                    [value]="type.id"
-                    (click)="propertyView.propertyType=type.name"
-
+    <div class="row">
+      <div class="col-8">
+        <form [formGroup]="listPropertyForm" >
+          <mat-stepper [linear]="isLinear" #stepper class="text-center">
+            <mat-step [stepControl]="propertyOverviewForm">
+              <div formGroupName="propertyOverview">
+                <ng-template matStepLabel>Property Overview </ng-template>
+                <mat-form-field>
+                  <mat-label>Property Title</mat-label>
+                  <input
+                    matInput
+                    placeholder="property title"
+                    formControlName="PropertyTitle"
+                    [(ngModel)]="propertyView.title"
+                  />
+                  <mat-error
+                    *ngIf="
+                      listPropertyForm
+                        .get('propertyOverview.PropertyTitle')
+                        ?.hasError('maxlength')
+                    "
                   >
-                    {{ type.name }}
-                  </mat-option>
-                </mat-select>
-                <mat-error
-                  *ngIf="
-                    listPropertyForm
-                      .get('propertyOverview.PropertyTypeId')
-                      ?.hasError('required')
-                  "
-                >
-                  Property type is required.
-                </mat-error>
-              </mat-form-field>
-
-              <mat-form-field>
-                <mat-label>Listing Type</mat-label>
-
-                <mat-select
-                  placeholder="Listing Type"
-                  formControlName="ListingTypeId"
-                >
-                  <mat-option
-                    *ngFor="let type of ListingType"
-                    [value]="type.id"
-                    (click)="propertyView.listingType=type.name"
-
+                    Property title cannot exceed 100 characters.
+                  </mat-error>
+                  <mat-error
+                    *ngIf="
+                      listPropertyForm
+                        .get('propertyOverview.PropertyTitle')
+                        ?.hasError('required')
+                    "
                   >
-                    {{ type.name }}
-                  </mat-option>
-                </mat-select>
-                <mat-error
-                  *ngIf="
-                    listPropertyForm
-                      .get('propertyOverview.listingType')
-                      ?.hasError('required')
-                  "
-                >
-                  Listing type is required.
-                </mat-error>
-              </mat-form-field>
-              <mat-form-field>
-                <mat-label>price</mat-label>
-                <input
-                  matInput
-                  placeholder="Last name, First name"
-                  formControlName="Price"
-                  [(ngModel)]="propertyView.price"
-                />
-                <mat-error
+                    Property title is required.
+                  </mat-error>
+                </mat-form-field>
+                <mat-form-field>
+                  <mat-label>Description</mat-label>
+                  <input
+                    matInput
+                    placeholder="Last name, First name"
+                    formControlName="PropertyDescription"
+                  />
+                  <mat-error
+                    *ngIf="
+                      listPropertyForm
+                        .get('propertyOverview.PropertyDescription')
+                        ?.hasError('maxlength')
+                    "
+                  >
+                    Property description cannot exceed 1000 characters.
+                  </mat-error>
+                  <mat-error
+                    *ngIf="
+                      listPropertyForm
+                        .get('propertyOverview.PropertyDescription')
+                        ?.hasError('required')
+                    "
+                  >
+                    Property description is required.
+                  </mat-error>
+                </mat-form-field>
+                <mat-form-field>
+                  <mat-select
+                    placeholder="Property Type"
+                    formControlName="PropertyTypeId"
+                  >
+                    <mat-option
+                      *ngFor="let type of propertyType"
+                      [value]="type.id"
+                      (click)="propertyView.propertyType=type.name"
+  
+                    >
+                      {{ type.name }}
+                    </mat-option>
+                  </mat-select>
+                  <mat-error
+                    *ngIf="
+                      listPropertyForm
+                        .get('propertyOverview.PropertyTypeId')
+                        ?.hasError('required')
+                    "
+                  >
+                    Property type is required.
+                  </mat-error>
+                </mat-form-field>
+  
+                <mat-form-field>
+                  <mat-label>Listing Type</mat-label>
+  
+                  <mat-select
+                    placeholder="Listing Type"
+                    formControlName="ListingTypeId"
+                  >
+                    <mat-option
+                      *ngFor="let type of ListingType"
+                      [value]="type.id"
+                      (click)="propertyView.listingType=type.name"
+  
+                    >
+                      {{ type.name }}
+                    </mat-option>
+                  </mat-select>
+                  <mat-error
+                    *ngIf="
+                      listPropertyForm
+                        .get('propertyOverview.listingType')
+                        ?.hasError('required')
+                    "
+                  >
+                    Listing type is required.
+                  </mat-error>
+                </mat-form-field>
+                <mat-form-field>
+                  <mat-label>price</mat-label>
+                  <input
+                    matInput
+                    placeholder="Last name, First name"
+                    formControlName="Price"
+                    [(ngModel)]="propertyView.price"
+                  />
+                  <mat-error
+                    *ngIf="
+                      listPropertyForm
+                        .get('propertyOverview.Price')
+                        ?.hasError('required')
+                    "
+                  >
+                    price is required.
+                  </mat-error>
+                  <mat-error
                   *ngIf="
                     listPropertyForm
                       .get('propertyOverview.Price')
-                      ?.hasError('required')
+                      ?.hasError('pattern')
                   "
                 >
-                  price is required.
-                </mat-error>
-                <mat-error
-                *ngIf="
-                  listPropertyForm
-                    .get('propertyOverview.Price')
-                    ?.hasError('pattern')
-                "
-              >
-              Please enter numbers only              </mat-error>
-                <mat-error
-                  *ngIf="
-                    listPropertyForm
-                      .get('propertyOverview.Price')
-                      ?.hasError('min')
-                  "
-                >
-                  Price must be at least AED 700.
-                </mat-error>
-              </mat-form-field>
-              <mat-form-field>
-                <mat-label>location</mat-label>
-                <input
-                #locationField
-                  matInput
-                  [placeholder]="locationPlaceHolder"
-                  formControlName="Location"
-                  [(ngModel)]="propertyView.location"
-                />
-                <mat-error
-                  *ngIf="
-                    listPropertyForm
-                      .get('propertyOverview.Location')
-                      ?.hasError('required')
-                  "
-                >
-                  location is required.
-                </mat-error>
-                <mat-error
-                  *ngIf="
-                    listPropertyForm
-                      .get('propertyOverview.Location')
-                      ?.hasError('maxlength')
-                  "
-                >
-                  Property description cannot exceed 200 characters.
-                </mat-error>
-              </mat-form-field>
-              <div #mapContainer id="map" style="height: 300px; width: 100%;"></div>
-
-              <div>
-                <button  mat-raised-button color="primary" matStepperNext>Next</button>
+                Please enter numbers only              </mat-error>
+                  <mat-error
+                    *ngIf="
+                      listPropertyForm
+                        .get('propertyOverview.Price')
+                        ?.hasError('min')
+                    "
+                  >
+                    Price must be at least AED 700.
+                  </mat-error>
+                </mat-form-field>
+                <mat-form-field>
+                  <mat-label>location</mat-label>
+                  <input
+                  #locationField
+                    matInput
+                    [placeholder]="locationPlaceHolder"
+                    formControlName="Location"
+                    [(ngModel)]="propertyView.location"
+                  />
+                  <mat-error
+                    *ngIf="
+                      listPropertyForm
+                        .get('propertyOverview.Location')
+                        ?.hasError('required')
+                    "
+                  >
+                    location is required.
+                  </mat-error>
+                  <mat-error
+                    *ngIf="
+                      listPropertyForm
+                        .get('propertyOverview.Location')
+                        ?.hasError('maxlength')
+                    "
+                  >
+                    Property description cannot exceed 200 characters.
+                  </mat-error>
+                </mat-form-field>
+                <div #mapContainer id="map" style="height: 300px; width: 100%;"></div>
+  
+                <div>
+                  <button  mat-raised-button color="primary" matStepperNext>Next</button>
+                </div>
               </div>
-            </div>
-          </mat-step>
-          <mat-step
-            [stepControl]="propertyDetailsForm"
-            label="Property Details
-    "
-          >
-            <div formGroupName="propertyDetails">
-              <mat-form-field>
-                <mat-label>Bedrooms</mat-label>
-                <input
-                  matInput
-                  type="number"
-
-                  formControlName="Bedrooms"
-                  placeholder="Number of Bedrooms"
-                  [(ngModel)]="propertyView.bedroom"
-                />
-                <mat-error
+            </mat-step>
+            <mat-step
+              [stepControl]="propertyDetailsForm"
+              label="Property Details
+      "
+            >
+              <div formGroupName="propertyDetails">
+                <mat-form-field>
+                  <mat-label>Bedrooms</mat-label>
+                  <input
+                    matInput
+                    type="number"
+  
+                    formControlName="Bedrooms"
+                    placeholder="Number of Bedrooms"
+                    [(ngModel)]="propertyView.bedroom"
+                  />
+                  <mat-error
+                    *ngIf="
+                      listPropertyForm
+                        .get('propertyDetails.Bedrooms')
+                        ?.hasError('min')
+                    "
+                  >
+                    Properties must have atleast one Bedroom
+                  </mat-error>
+                  <mat-error
+                    *ngIf="
+                      listPropertyForm
+                        .get('propertyDetails.Bedrooms')
+                        ?.hasError('required')
+                    "
+                  >
+                  Bedroom Number is required.
+                  </mat-error>
+                </mat-form-field>
+                <mat-form-field>
+                  <mat-label>Bathrooms</mat-label>
+                  <input
+                    matInput
+                    type="number"
+                    formControlName="Bathrooms"
+                    placeholder="Number of Bathrooms"
+                    [(ngModel)]="propertyView.bathroom"
+                  />
+                  <mat-error
                   *ngIf="
-                    listPropertyForm
-                      .get('propertyDetails.Bedrooms')
+                     listPropertyForm
+                      .get('propertyDetails.Bathrooms')
                       ?.hasError('min')
                   "
                 >
-                  Properties must have atleast one Bedroom
+                  Properties must have atleast one Bathroom
                 </mat-error>
                 <mat-error
                   *ngIf="
                     listPropertyForm
-                      .get('propertyDetails.Bedrooms')
+                      .get('propertyDetails.Bathrooms')
                       ?.hasError('required')
                   "
                 >
-                Bedroom Number is required.
+                Bathroom Number is required.
                 </mat-error>
-              </mat-form-field>
-              <mat-form-field>
-                <mat-label>Bathrooms</mat-label>
-                <input
-                  matInput
-                  type="number"
-                  formControlName="Bathrooms"
-                  placeholder="Number of Bathrooms"
-                  [(ngModel)]="propertyView.bathroom"
-                />
+                </mat-form-field>
+                <mat-form-field>
+                  <mat-label>size</mat-label>
+                  <input
+                    matInput
+                    formControlName="Size"
+                    placeholder="Size in SqFt"
+                    [(ngModel)]="propertyView.size"
+                  />
+                  <mat-error
+                  *ngIf="
+                    listPropertyForm
+                      .get('propertyDetails.Size')
+                      ?.hasError('min')
+                  "
+                >
+                  Size must have atleast one SqFt
+                </mat-error>
                 <mat-error
-                *ngIf="
+                  *ngIf="
+                    listPropertyForm
+                      .get('propertyDetails.Size')
+                      ?.hasError('required')
+                  "
+                >
+                size is required.
+                </mat-error>
+                </mat-form-field>
+                <mat-form-field>
+                  <mat-label>Furnishing</mat-label>
+                  <mat-select
+                  placeholder="Furnishing"
+                  formControlName="FurnishingTypeId"
+                >
+                  <mat-option
+                    *ngFor="let type of furnishingType"
+                    [value]="type.id"
+                  >
+                    {{ type.name }}
+                  </mat-option>
+                </mat-select> 
+                  <mat-error
+                  *ngIf="
                    listPropertyForm
-                    .get('propertyDetails.Bathrooms')
-                    ?.hasError('min')
-                "
-              >
-                Properties must have atleast one Bathroom
-              </mat-error>
-              <mat-error
-                *ngIf="
-                  listPropertyForm
-                    .get('propertyDetails.Bathrooms')
-                    ?.hasError('required')
-                "
-              >
-              Bathroom Number is required.
-              </mat-error>
-              </mat-form-field>
-              <mat-form-field>
-                <mat-label>size</mat-label>
-                <input
-                  matInput
-                  formControlName="Size"
-                  placeholder="Size in SqFt"
-                  [(ngModel)]="propertyView.size"
-                />
-                <mat-error
-                *ngIf="
-                  listPropertyForm
-                    .get('propertyDetails.Size')
-                    ?.hasError('min')
-                "
-              >
-                Size must have atleast one SqFt
-              </mat-error>
-              <mat-error
-                *ngIf="
-                  listPropertyForm
-                    .get('propertyDetails.Size')
-                    ?.hasError('required')
-                "
-              >
-              size is required.
-              </mat-error>
-              </mat-form-field>
-              <mat-form-field>
-                <mat-label>Furnishing</mat-label>
-                <mat-select
-                placeholder="Furnishing"
-                formControlName="FurnishingTypeId"
-              >
-                <mat-option
-                  *ngFor="let type of furnishingType"
-                  [value]="type.id"
+                      .get('propertyDetails.FurnishingTypeId')
+                      ?.hasError('required')
+                  "
                 >
-                  {{ type.name }}
-                </mat-option>
-              </mat-select> 
-                <mat-error
-                *ngIf="
-                 listPropertyForm
-                    .get('propertyDetails.FurnishingTypeId')
-                    ?.hasError('required')
-                "
-              >
-              Furnishing type is required.
-              </mat-error>
-              </mat-form-field>
-              <mat-form-field>
-             
-              <mat-label>Amenities</mat-label>
-              <mat-select formControlName="amenities" multiple>
-                @for (type of amenitiesOptions; track type) {
-                  <mat-option [value]="type.name">{{type.name}}</mat-option>
-                }
-              </mat-select>
-              </mat-form-field>
-              <mat-form-field>
-                <mat-label>Near by Facilities</mat-label>
+                Furnishing type is required.
+                </mat-error>
+                </mat-form-field>
+                <mat-form-field>
                
-              <mat-select formControlName="nearByFacilities" multiple>
-                @for (facility of facilites; track facility) {
-                  <mat-option [value]="facility.name">{{facility.name}}</mat-option>
-                }
-              </mat-select>
-              </mat-form-field>
-              <div>
-                <button  mat-raised-button color="primary" matStepperPrevious (click)="step2Clicked()">Back</button> |
-                <button  mat-raised-button color="primary" matStepperNext>Next</button>
+                <mat-label>Amenities</mat-label>
+                <mat-select formControlName="amenities" multiple>
+                  @for (type of amenitiesOptions; track type) {
+                    <mat-option [value]="type.name">{{type.name}}</mat-option>
+                  }
+                </mat-select>
+                </mat-form-field>
+                <mat-form-field>
+                  <mat-label>Near by Facilities</mat-label>
+                 
+                <mat-select formControlName="nearByFacilities" multiple>
+                  @for (facility of facilites; track facility) {
+                    <mat-option [value]="facility.name">{{facility.name}}</mat-option>
+                  }
+                </mat-select>
+                </mat-form-field>
+                <div>
+                  <button  mat-raised-button color="primary" matStepperPrevious (click)="step2Clicked()">Back</button> |
+                  <button  mat-raised-button color="primary" matStepperNext>Next</button>
+                </div>
               </div>
-            </div>
-          </mat-step>
-          <mat-step
-            [stepControl]="listingAndAgentInfoForm"
-            label="Listing & Agent Information"
-          >
-            <div formGroupName="listingAndAgentDetails">
-              <mat-form-field>
-                <mat-label>Images</mat-label>
-                <input
-                  matInput
-                  formControlName="Images"
-                  placeholder="Ex. 1 Main St, New York, NY"
-                  required
+            </mat-step>
+            <mat-step
+              [stepControl]="listingAndAgentInfoForm"
+              label="Listing & Agent Information"
+            >
+              <div formGroupName="listingAndAgentDetails">
+             
+                <div class="form-group">
+                  <label for="fileInput">Images</label>
+                <div class="custom-file">
+                  <input
+                  type="file"
+                  id="fileInput"
+                  class="custom-file-input"
+  
+                  #fileInput
+                  multiple
+                  (change)="onFileSelected($event)"
+                  style="display: none;"
                 />
-              </mat-form-field>
-              <mat-form-field>
-                <mat-label>Virtual Tour Url</mat-label>
-                <input
-                  matInput
-                  formControlName="virtualTourUrl"
-                  placeholder="Ex. 1 Main St, New York, NY"
-                  required
-                />
-              </mat-form-field>
-              <mat-form-field>
-                <mat-label>Agent Name</mat-label>
-                <input
-                  matInput
-                  formControlName="agentName"
-                  placeholder="Ex. 1 Main St, New York, NY"
-                  required
-                />
-              </mat-form-field>
-              <mat-form-field>
-                <mat-label>Agent Contact Number</mat-label>
-                <input
-                  matInput
-                  formControlName="agentContactNumber"
-                  placeholder="Ex. 1 Main St, New York, NY"
-                  required
-                />
-              </mat-form-field>
-              <mat-form-field>
-                <mat-label>Email Address</mat-label>
-                <input
-                  matInput
-                  formControlName="emailAddress"
-                  placeholder="Ex. 1 Main St, New York, NY"
-                  required
-                />
-              </mat-form-field>
-              <mat-form-field>
-                <mat-label>Availability Date</mat-label>
-                <input
-                  matInput
-                  formControlName="availabilityDate"
-                  placeholder="Ex. 1 Main St, New York, NY"
-                  required
-                />
-              </mat-form-field>
-              <mat-form-field>
-                <mat-label>Terms And Condition</mat-label>
-                <input
-                  matInput
-                  formControlName="termsAndCondition"
-                  placeholder="Ex. 1 Main St, New York, NY"
-                  required
-                />
-              </mat-form-field>
-              <div>
-                <button mat-raised-button color="primary" matStepperPrevious>Back</button> |
-                <button (click)="HandleSubmit()" type="submit" mat-raised-button color="accent" matStepperNext>Submit</button>
+                <button type="button" class="custom-file-button" (click)="fileInput.click()">Choose Files</button>
+                <div *ngIf="!hasEnoughImages()" class="image-selection-error">
+                  Please select at least 5 images.
+                </div>
+                </div>
+                  <div class="selected-images">
+                    <div class="image-wrapper" *ngFor="let file of selectedFiles; let i = index">
+                      <img [src]="getFileUrl(file)" alt="Selected Image" class="selected-image" />
+                      <button type="button" class="delete-icon" (click)="removeFile(i)">✖️</button>
+                    </div>
+                  </div>
+                  
+                </div>
+                
+                <mat-form-field>
+                  <mat-label>Virtual Tour Url</mat-label>
+                  <input
+                    matInput
+                    formControlName="virtualTourUrl"
+                    placeholder="Ex. 1 Main St, New York, NY"
+                    required
+                  />
+                </mat-form-field>
+                <mat-form-field>
+                  <mat-label>Agent Name</mat-label>
+                  <input
+                    matInput
+                    formControlName="agentName"
+                    placeholder="Ex. 1 Main St, New York, NY"
+                    required
+                  />
+                </mat-form-field>
+                <mat-form-field>
+                  <mat-label>Agent Contact Number</mat-label>
+                  <input
+                    matInput
+                    formControlName="agentContactNumber"
+                    placeholder="Ex. 1 Main St, New York, NY"
+                    required
+                  />
+                </mat-form-field>
+                <mat-form-field>
+                  <mat-label>Agent Email Address</mat-label>
+                  <input
+                    matInput
+                    formControlName="emailAddress"
+                    placeholder="Ex. 1 Main St, New York, NY"
+                    required
+                  />
+                </mat-form-field>
+                <mat-form-field>
+                  <mat-label>Availability Date</mat-label>
+                  <input
+                    matInput
+                    formControlName="availabilityDate"
+                    placeholder="Ex. 1 Main St, New York, NY"
+                    required
+                  />
+                  
+                </mat-form-field>
+                <mat-form-field>
+                  <mat-label>Terms And Condition</mat-label>
+                  <input
+                    matInput
+                    formControlName="termsAndCondition"
+                    placeholder="Ex. 1 Main St, New York, NY"
+                    required
+                  />
+                </mat-form-field>
+                <div>
+                  <button mat-raised-button color="primary" matStepperPrevious>Back</button> |
+                  <button (click)="HandleSubmit()" type="submit" mat-raised-button color="accent" matStepperNext>Submit</button>
+                </div>
               </div>
-            </div>
-          </mat-step>
-        </mat-stepper>
-      </form>
-    </div>
-
-    <div class="col-4">
-      <mat-card class="card-class">
-        <mat-card-header>
-          <p class="lead text-center text-secondary">Your Property Preview</p>
-        </mat-card-header>
-        <mat-card-subtitle> </mat-card-subtitle>
-        <mat-card-content>
-          <app-property-card [property]="propertyView"></app-property-card>
-        </mat-card-content>
-        <mat-card-footer> </mat-card-footer>
-      </mat-card>
+            </mat-step>
+          </mat-stepper>
+        </form>
+      </div>
+  
+      <div class="col-4">
+        <mat-card class="card-class">
+          <mat-card-header>
+            <p class="lead text-center text-secondary">Your Property Preview</p>
+          </mat-card-header>
+          <mat-card-subtitle> </mat-card-subtitle>
+          <mat-card-content>
+            <app-property-card [property]="propertyView"></app-property-card>
+          </mat-card-content>
+          <mat-card-footer> </mat-card-footer>
+        </mat-card>
+      </div>
     </div>
   </div>
 </div>

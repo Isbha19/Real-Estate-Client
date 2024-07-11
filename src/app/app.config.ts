@@ -20,6 +20,8 @@ import { companyReducer } from './shared/store/company/verifiedCompany/company.r
 import { CompanyEffects } from './shared/store/company/verifiedCompany/company.effects';
 import { unVerifiedCompanyEffects } from './shared/store/company/unVerifiedCompany/unVerifiedCompany.effects';
 
+import { unverifiedagentReducer } from './shared/store/agent/unVerifiedAgent/unVerifiedAgent.reducer';
+import { unVerifiedAgentEffects } from './shared/store/agent/unVerifiedAgent/unVerifiedAgent.effects';
 
 export const appConfig: ApplicationConfig = {
   providers: [provideRouter(routes), provideAnimationsAsync(), provideToastr({ closeButton: true }),
@@ -28,6 +30,9 @@ export const appConfig: ApplicationConfig = {
     ])), provideStore(), provideState({ name: 'user', reducer: userReducer }),
     provideState({ name: 'company', reducer: companyReducer }),
     provideState({ name: 'unverifiedcompanies', reducer: unverifiedcompanyReducer }),
+    provideState({ name: 'unverifiedagents', reducer: unverifiedagentReducer }),
+
+    
     provideStoreDevtools({ maxAge: 25, logOnly: !isDevMode() }),
-    provideStoreDevtools({ maxAge: 25, logOnly: !isDevMode() }),provideEffects([UserEffects,AppEffects,CompanyEffects,unVerifiedCompanyEffects])]
+    provideStoreDevtools({ maxAge: 25, logOnly: !isDevMode() }),provideEffects([UserEffects,AppEffects,CompanyEffects,unVerifiedCompanyEffects,unVerifiedAgentEffects])]
 };

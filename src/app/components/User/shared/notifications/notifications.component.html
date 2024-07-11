@@ -1,0 +1,24 @@
+<div class="nav-item dropdown">
+  <a class="nav-link hidden-arrow" (mouseleave)="markOpen()" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+    <i style="font-size: x-large;color: blue;" class="fas fa-bell text-black"></i>
+    <span *ngIf="NotificationsToOpenCount > 0" class="badge rounded-pill badge-notification bg-danger">{{ NotificationsToOpenCount }}</span>
+  </a>
+
+  <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownMenuLink">
+    <ng-container *ngIf="notifications.length > 0; else noNotifications">
+      <li *ngFor="let notification of notifications" class="notification-item" [ngClass]="{'unread': !notification.isRead}">
+        <a (click)="markAsRead(notification.notificationId)" class="dropdown-item" [routerLink]="notification.url">
+          {{ notification.message }}
+          <span class="time-ago">{{ notification.createdAt | timeAgo }}</span>
+        </a>
+      </li>
+    </ng-container>
+    <ng-template #noNotifications>
+      <li class="notification-item">
+        <a class="dropdown-item">
+          No notifications
+        </a>
+      </li>
+    </ng-template>
+  </ul>
+</div>
