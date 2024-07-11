@@ -1,3 +1,4 @@
+import { companyStripeCustomer } from '../../model/CompanyStripeCustomer';
 import { CompanyDashboardService } from '../../service/company-dashboard.service';
 import { CompanyService } from './../../service/company.service';
 import { Component } from '@angular/core';
@@ -20,7 +21,7 @@ ngOnInit(): void {
 }
 fetchStripeCustomerId() {
   this.companyDashboardService.getStripeCustomerId().subscribe({
-    next: (response) => {
+    next: (response:companyStripeCustomer) => {
 this.customerId=response.stripeCustomerId ;  
     },
     error: (error) => {

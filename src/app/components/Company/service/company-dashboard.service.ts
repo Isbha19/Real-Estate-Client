@@ -9,6 +9,7 @@ import { propertyDetail } from '../../Property/model/propertyDetail';
 import { SubscriptionPackage } from '../model/SubscriptionPackage';
 import { Observable } from 'rxjs';
 import { ApiResponse } from '../../../core/model/response/ApiResponse';
+import { companyStripeCustomer } from '../model/CompanyStripeCustomer';
 @Injectable({ providedIn: 'root' })
 export class CompanyDashboardService {
   constructor(private http: HttpClient) {}
@@ -46,7 +47,7 @@ export class CompanyDashboardService {
     );
   }
   getStripeCustomerId() {
-    return this.http.get<any>(
+    return this.http.get<companyStripeCustomer>(
       `${environment.apiUrl}Company/get-stripe-customerId`
     );
   }

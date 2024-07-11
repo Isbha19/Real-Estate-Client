@@ -17,6 +17,22 @@ export class PropertyListTypeComponent {
   properties: PropertyListing[] = [];
   listingType: string="";
 
+  // Add variables for each filter
+  searchKeyword: string = '';
+  propertyType: string = '';
+  location: string = '';
+  beds: number | null = null;
+  bathrooms: number | null = null;
+  priceMin: number | null = null;
+  priceMax: number | null = null;
+  facilities: string = '';
+  amenities: string = '';
+  furnished: string = '';
+  keywords: string = '';
+  size: number | null = null;
+  virtualTour: string = '';
+
+
   ngOnInit(): void {
     this.route.paramMap.subscribe(params => {
       this.listingType = params.get('listingType')||'';
@@ -35,5 +51,28 @@ export class PropertyListTypeComponent {
       }
     });
   }
+  searchProperties(): void {
+    // Implement search logic
+    console.log('Search properties with the following filters:', {
+      searchKeyword: this.searchKeyword,
+      propertyType: this.propertyType,
+      location: this.location,
+      beds: this.beds,
+      bathrooms: this.bathrooms,
+      priceMin: this.priceMin,
+      priceMax: this.priceMax
+    });
+  }
+  applyFilters(): void {
+    // Implement apply filters logic
+    console.log('Apply filters with the following details:', {
+      facilities: this.facilities,
+      amenities: this.amenities,
+      furnished: this.furnished,
+      keywords: this.keywords,
+      size: this.size,
+      virtualTour: this.virtualTour
+    });
 
+}
 }

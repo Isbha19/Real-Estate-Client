@@ -8,6 +8,7 @@ import { Observable } from 'rxjs';
 import { CompanyRegisterResponse } from '../model/companyRegisterResponse';
 import { ApiResponse } from '../../../core/model/response/ApiResponse';
 import { CompanyDetails } from '../../Admin/model/company/companyDetail';
+import { CustomerPortalSessionResponse } from '../model/CustomerPortal';
 
 @Injectable({ providedIn: 'root' })
 export class CompanyService {
@@ -29,16 +30,16 @@ export class CompanyService {
       `${environment.apiUrl}Company/get-business-activity-types`
     );
   }
-  uploadCompanyLogo(file: File, companyId: number): Observable<any> {    
+  uploadCompanyLogo(file: File, companyId: number): Observable<ApiResponse> {    
     const formData = new FormData();
     formData.append('file', file);
     const headers=new HttpHeaders().append('Content-Disposition','multipart/form-data')
 
-    return this.http.post<any>(`${environment.apiUrl}Company/add-company-logo?companyId=${companyId}`, formData);
+    return this.http.post<ApiResponse>(`${environment.apiUrl}Company/add-company-logo?companyId=${companyId}`, formData);
   }
   
-  createCustomerPortalSession(customerId: string): Observable<any> {    
-    return this.http.post<any>(`${environment.apiUrl}Company/create-customer-portal-session/${customerId}`,{});
+  createCustomerPortalSession(customerId: string): Observable<CustomerPortalSessionResponse> {    
+    return this.http.post<CustomerPortalSessionResponse>(`${environment.apiUrl}Company/create-customer-portal-session/${customerId}`,{});
   }
   validateUserPayment(){
     return this.http.get<ApiResponse>(

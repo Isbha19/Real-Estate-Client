@@ -75,7 +75,7 @@ export class AppComponent {
         },
       });
     } else {
-      console.log("no jwttt");
+     
       
       this.accountService.refreshUser(null).subscribe();
       this.loading = false;
