@@ -8,7 +8,7 @@ import {
   StateObservable,
   UPDATE,
   toSignal
-} from "./chunk-4OQFLV3Y.js";
+} from "./chunk-2SP3KKJB.js";
 import {
   ErrorHandler,
   Inject,
@@ -24,7 +24,7 @@ import {
   ɵɵdefineNgModule,
   ɵɵgetInheritedFactory,
   ɵɵinject
-} from "./chunk-7JN7PAND.js";
+} from "./chunk-LUNGNAJ2.js";
 import {
   merge,
   queueScheduler
@@ -53,7 +53,7 @@ import {
 import {
   __spreadProps,
   __spreadValues
-} from "./chunk-J4B6MK7R.js";
+} from "./chunk-7G5TR5RR.js";
 
 // node_modules/@ngrx/store-devtools/fesm2022/ngrx-store-devtools.mjs
 var PERFORM_ACTION = "PERFORM_ACTION";

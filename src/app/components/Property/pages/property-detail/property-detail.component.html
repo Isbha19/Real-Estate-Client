@@ -74,7 +74,7 @@
                     <li class="list-group-item d-flex justify-content-center">
                         <button class="btn btn-primary mx-2 btn-width">Call</button>
                         <button class="btn btn-danger mx-2 btn-width">Email</button>
-                        <button class="btn btn-warning mx-2 btn-width">Chat</button>
+                        <button class="btn btn-warning mx-2 btn-width" (click)="openChat()">Chat</button>
                     </li>
                     <li class="list-group-item d-flex align-items-center">
                         <img class="rounded-circle-small me-3" style="width: 50px; height: 50px;" [src]="property.agentImage" alt="Agent Image">
@@ -92,22 +92,6 @@
       </div>
     </div>
   </div>
-  <!-- <div class="agent-info-container container-xxl py-5">
-    <div class="container">
-      <div class="row g-5 align-items-center">
-        <div class="col-lg-4 wow fadeIn" data-wow-delay="0.1s">
-          <div class="agent-img position-relative overflow-hidden p-5 pe-0">
-            <img class="img-fluid w-100" [src]="property.agentImage" alt="Agent Image">
-          </div>
-        </div>
-        <div class="col-lg-8 wow fadeIn" data-wow-delay="0.5s">
-          <h3>{{property.agentName}}</h3>
-          <p><i class="fa fa-envelope text-primary me-3"></i>{{property.agentEmail}}</p>
-          <p><i class="fa fa-phone text-primary me-3"></i>{{property.agentPhoneNumber}}</p>
-          <p><i class="fa fa-whatsapp text-primary me-3"></i>{{property.agentWhatsapp}}</p>
-          <p><img [src]="property.companyLogo" alt="Company Logo" width="50" height="50"> {{property.companyName}}</p>
-        </div>
-      </div>
-    </div>
-  </div>
-   -->
+
+
+   <app-chat-popup *ngIf="showChat" [agentName]="property.agentName" [agentImage]="property.agentImage" (closeChat)="closeChat()" (sendMessage)="sendMessage($event)"></app-chat-popup>

@@ -1,3 +1,4 @@
+import { ChatPopupComponent } from './../chat-popup/chat-popup.component';
 import { ImageGalleryComponent } from './../image-gallery/image-gallery.component';
 
 import { Component } from '@angular/core';
@@ -6,11 +7,12 @@ import { PropertyService } from '../../services/property.service';
 import { CommonModule } from '@angular/common';
 import { propertyDetail } from '../../model/propertyDetail';
 import { MatDialog } from '@angular/material/dialog';
+import { SignalRService } from '../../../../core/service/signal-r.service';
 
 @Component({
   selector: 'app-property-detail',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule,ChatPopupComponent],
   templateUrl: './property-detail.component.html',
   styleUrl: './property-detail.component.scss',
 })
@@ -19,11 +21,16 @@ export class PropertyDetailComponent {
   primaryImageUrl: string | undefined;
   otherImageUrls: string[] = [];
   isOpen = false;
+  showChat = false;
+  messages: string[] = [];
+  agentId: string = 'ca81531a-04a6-421f-b2f2-38f00aee9308'; 
 
   constructor(
     private route: ActivatedRoute,
     private propertyService: PropertyService,
-    private dialog:MatDialog
+    private dialog:MatDialog,
+    private signalRService: SignalRService // Inject SignalRService
+
   ) {}
   ngOnInit(): void {
     this.route.paramMap.subscribe((params) => {
@@ -67,5 +74,19 @@ export class PropertyDetailComponent {
      data: { imageUrls: this.otherImageUrls }
 
    })
+}
+openChat() {
+  this.showChat = true;
+  // Load previous messages if needed
+}
+
+closeChat() {
+  this.showChat = false;
+}
+sendMessage(message: string) {
+  // Replace agentId with actual agent ID logic
+  // const agentId = this.property.agentId; // Example logic to get agent ID
+  // this.chatService.sendMessage(agentId, message).subscribe(() => {
+  // });
 }
 }
