@@ -22,6 +22,7 @@ export class PropertyDetailComponent {
   otherImageUrls: string[] = [];
   isOpen = false;
   showChat = false;
+
   messages: string[] = [];
   agentId: string = 'ca81531a-04a6-421f-b2f2-38f00aee9308'; 
 
@@ -83,10 +84,5 @@ openChat() {
 closeChat() {
   this.showChat = false;
 }
-sendMessage(message: string) {
-  // Replace agentId with actual agent ID logic
-  // const agentId = this.property.agentId; // Example logic to get agent ID
-  // this.chatService.sendMessage(agentId, message).subscribe(() => {
-  // });
-}
+
 }

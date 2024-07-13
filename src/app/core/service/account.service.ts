@@ -12,13 +12,17 @@ import { LoginWithExternal } from '../model/account/loginWithExternal';
 import { environment } from '../../../environments/environment';
 import { LoginResponse } from '../model/response/LoginResponse';
 import { ApiResponse } from '../model/response/ApiResponse';
+import { SignalRService } from './signal-r.service';
 
 @Injectable({ providedIn: 'root' })
 export class AccountService {
   
   private userSource = new ReplaySubject<User | null>(1);
   user$ = this.userSource.asObservable();
-  constructor(private http: HttpClient, private router: Router) {}
+  constructor(private http: HttpClient, 
+    private router: Router,
+    private signalr:SignalRService
+  ) {}
 
   refreshUser(jwt: string | null) {
     if (jwt === null) {
@@ -43,6 +47,7 @@ export class AccountService {
         // Assuming LoginResponse has a user property
         if (response && response.data) {
           this.setUser(response.data);
+          this.signalr.createHubConnection(response.data);
           return response; // Return full LoginResponse
         }
         return null; // Or handle invalid response as needed
@@ -61,9 +66,11 @@ export class AccountService {
     localStorage.removeItem(environment.userKey);
     this.userSource.next(null);
     this.router.navigateByUrl('/');
+    this.signalr.stopHubConnection();
   }
   private setUser(user: User) {
     localStorage.setItem(environment.userKey, JSON.stringify(user));
+    
     this.userSource.next(user);
   }
   getjwt() {
@@ -71,6 +78,7 @@ export class AccountService {
     
     if (key) {
       const user = JSON.parse(key);
+      this.signalr.createHubConnection(user);
       return user.jwt;
     } else {
       return null;

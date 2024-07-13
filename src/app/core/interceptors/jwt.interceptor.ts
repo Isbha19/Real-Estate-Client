@@ -5,26 +5,19 @@ import { take } from 'rxjs';
 import { ToastrService } from 'ngx-toastr';
 
 export const jwtInterceptor: HttpInterceptorFn = (req, next) => {
-  const accountService=inject(AccountService);
+  const accountService = inject(AccountService);
 
   accountService.user$.pipe(take(1)).subscribe({
-    next:user=>{
-      if(user){   
-        console.log("yes userrr");
-         
-        req=req.clone({
-          setHeaders:{
-            Authorization:`Bearer ${user.jwt}`
-          }
-        })
-      }else{
-        console.log("no userr");
-
+    next: (user) => {
+      if (user) {
+        req = req.clone({
+          setHeaders: {
+            Authorization: `Bearer ${user.jwt}`,
+          },
+        });
       }
-      
-      }
-  })
-  console.log(JSON.stringify(req)+" request details");
+    },
+  });
 
   return next(req);
 };
