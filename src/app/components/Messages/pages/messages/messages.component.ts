@@ -1,10 +1,10 @@
 import { Component } from '@angular/core';
-import { Message } from '../../../core/model/message';
-import { MessageService } from '../../../core/service/message.service';
+import { Message } from '../../../../core/model/message';
+import { MessageService } from '../../service/message.service';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { RouterLink } from '@angular/router';
-import { TimeAgoPipe } from '../../../core/pipe/timeAgo.pipe';
+import { TimeAgoPipe } from '../../../../core/pipe/timeAgo.pipe';
 
 @Component({
   selector: 'app-messages',

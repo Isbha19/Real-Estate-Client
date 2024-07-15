@@ -13,7 +13,7 @@ import { Router } from '@angular/router';
 })
 export class SignalRService {
   hubUrl = environment.hubUrl;
-  private hubConnection!: HubConnection;
+  public hubConnection!: HubConnection;
   private onlineUsersSource = new BehaviorSubject<string[]>([]);
   onlineUsers$ = this.onlineUsersSource.asObservable();
 
@@ -52,6 +52,7 @@ this.Toastr.info(username+' has sent you a new message!')
   // navigattteee
 })
     });
+   
   }
   stopHubConnection() {
     this.hubConnection.stop().catch((error) => console.log(error));

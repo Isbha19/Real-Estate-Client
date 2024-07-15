@@ -133,7 +133,7 @@ body, html {
 .chatPopup{
   position: fixed;
       bottom: 20px;
-      right: 20px;
+      right: 320px;
       z-index: 1000;
 }
 .chat {
@@ -163,11 +163,12 @@ body, html {
 
 
 .pic {
-	width: 4rem;
-	height: 4rem;
+	width: 3rem;
+	height: 3rem;
 	background-size: cover;
 	background-position: center;
 	border-radius: 50%;
+
 }
 
 .contact {
@@ -265,8 +266,8 @@ body, html {
 	flex-direction: column;
 	justify-content: space-between;
 	
-	width: 24rem;
-	height: 28rem;
+	width: 20rem;
+	height: 22rem;
 	z-index: 2;
 	box-sizing: border-box;
 	border-radius: 1rem;
@@ -279,7 +280,7 @@ body, html {
 	.contact.bar {
 		flex-basis: 3.5rem;
 		flex-shrink: 0;
-		margin: 1rem;
+		margin: .7rem;
 		box-sizing: border-box;
 	}
 	
@@ -346,11 +347,11 @@ body, html {
 		flex-shrink: 0;
 		display: flex;
 		align-items: center;
-		padding: 0 0.5rem 0 1.5rem;
+		padding: 0 0.5rem 0 1rem; // Adjusted padding
 		
 		i {
 			font-size: 1.5rem;
-			margin-right: 1rem;
+			margin-right: 0.5rem; // Adjusted margin
 			color: $text-2;
 			cursor: pointer;
 			transition: color 200ms;
@@ -365,9 +366,9 @@ body, html {
 			background-image:none;
 			background-color: white;
 			padding: 0.5rem 1rem;
-			margin-right: 1rem;
+			margin-right: 0.5rem; // Adjusted margin
 			border-radius: 1.125rem;
-			flex-grow: 2;
+			flex-grow: 1;
 			box-shadow: 
 				0 0 1rem rgba(black, 0.1),
 				0rem 1rem 1rem -1rem rgba(black, 0.2);
@@ -404,11 +405,17 @@ body, html {
 	color:rgb(1,189,42);
 }
 
-// Obviously in a real app I would load this from a DB with JS
-// For now this is a nice quick and easy method to mockup
 
 .pic.stark { background-image: url('../../../../../assets/img/call-to-action.jpg')}
 .pic.banner { background-image: url('https://vignette.wikia.nocookie.net/marvelcinematicuniverse/images/4/4f/BruceHulk-Endgame-TravelingCapInPast.jpg')}
 .pic.thor { background-image: url('https://vignette.wikia.nocookie.net/marvelcinematicuniverse/images/9/98/ThorFliesThroughTheAnus.jpg')}
 .pic.danvers { background-image: url('https://vignette.wikia.nocookie.net/marvelcinematicuniverse/images/0/05/HeyPeterParker.png')}
 .pic.rogers { background-image: url('https://vignette.wikia.nocookie.net/marvelcinematicuniverse/images/7/7c/Cap.America_%28We_Don%27t_Trade_Lives_Vision%29.png')}
+
+
+.emoji-picker{
+	position: absolute;
+  left: -300px; /* Adjust as needed based on your layout */
+  bottom: 50px; /* Adjust vertical position if necessary */
+  z-index: 1000; /* Ensure it's above other elements if needed */
+}

@@ -1,5 +1,8 @@
+import { MessageService } from './../../../Messages/service/message.service';
 import { SignalRService } from './../../../../core/service/signal-r.service';
 import { CommonModule } from '@angular/common';
+import { PickerComponent } from '@ctrl/ngx-emoji-mart';
+
 import {
   Component,
   ElementRef,
@@ -9,25 +12,28 @@ import {
   ViewChild,
 } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { MessageService } from '../../../../core/service/message.service';
 import { Message } from '../../../../core/model/message';
 import { TimeAgoPipe } from '../../../../core/pipe/timeAgo.pipe';
 import { AccountService } from '../../../../core/service/account.service';
 import { User } from '../../../../core/model/account/user';
 import { take } from 'rxjs';
+import { JwtDecodedToken } from '../../../../core/model/jwtTokenDecoded';
+import { jwtDecode } from 'jwt-decode';
 
 @Component({
   selector: 'app-chat-popup',
   standalone: true,
-  imports: [CommonModule, FormsModule, TimeAgoPipe],
+  imports: [CommonModule, FormsModule, TimeAgoPipe,PickerComponent],
   templateUrl: './chat-popup.component.html',
   styleUrl: './chat-popup.component.scss',
 })
 export class ChatPopupComponent {
   @ViewChild('chat') chatElement!: ElementRef;
 
-  @Input() agentName!: string;
-  @Input() agentImage!: string | undefined | null;
+  @Input() otherPersonName!: string;
+  @Input() otherPersonImage!: string | undefined | null;
+  @Input() otherPersonId!: string;
+
 
   @Output() closeChat = new EventEmitter<void>();
   @Output() sendMessage = new EventEmitter<string>();
@@ -35,8 +41,9 @@ export class ChatPopupComponent {
   newMessage: string = '';
   messages: Message[] = [];
   user!: User;
-  // @Input() senderId: string='821244cd-ac38-4760-aa9f-a0476dcdf65b';
-  // @Input() recieverId: string='ca81531a-04a6-421f-b2f2-38f00aee9308';
+  typingUsers: { [userId: string]: boolean } = {};
+currentUserId:string="";
+showEmoji=false;
 
   constructor(
     public messageService: MessageService,
@@ -46,25 +53,32 @@ export class ChatPopupComponent {
     this.accountService.user$.pipe(take(1)).subscribe((user) => {
       if (user) {
         this.user = user;
+        const decodedToken: JwtDecodedToken = jwtDecode(user?.jwt);
+        this.currentUserId=decodedToken.nameid;
       }
     });
+   
   }
-  // loadMessages() {
-  //   this.messageService
-  //     .getMessageThread('ca81531a-04a6-421f-b2f2-38f00aee9308')
-  //     .subscribe((messages) => {
-  //       this.messages = messages;
-  //       console.log(JSON.stringify(this.messages) + 'ms');
-  //     });
-  // }
+
   ngOnInit(): void {
-    // this.loadMessages();
+   if(this.messageService.isHubConnectionEstablished()==false){
     this.messageService.createHubConnection(
       this.user,
-      'ca81531a-04a6-421f-b2f2-38f00aee9308'
+      this.otherPersonId
     );
+   }
+    this.messageService.hubConnection.on('UserTyping', (userId: string) => {
+      this.typingUsers[userId] = true;
+      
+    });
+
+    this.messageService.hubConnection.on('UserStoppedTyping', (userId: string) => {
+      this.typingUsers[userId] = false;
+    });
+    
   }
   ngAfterViewChecked(): void {
+
     this.scrollToBottom();
   }
 
@@ -85,11 +99,34 @@ export class ChatPopupComponent {
   onSendMessage() {
     if (this.newMessage.trim() !== '') {
       this.messageService
-        .sendMessage('ca81531a-04a6-421f-b2f2-38f00aee9308', this.newMessage)
+        .sendMessage(this.otherPersonId, this.newMessage)
         .then(()=>{
           this.newMessage = '';
+          this.messageService.sendStoppedTypingNotification(this.otherPersonId);
+          this.showEmoji=false;
 
         })
     }
   }
+  selectEmoji(event: any) {
+    // Append selected emoji to the message
+    this.newMessage += event.emoji.native;
+  }
+  enableEmoji(){
+
+      this.showEmoji = !this.showEmoji;
+      console.log('showEmoji:', this.showEmoji);
+  }
+  onTyping(event: Event) {
+    const inputValue = (event.target as HTMLInputElement).value;
+    if (inputValue.trim() !== '') {
+      this.messageService.sendTypingNotification(this.otherPersonId);
+    } else {
+      this.messageService.sendStoppedTypingNotification(this.otherPersonId);
+    }
+  }
+  isUserTyping(userId: string): boolean {
+    return !!this.typingUsers[userId];
+  }
+
 }

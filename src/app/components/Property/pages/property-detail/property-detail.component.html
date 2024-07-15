@@ -94,4 +94,4 @@
   </div>
 
 
-   <app-chat-popup *ngIf="showChat" [agentName]="property.agentName" [agentImage]="property.agentImage" (closeChat)="closeChat()" ></app-chat-popup>
+   <app-chat-popup *ngIf="showChat" [otherPersonName]="property.agentName" [otherPersonImage]="property.agentImage" [otherPersonId]="property.agentUserId" (closeChat)="closeChat()" ></app-chat-popup>

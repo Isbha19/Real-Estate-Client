@@ -8,7 +8,6 @@ import { TimeAgoPipe } from '../../../../core/pipe/timeAgo.pipe';
 import { AccountService } from '../../../../core/service/account.service';
 import { JwtDecodedToken } from '../../../../core/model/jwtTokenDecoded';
 import { jwtDecode } from 'jwt-decode';
-import { MessageService } from '../../../../core/service/message.service';
 
 @Component({
   selector: 'app-notifications',

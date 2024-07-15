@@ -1,4 +1,4 @@
-import { MessagesComponent } from './components/Messages/messages/messages.component';
+import { MessagesComponent } from './components/Messages/pages/messages/messages.component';
 import { UnverifiedCompanyPropertiesComponent } from './components/Company/pages/companyDashboard/unverified-company-properties/unverified-company-properties.component';
 import { CompanyPropertiesComponent } from './components/Company/pages/companyDashboard/company-properties/company-properties.component';
 import { UnverifiedAgentListComponent } from './components/Company/pages/companyDashboard/unverified-agent-list/unverified-agent-list.component';

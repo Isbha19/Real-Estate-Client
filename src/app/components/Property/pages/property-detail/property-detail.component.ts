@@ -24,7 +24,6 @@ export class PropertyDetailComponent {
   showChat = false;
 
   messages: string[] = [];
-  agentId: string = 'ca81531a-04a6-421f-b2f2-38f00aee9308'; 
 
   constructor(
     private route: ActivatedRoute,
