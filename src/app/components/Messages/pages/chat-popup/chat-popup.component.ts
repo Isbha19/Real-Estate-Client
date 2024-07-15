@@ -1,5 +1,5 @@
-import { MessageService } from './../../../Messages/service/message.service';
-import { SignalRService } from './../../../../core/service/signal-r.service';
+import { MessageService } from '../../service/message.service';
+import { SignalRService } from '../../../../core/service/signal-r.service';
 import { CommonModule } from '@angular/common';
 import { PickerComponent } from '@ctrl/ngx-emoji-mart';
 
@@ -61,6 +61,7 @@ showEmoji=false;
   }
 
   ngOnInit(): void {
+    
    if(this.messageService.isHubConnectionEstablished()==false){
     this.messageService.createHubConnection(
       this.user,

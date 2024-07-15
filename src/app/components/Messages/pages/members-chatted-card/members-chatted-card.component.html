@@ -13,8 +13,8 @@
 	  </header>
 	  <ul *ngIf="sideBarOpened">
 		<ng-container *ngIf="chats.length > 0; else noChats">
-		  <li (click)="openChat(chat.userName, chat.userId)" *ngFor="let chat of chats">
-			<img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/1940306/chat_avatar_01.jpg" alt="">
+		  <li (click)="openChat(chat.userName, chat.userId,chat.imageUrl)" *ngFor="let chat of chats">
+			<img src={{chat.imageUrl}} alt="">
 			<div>
 			  <h2>{{chat.userName}}</h2>
 			  <h3>
@@ -33,5 +33,5 @@
 	</aside>
   </div>
   
-  <app-chat-popup *ngIf="showChat" [otherPersonName]="chatUserName" [otherPersonId]="chatUserId" (closeChat)="closeChat()"></app-chat-popup>
+  <app-chat-popup *ngIf="showChat" [otherPersonName]="chatUserName" [otherPersonId]="chatUserId" [otherPersonImage]="chatUserImage" (closeChat)="closeChat()"></app-chat-popup>
   

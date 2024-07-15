@@ -17,7 +17,7 @@ export class MessageService {
   private messageThreadSource=new BehaviorSubject<Message[]>([]);
   messageThread$=this.messageThreadSource.asObservable();
   private connectionEstablished: boolean = false;
-public isPopupOpen=false;
+public isPopupOpen=false
   constructor(private http: HttpClient) {}
 
   createHubConnection(user:User,otherUsername:string){

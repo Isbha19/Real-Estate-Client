@@ -1,9 +1,10 @@
+import { Image } from './../../../Agent/model/Image';
 import { UserChats } from './../../model/userChat';
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MessageService } from '../../service/message.service';
 import { SignalRService } from '../../../../core/service/signal-r.service';
-import { ChatPopupComponent } from '../../../Property/pages/chat-popup/chat-popup.component';
+import { ChatPopupComponent } from '../chat-popup/chat-popup.component';
 import { AccountService } from '../../../../core/service/account.service';
 import { take } from 'rxjs';
 import { User } from '../../../../core/model/account/user';
@@ -21,6 +22,7 @@ export class MembersChattedCardComponent {
   showChat=false;
   chatUserName:string="";
   chatUserId:string="";
+  chatUserImage:string=""
   user!:User;
   first=true;
   toggleSidebar(): void {
@@ -55,7 +57,7 @@ constructor(private messageService:MessageService,
     );
    
   }
-  openChat(username: string, id: string) {
+  openChat(username: string, id: string,Image:string) {
     this.messageService.isPopupOpen=true;
     if (this.showChat) {
       this.messageService.stopHubConnection();
@@ -65,6 +67,7 @@ constructor(private messageService:MessageService,
     this.showChat = true;
     this.chatUserName = username;
     this.chatUserId = id;
+    this.chatUserImage=Image;
     
  
   }
