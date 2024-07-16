@@ -1,0 +1,79 @@
+/* Adjust the z-index of the modal */
+.modal {
+    z-index: 10000; 
+}
+
+.modal-backdrop {
+    z-index: 10000; 
+}
+.dropdown-menu{
+  z-index: 1000; 
+
+}
+
+.keep-bathNbed-open {
+  display: block !important;
+}
+.keep-bathNbed-close{
+  display: none !important;
+
+}
+
+.keep-open {
+  display: block !important;
+}
+.keep-close{
+  display: none !important;
+
+}
+/* General dropdown styles */
+.dropdown-menu {
+    width: 300px; /* Adjust width as needed */
+  }
+  
+  .dropdown-menu label {
+    display: inline-flex;
+    align-items: center;
+    cursor: pointer;
+    user-select: none;
+  }
+  
+  .dropdown-menu input[type="checkbox"] {
+    position: absolute;
+    opacity: 0;
+    width: 0;
+    height: 0;
+  }
+  
+  .dropdown-menu input[type="checkbox"] + span {
+    position: relative;
+    padding-left: 25px;
+    cursor: pointer;
+  }
+  
+  .dropdown-menu input[type="checkbox"] + span:before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 20px;
+    height: 20px;
+    border: 2px solid #6c757d;
+    border-radius: 4px;
+    background-color: transparent;
+  }
+  
+  .dropdown-menu input[type="checkbox"]:checked + span:before {
+    content: "✓";
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #6c757d;
+    color: white;
+  }
+  
+  .dropdown-menu span {
+    margin-left: 5px;
+  }
+  

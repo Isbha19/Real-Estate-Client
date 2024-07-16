@@ -49,7 +49,6 @@ this.Toastr.info(username+' has sent you a new message!')
 .onTap.pipe(take(1))
 .subscribe(()=>{
 
-  // navigattteee
 })
     });
    

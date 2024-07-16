@@ -27,9 +27,7 @@ export class NotificationService {
     .catch(err => console.error('Error while starting connection: ' + err));
 
     this.hubConnection.on('AllNotification',notifications=>{
-      this.notificationSource.next(notifications);
-      console.log(JSON.stringify(notifications)+"firstt");
-      
+      this.notificationSource.next(notifications);      
   
     })
     this.hubConnection.on('ReceiveNotification',notification=>{

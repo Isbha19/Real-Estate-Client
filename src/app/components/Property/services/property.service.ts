@@ -1,5 +1,5 @@
 import { propertyDetail } from './../model/propertyDetail';
-import { PropertyCard } from './../../Agent/model/propertyCard';
+import { PropertyFilter } from './../model/propertyFilter';
 
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
@@ -20,6 +20,11 @@ export class PropertyService {
     return this.http.get<propertyDetail>(
       `${environment.apiUrl}Property/get-property/${id}`
     );
+  }
+  getFilteredProperties(filters: PropertyFilter) {
+    console.log("came hre servicee"+ JSON.stringify(filters));
+    
+    return this.http.post<any>(`${environment.apiUrl}Property/filter-properties`, filters);
   }
 
 }
