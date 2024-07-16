@@ -1,3 +1,109 @@
+
+<!-- filtering -->
+<form [formGroup]="propertyForm">
+
+<div class="container-fluid bg-primary mb-5 wow fadeIn" data-wow-delay="0.1s" style="padding: 35px;">
+  <div class="container">
+    <div class="row g-2">
+      <div class="col-md-12">
+        <div class="row g-2 ">
+
+          <div class="col-md-3">
+            <input type="text" #locationField
+            formControlName="locationField"
+
+            class="form-control border-0 " placeholder="Search Locations">
+          </div>
+          <div class="col-md-2">
+            <select class="form-select border-0 py-2" formControlName="selectedListingType"
+            >
+              <option selected value=-1>Listing Type</option>
+              <option  *ngFor="let item of ListingType" [value]="item.id">{{item.name}}</option>
+            </select>
+          </div>
+          <div class="col-md-2">
+            <select class="form-select border-0 py-2" formControlName="selectedPropertyType">
+              <option selected value=-1>Property Type</option>
+              <option *ngFor="let item of propertyTypes" [value]="item.id">{{item.name}}</option>
+            </select>
+          </div>
+          
+        
+        
+<div class="col-md-2 position-relative">
+  <button (click)="startWithBathnBed()" class="btn btn-secondary w-100 dropdown-toggle py-2" type="button" id="bedsBathsDropdown" data-bs-toggle="dropdown" aria-expanded="false"> Beds & Baths </button>
+  <ul class="dropdown-menu p-3" [class.keep-bathNbed-open]="keepBathNBedOpen"
+  [class.keep-bathNbed-close]="!keepBathNBedOpen" aria-labelledby="bedsBathsDropdown" data-bs-auto-close="outside">    <li class="mb-2">
+      <div class="d-flex flex-wrap">
+        <mat-form-field class="form-field w-100">
+          <mat-label>Bedrooms</mat-label>
+          <mat-select multiple formControlName="selectedBedrooms">
+            <mat-option *ngFor="let num of bathAndBeds" [value]="num">    {{ num === 7 ? '7+' : num }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+    </li>
+    <li>
+      <div class="d-flex flex-wrap">
+       
+        <mat-form-field class="form-field w-100">
+          <mat-label>Bathrooms</mat-label>
+          <mat-select multiple formControlName="selectedBathrooms">
+            <mat-option *ngFor="let num of bathAndBeds" [value]="num">    {{ num === 7 ? '7+' : num }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>      </div>
+    </li>
+    <button class="btn btn-primary" (click)="doneWithBathnBed()">Done</button>
+
+  </ul>
+</div>
+
+
+<div class="col-md-1 position-relative">
+  <button (click)="startWithPrice()"  class="btn btn-secondary w-100 dropdown-toggle py-2" type="button" id="priceDropdown" data-bs-toggle="dropdown" aria-expanded="false" data-bs-auto-close="outside">
+    Price
+  </button>
+  <ul class="dropdown-menu p-3 keep-open"  [class.keep-open]="keepOpen"
+  [class.keep-close]="!keepOpen" aria-labelledby="priceDropdown">
+    <li class="mb-2">
+      <mat-form-field class="form-field w-100">
+        <mat-label>Min Price</mat-label>
+        <mat-select formControlName="selectedMinPrice" [(ngModel)]="selectedMinPrice" (selectionChange)="onMinPriceChange(selectedMinPrice)">
+          <mat-option *ngFor="let priceOption of filteredPriceOptionsmin" [value]="priceOption">
+            {{ priceOption }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>    </li>
+    <li>
+      <mat-form-field class="form-field w-100">
+        <mat-label>Max Price</mat-label>
+    
+          <mat-select formControlName="selectedMaxPrice" [(ngModel)]="selectedMaxPrice" (selectionChange)="onMaxPriceChange(selectedMaxPrice)">
+            <mat-option *ngFor="let priceOption of filteredPriceOptionsmax"  [value]="priceOption">
+              {{ priceOption }}
+            </mat-option>
+          </mat-select>      
+      </mat-form-field>    </li>
+      <button class="btn btn-primary" (click)="doneWithprice()">Done</button>
+  </ul>
+</div>
+          <div class="col-md-1">
+            <button class="btn btn-secondary w-100 py-2" (click)="openMoreFiltersPopup()">More</button>
+          </div>
+          <div class="col-md-1">
+            <button class="btn btn-dark border-0 w-100 py-2" (click)="onSubmit()">Search</button>
+          </div>
+        </div>
+      </div>
+   
+     
+    </div>
+  </div>
+</div> 
+</form>
+<!-- End of filtering -->
 <!-- Property List Start -->
 <div class="container-xxl py-5">
   <div class="container">
@@ -46,126 +152,13 @@
         </ul>
       </div>
     </div>
-     <!-- Search Start -->
-    <!-- Search Start -->
-    <!-- <div class="container-fluid bg-primary mb-5 wow fadeIn" data-wow-delay="0.1s" style="padding: 35px;">
-      <div class="container">
-        <div class="row g-2">
-          <div class="col-md-12">
-            <div class="row g-2">
-              <div class="col-md-3">
-                <input type="text" class="form-control border-0 py-3" placeholder="Search Keyword">
-              </div>
-              <div class="col-md-3">
-                <select class="form-select border-0 py-3">
-                  <option selected>Property Type</option>
-                  <option value="1">Property Type 1</option>
-                  <option value="2">Property Type 2</option>
-                  <option value="3">Property Type 3</option>
-                </select>
-              </div>
-              <div class="col-md-3">
-                <select class="form-select border-0 py-3">
-                  <option selected>Location</option>
-                  <option value="1">Location 1</option>
-                  <option value="2">Location 2</option>
-                  <option value="3">Location 3</option>
-                </select>
-              </div>
-              <div class="col-md-3">
-                <button class="btn btn-dark border-0 w-100 py-3" (click)="searchProperties()">Search</button>
-              </div>
-            </div>
-          </div>
-          <div class="col-md-12">
-            <div class="row g-2 mt-2">
-              <div class="col-md-3">
-                <select class="form-select border-0 py-3">
-                  <option selected>Beds</option>
-                  <option value="1">1 Bed</option>
-                  <option value="2">2 Beds</option>
-                  <option value="3">3 Beds</option>
-                </select>
-              </div>
-              <div class="col-md-3">
-                <select class="form-select border-0 py-3">
-                  <option selected>Bathrooms</option>
-                  <option value="1">1 Bathroom</option>
-                  <option value="2">2 Bathrooms</option>
-                  <option value="3">3 Bathrooms</option>
-                </select>
-              </div>
-              <div class="col-md-3">
-                <input type="number" class="form-control border-0 py-3" placeholder="Price Min">
-              </div>
-              <div class="col-md-3">
-                <input type="number" class="form-control border-0 py-3" placeholder="Price Max">
-              </div>
-            </div>
-          </div>
-          <div class="col-md-12 mt-2 text-end">
-            <button class="btn btn-secondary py-3 px-4" data-bs-toggle="modal" data-bs-target="#moreFiltersModal">More Filters</button>
-          </div>
-        </div>
-      </div>
-    </div> -->
-    <!-- Search End -->
-    <!-- <div class="modal fade" id="moreFiltersModal" tabindex="-1" aria-labelledby="moreFiltersModalLabel" aria-hidden="true">
-      <div class="modal-dialog modal-lg">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title" id="moreFiltersModalLabel">More Filters</h5>
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-          </div>
-          <div class="modal-body">
-            <div class="row">
-              <div class="col-md-6">
-                <label for="facilities" class="form-label">Nearby Facilities</label>
-                <input type="text" class="form-control" id="facilities" placeholder="Facilities">
-              </div>
-              <div class="col-md-6">
-                <label for="amenities" class="form-label">Amenities</label>
-                <input type="text" class="form-control" id="amenities" placeholder="Amenities">
-              </div>
-              <div class="col-md-6 mt-3">
-                <label for="furnished" class="form-label">Furnished</label>
-                <select class="form-select" id="furnished">
-                  <option selected>Select</option>
-                  <option value="yes">Yes</option>
-                  <option value="no">No</option>
-                </select>
-              </div>
-              <div class="col-md-6 mt-3">
-                <label for="keywords" class="form-label">Keywords</label>
-                <input type="text" class="form-control" id="keywords" placeholder="Keywords">
-              </div>
-              <div class="col-md-6 mt-3">
-                <label for="size" class="form-label">Size</label>
-                <input type="number" class="form-control" id="size" placeholder="Size in Sqft">
-              </div>
-              <div class="col-md-6 mt-3">
-                <label for="virtualTour" class="form-label">Virtual Tour</label>
-                <select class="form-select" id="virtualTour">
-                  <option selected>Select</option>
-                  <option value="yes">Yes</option>
-                  <option value="no">No</option>
-                </select>
-              </div>
-            </div>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-            <button type="button" class="btn btn-primary" (click)="applyFilters()">Apply Filters</button>
-          </div>
-        </div>
-      </div>
-    </div> -->
-    <!-- More Filters Modal End -->
-
-<!-- Search End -->
+  
     <div class="tab-content">
       <div id="tab-1" class="tab-pane fade show p-0 active">
         <div class="row g-4">
+          <div *ngIf="properties.length===0">
+            <h1 class="text-center">No Properties Found</h1>
+          </div>
           <div
             class="col-lg-4 col-md-6 wow fadeInUp"
             *ngFor="let property of properties"

@@ -1,0 +1,41 @@
+
+   <div class="chatPopup">
+  
+    <div class="chat">
+        <div class="contact bar">
+            <div class="pic" style="background-image: url('{{otherPersonImage}}');"></div>
+            <div class="name">{{otherPersonName}} <span [class.is-online]="(signalR.onlineUsers$ | async)?.includes(otherPersonId)"><i class="fa fa-user mr-2"></i></span></div>
+            <div class="seen">Today at 12:56</div>
+            <div class="close-btn" (click)="onCloseChat()">×</div>
+
+        </div>
+        <div id="chat" #chat class="messages" >
+            <div *ngIf="(messageService.messageThread$|async)?.length===0">
+               No messages to yet.. Start conversation by saying hi
+              </div>
+            <div *ngIf="(messageService.messageThread$|async)?.length?? 0 > 0">
+                <div class="time">Today at 11:41</div> 
+            <ng-container *ngFor="let message of (messageService.messageThread$|async)">
+              <div [ngClass]="{'message': true, 'stark': message.senderName === otherPersonName, 'parker': message.senderName !== otherPersonName}">
+                {{ message.content }}
+              </div>
+            </ng-container>
+            </div>
+          
+            <div *ngIf="isUserTyping(otherPersonId)" class="message stark">
+                <div class="typing typing-1"></div>
+                <div class="typing typing-2"></div>
+                <div class="typing typing-3"></div>
+              </div>
+              
+        </div>
+        <div class="input">
+            <i class="fas fa-camera"></i>
+            <i class="far fa-laugh-beam" (click)="enableEmoji()"></i>
+            <emoji-mart class="emoji-picker" *ngIf="showEmoji" (emojiClick)="selectEmoji($event)"></emoji-mart>
+
+            <input type="text" [(ngModel)]="newMessage" placeholder="Type your message here!" (keydown.enter)="onSendMessage()" (input)="onTyping($event)">
+            <i class="fas fa-paper-plane" (click)="onSendMessage()"></i>
+        </div>
+    </div>
+</div>

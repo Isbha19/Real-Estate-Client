@@ -18,6 +18,7 @@ import { PropertyListComponent } from './components/User/property-list/property-
 import { SearchComponent } from './components/User/search/search.component';
 import { NavbarComponent } from './components/User/shared/navbar/navbar.component';
 import { ToastrService } from 'ngx-toastr';
+import { SignalRService } from './core/service/signal-r.service';
 
 @Component({
   selector: 'app-root',
@@ -44,7 +45,7 @@ import { ToastrService } from 'ngx-toastr';
 export class AppComponent {
   loading: boolean = true; // Flag to track loading state
   constructor(private accountService: AccountService,
-    private toastr:ToastrService,private router:Router
+    private toastr:ToastrService,private router:Router,
   ) {}
   ngOnInit(): void {
     this.router.events.subscribe(x => {

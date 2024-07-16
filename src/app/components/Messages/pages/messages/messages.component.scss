@@ -1,0 +1,14 @@
+.img-circle{
+    max-height: 50px;
+}
+/* Remove default radio button styles */
+.btn-group label input[type="radio"] {
+    display: none; /* Hide the default radio button */
+  }
+  
+  /* Optional: Style the labels to look like buttons */
+  .btn-group label {
+    cursor: pointer;
+    padding: 8px 16px; /* Adjust padding as needed */
+  }
+  

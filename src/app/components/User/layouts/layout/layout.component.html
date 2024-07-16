@@ -1,3 +1,4 @@
 <app-navbar></app-navbar>
 <router-outlet></router-outlet>
+<app-members-chatted-card *ngIf="accountService.user$| async"></app-members-chatted-card>
 <app-footer></app-footer>

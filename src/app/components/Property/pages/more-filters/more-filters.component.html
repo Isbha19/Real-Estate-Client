@@ -1,0 +1,90 @@
+<form [formGroup]="morefilterForm">
+<div class="container px-5 py-5">
+<h2 class="text-center ">More Filters</h2>
+
+    <div class="row">
+      <!-- Nearby Facilities -->
+      <div class="col-md-6">
+        <mat-form-field class="form-field w-100">
+          <mat-label>Nearby Facilities</mat-label>
+          <mat-select formControlName="selectedFacilities" multiple id="facilities" >
+            <mat-option *ngFor="let facility of facilites" [value]="facility.id">{{ facility.name }}</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+  
+      <!-- Amenities -->
+      <div class="col-md-6">
+        <mat-form-field class="form-field w-100">
+          <mat-label>Amenities</mat-label>
+          <mat-select formControlName="selectedAmenities" multiple id="amenities" >
+            <mat-option *ngFor="let amenity of amenitiesOptions" [value]="amenity.id">{{ amenity.name }}</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+    </div>
+  
+    <div class="row mt-3">
+      <!-- Furnished Checkbox -->
+      <div class="col-md-6">
+        <mat-form-field class="form-field w-100">
+          <mat-label>Furnished</mat-label>
+          <mat-select formControlName="selectedFurnished" id="furnished" >
+            <mat-option *ngFor="let option of furnishingType" [value]="option.id">{{ option.name }}</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+  
+      <!-- Size Range -->
+      <div class="col-md-6">
+        <div class="row">
+          <div class="col-md-6">
+            <mat-form-field class="form-field w-100">
+                <mat-label>               Min size
+                </mat-label>
+                <mat-select formControlName="selectedMinSize" [(ngModel)]="selectedMinSize" (selectionChange)="onMinSizeChange(selectedMinSize)">
+                  <mat-option *ngFor="let size of filteredSizeOptionsmin"  [value]="size">
+                    {{ size }}
+                  </mat-option>
+                </mat-select> 
+            </mat-form-field>
+          </div>
+          <div class="col-md-6">
+            <mat-form-field class="form-field w-100">
+              <mat-label>               Max size
+              </mat-label>
+              <mat-select formControlName="selectedMaxSize"[(ngModel)]="selectedMaxSize" (selectionChange)="onMaxSizeChange(selectedMaxSize)">
+                <mat-option *ngFor="let size of filteredSizeOptionsmax"  [value]="size">
+                  {{ size }}
+                </mat-option>
+              </mat-select> 
+            </mat-form-field>
+          </div>
+        </div>
+      </div>
+    </div>
+  
+    <div class="row mt-3">
+      <!-- Virtual Tour Dropdown -->
+      <div class="col-md-6 text-center">
+        <mat-form-field class="form-field w-100 ">
+          <mat-label>Virtual Tour</mat-label>
+          <mat-select formControlName="hasVirtualTour" id="virtualTour">
+            <mat-option value=true>Yes</mat-option>
+            <mat-option>No</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+    </div>
+  
+    <div class="row mt-3">
+      <!-- Buttons -->
+      <div class="col-md-12 text-center">
+        <button mat-raised-button color="primary" class="mx-2" (click)="Close()">Close</button>
+        <button mat-raised-button color="accent" class="mx-2" (click)="applyFilter()" >Apply Filters</button>
+      </div>
+    </div>
+  
+  </div>
+  
+</form>

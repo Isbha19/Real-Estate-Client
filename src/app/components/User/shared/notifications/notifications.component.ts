@@ -1,3 +1,4 @@
+import { AccountService } from './../../../../core/service/account.service';
 import { ToastrService } from 'ngx-toastr';
 import { Component } from '@angular/core';
 import { NotificationService } from '../../../../core/service/notification.service';
@@ -5,9 +6,10 @@ import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import { NotificationDisplay } from '../../../../core/model/notification/notificationDisplay';
 import { TimeAgoPipe } from '../../../../core/pipe/timeAgo.pipe';
-import { AccountService } from '../../../../core/service/account.service';
 import { JwtDecodedToken } from '../../../../core/model/jwtTokenDecoded';
 import { jwtDecode } from 'jwt-decode';
+import { User } from '../../../../core/model/account/user';
+import { take } from 'rxjs';
 
 @Component({
   selector: 'app-notifications',
@@ -20,25 +22,42 @@ export class NotificationsComponent {
   notifications: NotificationDisplay[] = [];
   userId!: string; // Initialize userId
   NotificationsToOpenCount:number=0;
-  
+  user!:User;
   constructor(
     public notificationService: NotificationService,
-
-  ) {}
+private accountService:AccountService
+  ) {
+    this.accountService.user$.pipe(take(1)).subscribe((user) => {
+      if (user) {
+        this.user = user;
+      }
+    });
+  }
   ngOnInit(): void {
-    this.loadNotifications();
+    //this.loadNotifications();
     this.updateOpenedNotificationsCount();
+    this.notificationService.createHubConnection(
+      this.user,
+      
+    );
+    this.notificationService.hubConnection.on('ReceiveNotification', (data: any) => {
+      
+    });
+    this.notificationService.notifications$.subscribe(notifications => {
+      this.notifications = notifications;
+      this.updateOpenedNotificationsCount();
+    });
   }
 
   loadNotifications() {
     this.notificationService.getUserNotifications().subscribe(
       (notifications) => {
         this.notifications = notifications;
-        console.log(this.NotificationsToOpenCount);
 
       }
     );
   }
+ 
   markAsRead(notificationId:number) {
 this.notificationService.markNotificationsAsRead(notificationId).subscribe(
   () => {

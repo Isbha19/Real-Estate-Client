@@ -17,6 +17,7 @@ export interface propertyDetail {
   amenities: string[];
   nearByFacilities: string[]; 
   agentName: string; 
+  agentUserId:string;
   agentImage: string | null | undefined; 
   agentPhoneNumber: string; 
   agentEmail: string; 

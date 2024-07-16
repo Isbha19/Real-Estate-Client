@@ -1,0 +1,37 @@
+<div id="container" [ngClass]="{'closed': !sideBarOpened}">
+	<aside>
+	  <header>
+		<div class="sidebar-header">
+		  <p>Messaging</p>
+		  <div class="actions">
+			<button (click)="toggleSidebar()">
+			  <i class="fas" [ngClass]="{'fa-angle-up': !sideBarOpened, 'fa-angle-down': sideBarOpened}"></i>
+			</button>
+		  </div>
+		</div>
+		<input *ngIf="sideBarOpened" type="text" placeholder="Search for messages..">
+	  </header>
+	  <ul *ngIf="sideBarOpened">
+		<ng-container *ngIf="chats.length > 0; else noChats">
+		  <li (click)="openChat(chat.userName, chat.userId,chat.imageUrl)" *ngFor="let chat of chats">
+			<img src={{chat.imageUrl}} alt="">
+			<div>
+			  <h2>{{chat.userName}}</h2>
+			  <h3>
+				<span class="status" [ngClass]="{'green': (signalR.onlineUsers$ | async)?.includes(chat.userId), 'orange': !(signalR.onlineUsers$ | async)?.includes(chat.userId)}"></span>
+				{{ (signalR.onlineUsers$ | async)?.includes(chat.userId) ? 'online' : 'offline' }}
+			  </h3>
+			</div>
+		  </li>
+		</ng-container>
+		<ng-template #noChats>
+		  <li>
+			<p class="text-center no-chats" >No chats available. You can chat directly with agents and companies.</p>
+		</li>
+		</ng-template>
+	  </ul>
+	</aside>
+  </div>
+  
+  <app-chat-popup *ngIf="showChat" [otherPersonName]="chatUserName" [otherPersonId]="chatUserId" [otherPersonImage]="chatUserImage" (closeChat)="closeChat()"></app-chat-popup>
+  
