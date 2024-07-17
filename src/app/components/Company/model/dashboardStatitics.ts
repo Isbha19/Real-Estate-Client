@@ -4,4 +4,5 @@ export interface DashboardStatistics {
   propertiesListedCount: number;
   numberOfAgents: number;
   propertyViews: number;
+  subscriptionAmtPaid:number;
 }
