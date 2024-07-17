@@ -22,6 +22,7 @@ import {
 } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { PropertyFilter } from '../../model/propertyFilter';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-property-lists-type',
@@ -40,6 +41,7 @@ import { PropertyFilter } from '../../model/propertyFilter';
 })
 export class PropertyListTypeComponent {
   propertyForm: FormGroup;
+  private subscriptions: Subscription[] = []; // Array to hold subscriptions
 
   constructor(
     private route: ActivatedRoute,
@@ -91,25 +93,34 @@ export class PropertyListTypeComponent {
     this.keepOpen = false;
   }
   ngOnInit(): void {
+   this.subscriptions.push(
     this.route.paramMap.subscribe((params) => {
       this.listingType = params.get('listingType') || '';
       this.loadProperties();
-    });
+    })
+   )
     this.filteredPriceOptionsmax = this.priceOptions.slice();
     this.filteredPriceOptionsmin = this.priceOptions.slice();
 
+   this.subscriptions.push(
     this.agentService.getPropertyTypes().subscribe({
       next: (response: any) => {
         this.propertyTypes = response;
       },
-    });
+    }),
 
     this.agentService.getListingTypes().subscribe({
       next: (response) => {
         this.ListingType = response;
       },
-    });
+    })
+   )
   }
+  ngOnDestroy(): void {
+    // Unsubscribe from all subscriptions to avoid memory leaks
+    this.subscriptions.forEach(subscription => subscription.unsubscribe());
+  }
+
   ngAfterViewInit(): void {
     this.autocomplete = new google.maps.places.Autocomplete(
       this.locationField.nativeElement,

@@ -1,3 +1,4 @@
+import { CompanyMainDashboardComponent } from './components/Company/pages/companyDashboard/company-main-dashboard/company-main-dashboard.component';
 import { MessagesComponent } from './components/Messages/pages/messages/messages.component';
 import { UnverifiedCompanyPropertiesComponent } from './components/Company/pages/companyDashboard/unverified-company-properties/unverified-company-properties.component';
 import { CompanyPropertiesComponent } from './components/Company/pages/companyDashboard/company-properties/company-properties.component';
@@ -81,11 +82,12 @@ export const routes: Routes = [
   { path: 'company-dashboard',    runGuardsAndResolvers: 'always',
     canActivate: [CompanyAdminGuard], component: CompanyAdminDashboardComponent,
     children:[
-      { path: '', component: CompanyDetailsComponent },
-      { path: 'verified-agents', component: VerifiedagentListComponent },
-      { path: 'unverified-agents', component: UnverifiedAgentListComponent },
-      { path: 'verified-properties', component: CompanyPropertiesComponent },
-      { path: 'unverified-properties', component: UnverifiedCompanyPropertiesComponent },
+      { path: '', component: CompanyMainDashboardComponent },
+      { path: 'company-details', component: CompanyDetailsComponent },
+      { path: 'agents/verified-agents', component: VerifiedagentListComponent },
+      { path: 'agents/unverified-agents', component: UnverifiedAgentListComponent },
+      { path: 'properties/verified-properties', component: CompanyPropertiesComponent },
+      { path: 'properties/unverified-properties', component: UnverifiedCompanyPropertiesComponent },
 
     ]
    },

@@ -24,6 +24,7 @@ import { take } from 'rxjs';
 import { getUser } from '../../../../shared/store/user/user.selectors';
 import { MemberAddEdit } from '../../model/memberAddEdit';
 import { AdminService } from '../../services/admin.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-add-edit-member',
@@ -44,6 +45,8 @@ export class AddEditMemberComponent {
   data = inject(MAT_DIALOG_DATA);
   storeNgrx = inject(Store<{ user: { user: users } }>);
   actions$ = inject(Actions);
+  private subscriptions: Subscription[] = []; // Array to hold subscriptions
+
   constructor(
     private adminService: AdminService,
     private formBuilder: FormBuilder,
@@ -51,14 +54,16 @@ export class AddEditMemberComponent {
     private dialogRef: MatDialogRef<AddEditMemberComponent>,
     private toastr: ToastrService
   ) {
+  this.subscriptions.push(
     this.actions$
-      .pipe(
-        ofType(addusersuccess, updateUserSuccess),
-        take(1) // Only take the first occurrence and then unsubscribe
-      )
-      .subscribe(() => {
-        this.dialogRef.close();
-      });
+    .pipe(
+      ofType(addusersuccess, updateUserSuccess),
+      take(1) // Only take the first occurrence and then unsubscribe
+    )
+    .subscribe(() => {
+      this.dialogRef.close();
+    })
+  )
   }
   ngOnInit(): void {
     
@@ -67,7 +72,6 @@ export class AddEditMemberComponent {
     if (id) {
       this.addNew = false; 
       this.storeNgrx.select(getUser).subscribe(res=>{
-        console.log("again"+JSON.stringify(res));
         
         this.updateForm(res);
 
@@ -77,7 +81,7 @@ export class AddEditMemberComponent {
       this.addPasswordValidator();
     }
     this.getRoles();
-  } //d
+  } 
 
   getMember(id: string) {
     this.adminService.getMember(id).subscribe({
@@ -87,9 +91,11 @@ export class AddEditMemberComponent {
     });
   }
   getRoles() {
-    this.adminService.getApplicationRoles().subscribe({
-      next: (roles) => (this.applicationRoles = roles),
-    });
+    this.subscriptions.push(
+      this.adminService.getApplicationRoles().subscribe({
+        next: (roles) => (this.applicationRoles = roles),
+      })
+    )
   }
 
   intializeForm() {
@@ -179,6 +185,11 @@ export class AddEditMemberComponent {
       }
     }
   }
+  ngOnDestroy(): void {
+    // Unsubscribe from all subscriptions to avoid memory leaks
+    this.subscriptions.forEach(subscription => subscription.unsubscribe());
+  }
+
   addPasswordValidator() {
     this.memberForm
       .get('password')

@@ -1,19 +1,21 @@
 <div class="sidebar">
-    <a routerLink='/company-dashboard' routerLinkActive="active" >About Company</a>
+  <a routerLink='/company-dashboard' routerLinkActive="active"  [routerLinkActiveOptions]="{ exact: true }">Dashboard</a>
+
+    <a routerLink='/company-dashboard/company-details' routerLinkActive="active" >About Company</a>
     <div class="dropdown">
-      <a class="dropbtn">Agents</a>
+      <a class="dropbtn" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: false }" routerLink='/company-dashboard/agents'>Agents</a>
 
       <div class="dropdown-content">
-        <a routerLink='verified-agents' routerLinkActive="active" >Verified Agents</a>
-        <a routerLink='unverified-agents'>Unverified Agents</a>
+        <a routerLink='agents/verified-agents' >Verified Agents</a>
+        <a routerLink='agents/unverified-agents'>Unverified Agents</a>
       </div>
     </div>
     <div class="dropdown">
-      <a class="dropbtn">Properties</a>
+      <a class="dropbtn" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: false }" routerLink='/company-dashboard/properties'>Properties</a>
 
       <div class="dropdown-content">
-        <a routerLink='verified-properties' routerLinkActive="active" >Verified Properties</a>
-        <a routerLink='unverified-properties'>Unverified Properties</a>
+        <a routerLink='properties/verified-properties'>Verified Properties</a>
+        <a routerLink='properties/unverified-properties'>Unverified Properties</a>
       </div>
     </div>
     <app-customer-portal-component></app-customer-portal-component>

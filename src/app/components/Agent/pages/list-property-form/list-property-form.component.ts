@@ -217,10 +217,9 @@ export class ListPropertyFormComponent {
       }),
       listingAndAgentDetails: this.builder.group({
         Images: this.builder.control(null, Validators.required),
-        virtualTourUrl: this.builder.control('', [
-          Validators.required,
+        virtualTourUrl: this.builder.control('', 
           Validators.pattern('https?://.+'),
-        ]),
+        ),
         agentName: this.builder.control({ value: '', disabled: true },
           Validators.required),
         agentContactNumber: this.builder.control('', Validators.required),

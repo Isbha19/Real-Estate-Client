@@ -5,6 +5,7 @@ import { CommonModule } from '@angular/common';
 import { MatDialogRef } from '@angular/material/dialog';
 import { AgentPropertyService } from '../../../Agent/services/agentProperty.service';
 import { GenericKeyValuePair } from '../../../Agent/model/genericKeyValuePair';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-more-filters',
@@ -20,6 +21,9 @@ export class MoreFiltersComponent {
   facilites: GenericKeyValuePair[] = [];
   morefilterForm: FormGroup;
   @Output() filtersApplied = new EventEmitter<any>();
+
+  private subscriptions: Subscription[] = []; // Array to hold subscriptions
+
 
   constructor(private dialogRef: MatDialogRef<MoreFiltersComponent>,
     private agentService: AgentPropertyService,
@@ -65,22 +69,29 @@ filteredSizeOptionsmin: number[] = [];
     this.filteredSizeOptionsmin = this.sizes.slice();
 
 
+  this.subscriptions.push(
     this.agentService.getFurnishingTypes().subscribe({
       next: (response) => {
         this.furnishingType = response;
       },
-    });
+    }),
     this.agentService.getAmenities().subscribe({
       next: (response) => {
         this.amenitiesOptions = response;
       },
-    });
+    }),
   
     this.agentService.getNearbyFacilities().subscribe({
       next: (response) => {
         this.facilites = response;
       },
-    });
+    }),
+  )
+  }
+
+  ngOnDestroy(): void {
+    // Unsubscribe from all subscriptions to avoid memory leaks
+    this.subscriptions.forEach(subscription => subscription.unsubscribe());
   }
 
   applyFilter() {

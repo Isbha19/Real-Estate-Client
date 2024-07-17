@@ -10,6 +10,7 @@ import { SubscriptionPackage } from '../model/SubscriptionPackage';
 import { Observable } from 'rxjs';
 import { ApiResponse } from '../../../core/model/response/ApiResponse';
 import { companyStripeCustomer } from '../model/CompanyStripeCustomer';
+import { DashboardStatistics } from '../model/dashboardStatitics';
 @Injectable({ providedIn: 'root' })
 export class CompanyDashboardService {
   constructor(private http: HttpClient) {}
@@ -27,6 +28,11 @@ export class CompanyDashboardService {
   getCompanyProperties() {
     return this.http.get<CompanyProperties[]>(
       `${environment.apiUrl}Property/get-company-properties`
+    );
+  }
+  getCompanyStatistics() {
+    return this.http.get<DashboardStatistics>(
+      `${environment.apiUrl}Company/Get-companyDashboard-statistics`
     );
   }
   getUnverifiedCompanyProperties() {
