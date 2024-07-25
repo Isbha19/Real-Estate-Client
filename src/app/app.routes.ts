@@ -8,7 +8,6 @@ import { UnverifiedAgentListComponent } from './components/Company/pages/company
 import { VerifiedagentListComponent } from './components/Company/pages/companyDashboard/verifiedagent-list/verifiedagent-list.component';
 import { AgentRegistrationFormComponent } from './components/Agent/pages/agent-registration-form/agent-registration-form.component';
 import { CompanyDetailsComponent } from './components/Company/pages/companyDashboard/company-details/company-details.component';
-import { CompanyDetails } from './components/Admin/model/company/companyDetail';
 import { CompanyAdminDashboardComponent } from './components/Company/pages/companyDashboard/company-admin-dashboard/company-admin-dashboard.component';
 import { UnverifiedCompaniesComponent } from './components/Admin/pages/unverified-companies/unverified-companies.component';
 import { VerifiedCompaniesComponent } from './components/Admin/pages/verified-companies/verified-companies.component';
