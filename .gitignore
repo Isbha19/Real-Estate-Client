@@ -19,3 +19,5 @@ temp/
 .DS_Store
 
 # IDE
+
+.tsbuildinfo
