@@ -16,7 +16,7 @@ import { Message } from '../../../../core/model/message';
 import { TimeAgoPipe } from '../../../../core/pipe/timeAgo.pipe';
 import { AccountService } from '../../../../core/service/account.service';
 import { User } from '../../../../core/model/account/user';
-import { take } from 'rxjs';
+import { map, Observable, take } from 'rxjs';
 import { JwtDecodedToken } from '../../../../core/model/jwtTokenDecoded';
 import { jwtDecode } from 'jwt-decode';
 
@@ -40,6 +40,8 @@ export class ChatPopupComponent {
 
   newMessage: string = '';
   messages: Message[] = [];
+  lastReceiverMessage!: Message|undefined;
+
   user!: User;
   typingUsers: { [userId: string]: boolean } = {};
 currentUserId:string="";
@@ -76,8 +78,13 @@ showEmoji=false;
     this.messageService.hubConnection.on('UserStoppedTyping', (userId: string) => {
       this.typingUsers[userId] = false;
     });
+    this.messageService.messageThread$.subscribe(messages => {      
+      this.setLastReceiverMessage(messages);
+      this.shouldShowReadStatus();
+    });
     
   }
+ 
   ngAfterViewChecked(): void {
 
     this.scrollToBottom();
@@ -105,7 +112,6 @@ showEmoji=false;
           this.newMessage = '';
           this.messageService.sendStoppedTypingNotification(this.otherPersonId);
           this.showEmoji=false;
-
         })
     }
   }
@@ -129,5 +135,30 @@ showEmoji=false;
   isUserTyping(userId: string): boolean {
     return !!this.typingUsers[userId];
   }
+  private setLastReceiverMessage(messages: Message[]) {
+    this.lastReceiverMessage = messages
+      .filter(m => m.senderId !== this.otherPersonId)
+      .pop();
+  }
+  shouldShowReadStatus(): Observable<boolean> {
+    return this.messageService.messageThread$.pipe(
+      map(messages => {
+        if (!this.lastReceiverMessage) return false;
 
+        const lastSentMessage = messages
+          .filter(message => message.senderName !== this.otherPersonName)
+          .pop();
+
+        const lastReceivedMessage = messages
+          .filter(message => message.senderName === this.otherPersonName)
+          .pop();
+
+        return (
+          !!lastSentMessage &&
+          this.lastReceiverMessage.dateRead > lastSentMessage.sentAt &&
+          (!lastReceivedMessage || this.lastReceiverMessage.dateRead > lastReceivedMessage.sentAt)
+        );
+      })
+    );
+  }
 }

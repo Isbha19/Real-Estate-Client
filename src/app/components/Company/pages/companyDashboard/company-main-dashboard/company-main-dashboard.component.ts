@@ -1,3 +1,4 @@
+import { BarChartComponent } from './../bar-chart/bar-chart.component';
 import { CompanyDashboardService } from '../../../service/company-dashboard.service';
 import { DashboardStatistics } from './../../../model/dashboardStatitics';
 import { Component } from '@angular/core';
@@ -5,7 +6,7 @@ import { Component } from '@angular/core';
 @Component({
   selector: 'app-company-main-dashboard',
   standalone: true,
-  imports: [],
+  imports: [BarChartComponent],
   templateUrl: './company-main-dashboard.component.html',
   styleUrl: './company-main-dashboard.component.scss',
 })
@@ -36,4 +37,5 @@ ngAfterViewInit(): void {
       console.log(this.progressWidth+"progress width");
       
   }
+  
 }

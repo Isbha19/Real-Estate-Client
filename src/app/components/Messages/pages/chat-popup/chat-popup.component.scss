@@ -383,6 +383,20 @@ body, html {
 		}
 	}
 }
+.time-shown {
+	font-size: 0.8em;
+	color: gray;
+	margin-left: 10px;
+	vertical-align: middle;
+  }
+.read-status {
+	color: lightgray;       /* Light gray color for the text */
+	text-align: right;      /* Align the text to the right */
+	font-size: 12px;        /* Optional: Adjust the font size */
+	margin-top: 10px;       /* Optional: Add some margin at the top */
+	margin-right: 5px;      /* Optional: Add some margin to the right */
+  }
+  
 
 
 @keyframes typing {

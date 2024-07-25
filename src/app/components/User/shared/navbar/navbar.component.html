@@ -73,7 +73,7 @@
                     <div class="arrow"></div>
                     <ng-container *ngIf="user && user.jwt"> <!-- Assuming 'data' is where the decoded JWT token is stored -->
                         <ng-container *ngIf="isAgent(user)">
-                            <p>Listed properties(0)</p>
+                            <p><a routerLink='listed-properties'>Listed properties(0)</a></p>
                             <div class="dropdown-divider"></div>
 
                         </ng-container>

@@ -7,7 +7,7 @@ import { AboutComponent } from '../../about/about.component';
 import { PropertyListComponent } from '../../property-list/property-list.component';
 import { CallToActionComponent } from '../../call-to-action/call-to-action.component';
 import { AgentListComponent } from '../../agent-list/agent-list.component';
-import { TestimonialComponent } from '../../testimonial/testimonial.component';
+import { TestimonialComponent } from './../Testimonial/pages/testimonial/testimonial.component';
 
 
 @Component({

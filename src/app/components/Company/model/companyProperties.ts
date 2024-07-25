@@ -12,4 +12,8 @@ export interface CompanyProperties {
     agentName: string;
     postedOn: Date; // Date in TypeScript is used instead of DateTime in C#
     primaryImageUrl: string;
+    isVerified:boolean;
+    isSold:boolean;
+    soldTo:string;
+    revenue:number;
 }

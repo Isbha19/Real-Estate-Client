@@ -13,6 +13,7 @@ import { environment } from '../../../environments/environment';
 import { LoginResponse } from '../model/response/LoginResponse';
 import { ApiResponse } from '../model/response/ApiResponse';
 import { SignalRService } from './signal-r.service';
+import { Testimonial } from '../../components/User/pages/Testimonial/model/Testimonial';
 
 @Injectable({ providedIn: 'root' })
 export class AccountService {
@@ -127,4 +128,5 @@ export class AccountService {
       })
     );
   }
+ 
 }

@@ -1,0 +1,13 @@
+/* testimonial.component.scss */
+
+.testimonial-item {
+    max-height: 300px; /* Adjust the height as needed */
+    overflow: hidden; /* Hide overflowed content */
+  }
+  
+  .testimonial-item p {
+    max-height: 150px; /* Adjust the height as needed */
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  

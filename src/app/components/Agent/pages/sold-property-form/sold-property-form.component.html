@@ -1,0 +1,45 @@
+<div class="container p-5">
+    <h2>Mark Property as Sold</h2>
+    <form [formGroup]="soldForm" (ngSubmit)="onSubmit()">
+      <div class="mb-3">
+        <label for="revenue" class="form-label">Revenue</label>
+        <input 
+          id="revenue" 
+          class="form-control" 
+          formControlName="revenue" 
+          [ngClass]="{ 'is-invalid': soldForm.get('revenue')?.invalid && (soldForm.get('revenue')?.dirty || soldForm.get('revenue')?.touched) }" 
+          required
+        >
+        <div *ngIf="soldForm.get('revenue')?.invalid && (soldForm.get('revenue')?.dirty || soldForm.get('revenue')?.touched)" class="invalid-feedback">
+          <div *ngIf="soldForm.get('revenue')?.hasError('required')">Revenue is required</div>
+          <div *ngIf="soldForm.get('revenue')?.hasError('pattern')">Revenue must be a number</div>
+        </div>
+      </div>
+      <div class="mb-3">
+        <label for="soldTo" class="form-label">Sold To</label>
+        <input 
+          type="text" 
+          id="soldTo" 
+          class="form-control" 
+          formControlName="soldTo" 
+    placeholder="Type to search..."
+    [matAutocomplete]="auto"
+        >
+        <mat-autocomplete
+    #auto
+    autoActiveFirstOption
+    [displayWith]="displayFn"
+  >
+    <mat-option
+      *ngFor="let user of filteredUsers | async"
+      [value]="user"
+    >
+      {{ user.userName }} <b>Email: {{user.email}}</b> 
+    </mat-option>
+
+  </mat-autocomplete>
+      </div>
+      <button type="submit" class="btn btn-primary" [disabled]="soldForm.invalid">Submit</button>
+    </form>
+  </div>
+  

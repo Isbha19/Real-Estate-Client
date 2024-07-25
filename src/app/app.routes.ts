@@ -1,3 +1,5 @@
+import { TestimonialFormComponent } from './components/User/pages/Testimonial/pages/testimonial-form/testimonial-form.component';
+import { ListedPropertiesComponent } from './components/Agent/pages/listed-properties/listed-properties.component';
 import { CompanyMainDashboardComponent } from './components/Company/pages/companyDashboard/company-main-dashboard/company-main-dashboard.component';
 import { MessagesComponent } from './components/Messages/pages/messages/messages.component';
 import { UnverifiedCompanyPropertiesComponent } from './components/Company/pages/companyDashboard/unverified-company-properties/unverified-company-properties.component';
@@ -75,6 +77,10 @@ export const routes: Routes = [
       { path: 'payment-success', component: PaymentSuccessComponent },
       { path: 'customer-portal', component: CustomerPortalComponentComponent },
       { path: 'messages', canActivate:[authGuard],component: MessagesComponent },
+      { path: 'listed-properties', canActivate:[authGuard],component: ListedPropertiesComponent },
+      { path: 'testimonial-form', canActivate:[authGuard],component: TestimonialFormComponent },
+
+
 
       
     ],

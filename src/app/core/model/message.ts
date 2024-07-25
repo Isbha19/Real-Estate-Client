@@ -7,5 +7,6 @@ export interface Message {
     content: string
     dateRead: Date
     sentAt: Date
+    showTime:boolean
   }
   

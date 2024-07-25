@@ -3,7 +3,7 @@ import { Component } from '@angular/core';
 import { NavigationEnd, Router, RouterOutlet } from '@angular/router';
 import { CarouselModule } from 'ngx-owl-carousel-o';
 
-import { TestimonialComponent } from './components/User/testimonial/testimonial.component';
+import { TestimonialComponent } from './components/User/pages/Testimonial/pages/testimonial/testimonial.component';
 
 import { CommonModule } from '@angular/common';
 

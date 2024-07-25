@@ -5,7 +5,10 @@ import { Pipe, PipeTransform } from '@angular/core';
   standalone:true
 })
 export class TimeAgoPipe implements PipeTransform {
-  transform(value: Date): string | undefined {
+  transform(value: Date|undefined): string | undefined {
+    if (!value) {
+      return 'Unknown';
+    }
     const now = new Date().getTime();
     const date = new Date(value).getTime();
     const seconds = Math.floor((now - date) / 1000);

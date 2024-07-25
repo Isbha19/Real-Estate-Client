@@ -1,0 +1,37 @@
+<div class="testimonial-form-container mat-elevation-z3">
+    <form [formGroup]="testimonialForm" (ngSubmit)="onSubmit()">
+      <mat-card>
+        <mat-card-header>
+          <mat-card-title>Submit Your Testimonial</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+          <div class="form-group">
+            <mat-form-field appearance="fill">
+              <mat-label>Your Name</mat-label>
+              <input matInput formControlName="name" required>
+            </mat-form-field>
+          </div>
+          <div class="form-group">
+            <mat-form-field appearance="fill">
+              <mat-label>Your Title</mat-label>
+              <input matInput formControlName="title" required>
+            </mat-form-field>
+          </div>
+          <div class="form-group">
+            <mat-form-field appearance="fill">
+              <mat-label>Testimonial</mat-label>
+              <textarea matInput formControlName="message" rows="4" required></textarea>
+            </mat-form-field>
+          </div>
+          <div class="form-group star-rating-container">
+            <label class="star-rating-label">Rating</label>
+            <ngx-star-rating formControlName="rating" [id]="'rating'" ></ngx-star-rating>
+          </div>
+        </mat-card-content>
+        <mat-card-actions>
+          <button mat-raised-button color="primary" type="submit" [disabled]="testimonialForm.invalid">Submit</button>
+        </mat-card-actions>
+      </mat-card>
+    </form>
+  </div>
+  

@@ -1,0 +1,36 @@
+<!-- Main row -->
+<div class="row">
+      
+    <div class="card card-success">
+      <div class="card-header">
+        <h3 class="card-title pr-4">Properties Listed and Sold
+        </h3>
+        <div class="dropdown">
+            <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+              Select Year
+            </a>
+    
+            <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                <li *ngFor="let year of years">
+                  <a class="dropdown-item" href="#" (click)="onYearChange(year)">{{ year }}</a>
+                </li>
+              </ul>
+          </div>
+          
+        <div class="card-tools">
+          <button type="button" class="btn btn-tool" data-card-widget="collapse">
+            <i class="fas fa-minus"></i>
+          </button>
+          <button type="button" class="btn btn-tool" data-card-widget="remove">
+            <i class="fas fa-times"></i>
+          </button>
+        </div>
+      </div>
+      <div class="card-body">
+        <div class="chart">
+          <canvas id="barChart" style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%;"></canvas>
+        </div>
+      </div>
+    </div>
+  </div>
+  

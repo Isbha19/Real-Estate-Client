@@ -44,16 +44,33 @@ public isPopupOpen=false
   })
 this.hubConnection.on("UpdatedGroup",(group:Group)=>{
   if(group.connections.some(x=>x.username===otherUsername)){
+    
     this.messageThread$.pipe(take(1)).subscribe(messages=>{
       messages.forEach(message=>{
         if(!message.dateRead){
-message.dateRead=new Date(Date.now())
+            message.dateRead=new Date(Date.now())
         }
       })
       this.messageThreadSource.next([...messages]);
     })
   }
 })
+this.hubConnection.on('MessageRead', (messageId: number) => {
+  console.log(`Received MessageRead for messageId: ${messageId}`);
+  
+  // Fetch the updated message thread from the server
+  this.getMessageThread(otherUsername).pipe(take(1)).subscribe({
+    next: (updatedMessages) => {
+      console.log('Updated messages:', updatedMessages);
+      // Update the message thread with the new messages
+      this.messageThreadSource.next(updatedMessages);
+    },
+    error: (error) => {
+      console.error('Error fetching updated messages:', error);
+    }
+  });
+});
+
 this.hubConnection.on('UserTyping', (userId: string) => {
   // Handle user typing event
   console.log(`User ${userId} is typing...`);
@@ -65,7 +82,9 @@ this.hubConnection.on('UserStoppedTyping', (userId: string) => {
   console.log(`User ${userId} stopped typing.`);
   // Emit or handle as needed in your component
 });
+
   }
+
   stopHubConnection(): void {
     if (this.hubConnection && this.hubConnection.state === HubConnectionState.Connected) {
       this.hubConnection.stop().then(() => {
@@ -80,6 +99,7 @@ this.hubConnection.on('UserStoppedTyping', (userId: string) => {
   public isHubConnectionEstablished(): boolean {
     return this.connectionEstablished;
   }
+ 
   
   sendTypingNotification(recipientUserId: string) {
     this.hubConnection.invoke('SendTypingNotification', recipientUserId)
