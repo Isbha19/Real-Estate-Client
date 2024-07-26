@@ -1,0 +1,12 @@
+.truncated-url {
+    display: block;
+    width: 150px; /* Set the desired width */
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    border: none; /* Remove any borders */
+    padding: 0; /* Remove padding */
+    margin: 0; /* Remove margin */
+    background: none; /* Remove any background */
+  }
+  

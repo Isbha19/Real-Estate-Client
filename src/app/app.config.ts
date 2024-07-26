@@ -11,6 +11,7 @@ import { provideAnimationsAsync } from '@angular/platform-browser/animations/asy
 import { provideToastr } from 'ngx-toastr';
 import { provideState, provideStore } from '@ngrx/store';
 import { userReducer } from './shared/store/user/user.reducer';
+import { packageReducer } from './shared/store/SubscriptionPackages/package.reducer';
 
 import { provideStoreDevtools } from '@ngrx/store-devtools';
 import { provideEffects } from '@ngrx/effects';
@@ -22,6 +23,7 @@ import { unVerifiedCompanyEffects } from './shared/store/company/unVerifiedCompa
 
 import { unverifiedagentReducer } from './shared/store/agent/unVerifiedAgent/unVerifiedAgent.reducer';
 import { unVerifiedAgentEffects } from './shared/store/agent/unVerifiedAgent/unVerifiedAgent.effects';
+import { PackageEffects } from './shared/store/SubscriptionPackages/package.effects';
 
 export const appConfig: ApplicationConfig = {
   providers: [provideRouter(routes), provideAnimationsAsync(), provideToastr({ closeButton: true }),
@@ -31,8 +33,10 @@ export const appConfig: ApplicationConfig = {
     provideState({ name: 'company', reducer: companyReducer }),
     provideState({ name: 'unverifiedcompanies', reducer: unverifiedcompanyReducer }),
     provideState({ name: 'unverifiedagents', reducer: unverifiedagentReducer }),
+    provideState({ name: 'package', reducer: packageReducer }),
+
 
     
     provideStoreDevtools({ maxAge: 25, logOnly: !isDevMode() }),
-    provideStoreDevtools({ maxAge: 25, logOnly: !isDevMode() }),provideEffects([UserEffects,AppEffects,CompanyEffects,unVerifiedCompanyEffects,unVerifiedAgentEffects])]
+    provideStoreDevtools({ maxAge: 25, logOnly: !isDevMode() }),provideEffects([UserEffects,AppEffects,CompanyEffects,unVerifiedCompanyEffects,unVerifiedAgentEffects,PackageEffects])]
 };

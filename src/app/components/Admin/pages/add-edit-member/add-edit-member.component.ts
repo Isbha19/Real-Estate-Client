@@ -1,7 +1,7 @@
 import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
 
-import {  Component, inject } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { CommonModule } from '@angular/common';
 import {
@@ -54,34 +54,30 @@ export class AddEditMemberComponent {
     private dialogRef: MatDialogRef<AddEditMemberComponent>,
     private toastr: ToastrService
   ) {
-  this.subscriptions.push(
-    this.actions$
-    .pipe(
-      ofType(addusersuccess, updateUserSuccess),
-      take(1) // Only take the first occurrence and then unsubscribe
-    )
-    .subscribe(() => {
-      this.dialogRef.close();
-    })
-  )
+    this.subscriptions.push(
+      this.actions$
+        .pipe(
+          ofType(addusersuccess, updateUserSuccess),
+          take(1) // Only take the first occurrence and then unsubscribe
+        )
+        .subscribe(() => {
+          this.dialogRef.close();
+        })
+    );
   }
   ngOnInit(): void {
-    
     this.intializeForm();
     const id = this.data.id;
     if (id) {
-      this.addNew = false; 
-      this.storeNgrx.select(getUser).subscribe(res=>{
-        
+      this.addNew = false;
+      this.storeNgrx.select(getUser).subscribe((res) => {
         this.updateForm(res);
-
-            })
-     
+      });
     } else {
       this.addPasswordValidator();
     }
     this.getRoles();
-  } 
+  }
 
   getMember(id: string) {
     this.adminService.getMember(id).subscribe({
@@ -95,7 +91,7 @@ export class AddEditMemberComponent {
       this.adminService.getApplicationRoles().subscribe({
         next: (roles) => (this.applicationRoles = roles),
       })
-    )
+    );
   }
 
   intializeForm() {
@@ -187,7 +183,7 @@ export class AddEditMemberComponent {
   }
   ngOnDestroy(): void {
     // Unsubscribe from all subscriptions to avoid memory leaks
-    this.subscriptions.forEach(subscription => subscription.unsubscribe());
+    this.subscriptions.forEach((subscription) => subscription.unsubscribe());
   }
 
   addPasswordValidator() {

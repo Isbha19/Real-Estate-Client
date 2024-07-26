@@ -1,0 +1,153 @@
+<!-- Main content -->
+<div style="height: 450px; overflow-y: auto;">
+    <div class="row">
+      <!-- left column -->
+      <div class="col-md-12">
+        <!-- general form elements -->
+        <div class="card card-primary">
+          <div class="card-header">
+            <h3 class="card-title">
+             <span *ngIf="addNew">Add</span>
+              <span *ngIf="!addNew">Edit</span> 
+              Package
+            </h3>
+          </div>
+          <!-- /.card-header -->
+          <!-- form start -->
+          <form [formGroup]="packageForm" (ngSubmit)="createPackage()" autocomplete="off">
+            <div class="card-body">
+           
+
+            <div class="form-group">
+              <input type="text" style="position: absolute; left: -9999px" />
+              <label for="exampleInputEmail1">Package Name</label>
+              <input
+                type="text"
+                class="form-control"
+                placeholder="Package Name"
+                formControlName="Name"
+                [class.is-invalid]="
+                  submitted && packageForm.get('Name')?.errors
+                "
+              />
+            </div>
+            <span
+              class="text-danger"
+              *ngIf="
+                submitted && packageForm.get('Name')?.hasError('required')
+              "
+            >
+              Package Name is required
+            </span>
+            <div class="form-group">
+              <label for="exampleInputEmail1">Package Price</label>
+              <input
+                type="text"
+                class="form-control"
+                placeholder="Package Price"
+                formControlName="Price"
+                [class.is-invalid]="
+                  submitted && packageForm.get('Price')?.errors
+                "
+              />
+            </div>
+            <span
+              class="text-danger"
+              *ngIf="
+                submitted && packageForm.get('Price')?.hasError('required')
+              "
+            >
+              Package Price is required
+            </span>
+            <div class="form-group">
+              <label for="exampleInputEmail1">Number Of Listings</label>
+              <input
+                type="text"
+                class="form-control"
+                placeholder="Number Of Listings"
+                formControlName="NumberOfListings"
+                [class.is-invalid]="
+                  submitted && packageForm.get('NumberOfListings')?.errors
+                "
+              />
+            </div>
+            <span
+              class="text-danger"
+              *ngIf="
+                submitted && packageForm.get('NumberOfListings')?.hasError('required')
+              "
+            >
+            Number Of Listings is required
+            </span>
+            <div class="form-group">
+              <label for="exampleInputEmail1">Short Description</label>
+              <input
+                type="text"
+                class="form-control"
+                placeholder="Short Description"
+                formControlName="Description"
+                [class.is-invalid]="
+                  submitted && packageForm.get('Description')?.errors
+                "
+              />
+            </div>
+            <span
+              class="text-danger"
+              *ngIf="
+                submitted && packageForm.get('Description')?.hasError('required')
+              "
+            >
+           Description is required
+            </span>
+            <!-- <div class="form-group mt-2">
+              <div class="col-2">
+                <label for="roles">Benefits:</label>
+              </div>
+              <div class="col-10">
+                <div class="btn-group">
+                  <ng-container *ngFor="let benefit of benefits">
+                    <input
+                      type="checkbox"
+                      class="btn-check"
+                      id="{{benefit}}"
+                      (change)="benefitOnChange(benefit)"
+                      [checked]="existingbenefits.includes(benefit)"
+                      [class.is-invalid]="
+                        submitted && packageForm.get('selectedBenefits')?.errors
+                      "
+                    />
+                    <label class="btn btn-outline-primary" for="{{ benefit }}">{{
+                      benefit
+                    }}</label>
+                  </ng-container>
+                </div>
+              </div>
+            </div>
+            <div class="text-danger" *ngIf="submitted &&packageForm.get('selectedBenefits')?.hasError('required')">
+              Please select atleast one benefit
+            </div> -->
+
+            </div>
+  
+       
+          
+            <!-- /.card-body -->
+  
+            <div class="card-footer">
+              <button type="submit" class="btn btn-primary">
+                {{ addNew ? "Create" : "Update" }}
+              </button>
+            </div>
+          </form>
+        </div>
+        <!-- /.card -->
+  
+        <!-- /.card -->
+      </div>
+      <!--/.col (right) -->
+    </div>
+    <!-- /.row -->
+  </div>
+  <!-- /.container-fluid -->
+  <!-- /.content -->
+  

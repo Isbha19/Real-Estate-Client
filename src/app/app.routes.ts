@@ -33,6 +33,7 @@ import { Routes } from '@angular/router';
 import { SendEmailComponent } from './components/User/features/account/send-email/send-email.component';
 import { RegisterWithThirdPartyComponent } from './components/User/features/account/register-with-third-party/register-with-third-party.component';
 import { CompanyAdminGuard } from './core/guards/companyAdmin.guard';
+import { SubscriptionManagementComponent } from './components/Admin/pages/subscription-management/subscription-management.component';
 
 export const routes: Routes = [
   {
@@ -105,7 +106,8 @@ export const routes: Routes = [
       { path: '', component: AdminDashboardComponent },
       { path: 'user-crud', component: UserCrudComponent },
       { path: 'verified-companies', component: VerifiedCompaniesComponent },
-      { path: 'unverified-companies', component: UnverifiedCompaniesComponent }
+      { path: 'unverified-companies', component: UnverifiedCompaniesComponent },
+      { path: 'manage-subscription', component: SubscriptionManagementComponent }
     ],
   },
 

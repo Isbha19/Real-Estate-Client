@@ -23,6 +23,7 @@
     "@angular/router": "^17.3.0",
     "@ctrl/ngx-emoji-mart": "^9.2.0",
     "@microsoft/signalr": "^8.0.7",
+    "@ng-select/ng-select": "^13.4.1",
     "@ngrx/effects": "^18.0.0",
     "@ngrx/store": "^18.0.0",
     "@ngrx/store-devtools": "^18.0.0",
