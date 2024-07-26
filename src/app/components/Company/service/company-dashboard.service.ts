@@ -12,6 +12,8 @@ import { ApiResponse } from '../../../core/model/response/ApiResponse';
 import { companyStripeCustomer } from '../model/CompanyStripeCustomer';
 import { DashboardStatistics } from '../model/dashboardStatitics';
 import { PropertyStatisticsDto } from '../model/PropertiesStatisticsDto';
+import { TopPropertyDto } from '../model/TopPropertyDto';
+import { TopAgentDto } from '../model/TopAgentDto';
 @Injectable({ providedIn: 'root' })
 export class CompanyDashboardService {
   constructor(private http: HttpClient) {}
@@ -66,4 +68,10 @@ export class CompanyDashboardService {
   getPropertiesStatistics(params: string): Observable<PropertyStatisticsDto> {
     return this.http.get<PropertyStatisticsDto>(`${environment.apiUrl}Property/properties/statistics?${params}`);
   }
+  getTopProperties(): Observable<TopPropertyDto[]> {
+    return this.http.get<TopPropertyDto[]>(`${environment.apiUrl}Property/top-properties`);
+  }
+  getTopPerformingAgents(): Observable<TopAgentDto[]> {
+    return this.http.get<TopAgentDto[]>(`${environment.apiUrl}Agent/top-agents`);
+}
 }

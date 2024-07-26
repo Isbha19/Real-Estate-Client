@@ -1,0 +1,16 @@
+<div class="container">
+    <h2 class="text-center mb-4 text-success font-weight-bold">Top 10 Most Viewed Properties</h2>
+    <div class="row">
+      <div class="col-md-4" *ngFor="let property of topProperties">
+        <div class="card mb-3">
+          <img src={{property.primaryImageUrl}} class="card-img-top" alt="{{ property.propertyTitle }}">
+          <div class="card-body">
+            <h5 class="card-title">{{ property.propertyTitle }}</h5>
+            <p class="card-text">Views: {{ property.propertyViews }}</p>
+            <a [routerLink]="['/property-detail', property.propertyId]" class="btn btn-primary">View Details</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  

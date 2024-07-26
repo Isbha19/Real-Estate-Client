@@ -3,7 +3,9 @@ import { Injectable } from '@angular/core';
 import { MemberView } from '../model/memberView';
 import { environment } from '../../../../environments/environment';
 import { MemberAddEdit } from '../model/memberAddEdit';
-
+import { AdminDashboardStatistics } from '../model/AdminDashboardStatistics';
+import { UserRoleStatistics } from '../model/UserRoleStatistics';
+import {TopCompaniesDto} from '../model/TopCompaniesDto'
 @Injectable({ providedIn: 'root' })
 export class AdminService {
   constructor(private http: HttpClient) {}
@@ -21,6 +23,21 @@ export class AdminService {
   getApplicationRoles() {
     return this.http.get<string[]>(
       `${environment.apiUrl}Admin/get-application-roles`
+    );
+  }
+  getAdminDashboardStatistics() {
+    return this.http.get<AdminDashboardStatistics>(
+      `${environment.apiUrl}Admin/dashboard-statistics`
+    );
+  }
+  getUserRoleStatistics() {
+    return this.http.get<UserRoleStatistics>(
+      `${environment.apiUrl}Admin/user-role-statistics`
+    );
+  }
+  getTopPerformingCompanies() {
+    return this.http.get<TopCompaniesDto[]>(
+      `${environment.apiUrl}Admin/top-performing-companies`
     );
   }
   addEditMember(model: MemberAddEdit) {
