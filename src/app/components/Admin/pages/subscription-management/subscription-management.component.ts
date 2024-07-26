@@ -1,8 +1,8 @@
 import { AddEditPackageComponent } from './../add-edit-package/add-edit-package.component';
 import { getPackage, getPackageList } from './../../../../shared/store/SubscriptionPackages/package.selector';
-import { getpackage, loadpackage } from './../../../../shared/store/SubscriptionPackages/package.action';
+import { deletepackage, getpackage, loadpackage } from './../../../../shared/store/SubscriptionPackages/package.action';
 import { Packages } from './../../../../shared/store/SubscriptionPackages/package.model';
-import { Component, inject } from '@angular/core';
+import { Component, ElementRef, inject, ViewChild } from '@angular/core';
 import {  ReactiveFormsModule } from '@angular/forms';
 import { environment } from '../../../../../environments/environment';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
@@ -12,7 +12,8 @@ import { Package } from '../../../Subscriptions/model/package';
 import { CommonModule } from '@angular/common';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { MatDialog } from '@angular/material/dialog';
-
+//@ts-ignore
+const $ = window['$'];
 @Component({
   selector: 'app-subscription-management',
   standalone: true,
@@ -27,6 +28,8 @@ export class SubscriptionManagementComponent {
   packages!:Package[];
   page:number=1;
   totalLength:number=0;
+  @ViewChild('modal') modal?: ElementRef;
+  packagetoDelete: Package | undefined;
 
   constructor(private fb: FormBuilder,private toastr:ToastrService,private dialog: MatDialog
   ) {
@@ -64,9 +67,37 @@ export class SubscriptionManagementComponent {
   // }
 
   deletePackage(packageId:string){
-
+    let packagefound = this.findPackage(packageId);
+    if (packagefound) {
+      this.packagetoDelete = packagefound;
+      this.openModal();
+    }
+    }
+    private findPackage(id: string): Package | undefined {
+      let packagefound = this.packages.find((x) => x.id === id);
+      if (packagefound) {
+        return packagefound;
+      }
+      return undefined;
+    }
+  openModal() {
+    $(this.modal?.nativeElement).modal('show');
   }
-
+  closeModal() {
+    $(this.modal?.nativeElement).modal('hide');
+  }
+  confirm(){
+    if (this.packagetoDelete) {
+ 
+      this.storeNgrx.dispatch(deletepackage({ id: this.packagetoDelete.id })); // Dispatch the deleteUser action with the user's id
+      this.packagetoDelete = undefined;
+      this.closeModal();
+    }
+  }
+  decline(){
+    this.packagetoDelete = undefined;
+    this.closeModal();
+  }
 
 editAndUpdate(id?:string){
    

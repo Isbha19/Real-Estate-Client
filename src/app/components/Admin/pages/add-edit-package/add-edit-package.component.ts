@@ -7,18 +7,22 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
-import { MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { Store } from '@ngrx/store';
 import { ToastrService } from 'ngx-toastr';
 import { Packages } from '../../../../shared/store/SubscriptionPackages/package.model';
 import { getPackage } from '../../../../shared/store/SubscriptionPackages/package.selector';
 import { Package } from '../../../Subscriptions/model/package';
 import { Benefits } from '../../model/Benefits';
+import { addpackage, addpackagesuccess } from '../../../../shared/store/SubscriptionPackages/package.action';
+import { MaterialModule } from '../../../../material.module';
+import { Actions, ofType } from '@ngrx/effects';
+import { take } from 'rxjs';
 
 @Component({
   selector: 'app-add-edit-package',
   standalone: true,
-  imports: [ReactiveFormsModule, CommonModule],
+  imports: [ReactiveFormsModule, CommonModule,MaterialModule],
   templateUrl: './add-edit-package.component.html',
   styleUrl: './add-edit-package.component.scss',
 })
@@ -30,20 +34,31 @@ export class AddEditPackageComponent {
   addNew = true;
   submitted = false;
   benefits: Benefits[] = []; // Array to hold benefits
+  loading = false;
+  actions$ = inject(Actions);
+  
+
   constructor(private fb: FormBuilder, private toastr: ToastrService,
-    private subscriptionService:SubscriptionPackageService) {
-   
+    private subscriptionService:SubscriptionPackageService,
+    private dialogRef: MatDialogRef<AddEditPackageComponent>,
+  ) {
+      this.actions$
+      .pipe(
+        ofType(addpackagesuccess),
+        take(1) // Only take the first occurrence and then unsubscribe
+      )
+      .subscribe(() => {
+        this.dialogRef.close();
+        this.loading=false;
+      })
   }
   createPackage() {
     this.submitted = true;
 
        if (this.packageForm.valid) {
       const formValue = this.packageForm.value;
-      this.subscriptionService.createPackage(formValue)
-      .subscribe((item) => {
-    this.toastr.success("product created!!!");
-
-      });
+      this.storeNgrx.dispatch(addpackage({ packageinput: formValue }));
+this.loading=true;
     }
 
   }

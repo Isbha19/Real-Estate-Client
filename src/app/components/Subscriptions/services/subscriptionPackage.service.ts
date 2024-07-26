@@ -23,5 +23,11 @@ getPackageById(id: string): Observable<Package> {
       createPackage(formValue: Package) {
         return this.http.post(`${environment.apiUrl}Subscription/create-product`, formValue);
       }
+      deletePackage(id: string) {
+        return this.http.delete(
+          `${environment.apiUrl}Subscription/delete-product/${id}`,
+          {}
+        );
+      }
     
 }
