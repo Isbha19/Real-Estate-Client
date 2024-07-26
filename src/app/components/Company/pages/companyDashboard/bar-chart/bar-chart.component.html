@@ -1,36 +1,55 @@
-<!-- Main row -->
 <div class="row">
-      
-    <div class="card card-success">
-      <div class="card-header">
-        <h3 class="card-title pr-4">Properties Listed and Sold
-        </h3>
-        <div class="dropdown">
-            <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
-              Select Year
+  <div class="card card-success">
+    <div class="card-header">
+      <h3 class="card-title pr-4">Properties Listed and Sold</h3>
+      <div class="row align-items-center">
+        <div class="col-md-2">
+          <div class="dropdown">
+            <a class="btn btn-secondary dropdown-toggle" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+              {{ selectedType | titlecase }}
             </a>
-    
-            <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                <li *ngFor="let year of years">
-                  <a class="dropdown-item" href="#" (click)="onYearChange(year)">{{ year }}</a>
-                </li>
-              </ul>
+            <ul class="dropdown-menu bg-dark" aria-labelledby="dropdownMenuLink">
+              <li><a class="dropdown-item bg-dark" (click)="onTypeChange('yearly')">Yearly</a></li>
+              <li><a class="dropdown-item bg-dark" (click)="onTypeChange('monthly')">Monthly</a></li>
+              <li><a class="dropdown-item bg-dark" (click)="onTypeChange('daily')">Daily</a></li>
+            </ul>
           </div>
-          
-        <div class="card-tools">
-          <button type="button" class="btn btn-tool" data-card-widget="collapse">
-            <i class="fas fa-minus"></i>
-          </button>
-          <button type="button" class="btn btn-tool" data-card-widget="remove">
-            <i class="fas fa-times"></i>
-          </button>
         </div>
+
+        <div class="col-md-2" *ngIf="selectedType !== 'yearly'">
+          <div class="dropdown">
+            <a class="btn btn-secondary dropdown-toggle" role="button" id="yearDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+              {{ selectedYear ? selectedYear : 'Select Year' }}
+            </a>
+            <ul class="dropdown-menu bg-dark" aria-labelledby="yearDropdown">
+              <li *ngFor="let year of years"><a class="dropdown-item bg-dark" (click)="onYearChange(year)">{{ year }}</a></li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="col-md-2 ml-2" *ngIf="selectedType === 'daily'">
+          <div class="dropdown">
+            <a class="btn btn-secondary dropdown-toggle" role="button" id="monthDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+              {{ selectedMonth ? months[selectedMonth - 1] : 'Select Month' }}
+            </a>
+            <ul class="dropdown-menu bg-dark" aria-labelledby="monthDropdown">
+              <li *ngFor="let month of months; let i = index"><a class="dropdown-item bg-dark" (click)="onMonthChange(i + 1)">{{ month }}</a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="col-md-auto ms-auto">
+          <button class="btn btn-primary" (click)="downloadReport()">Download Report</button>
+            <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i></button>
+            <button type="button" class="btn btn-tool" data-card-widget="remove"><i class="fas fa-times"></i></button>
+        </div>
+        
       </div>
-      <div class="card-body">
-        <div class="chart">
-          <canvas id="barChart" style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%;"></canvas>
-        </div>
+      
+    </div>
+    <div class="card-body">
+      <div class="chart">
+        <canvas id="barChart" style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%;"></canvas>
       </div>
     </div>
   </div>
-  
+</div>

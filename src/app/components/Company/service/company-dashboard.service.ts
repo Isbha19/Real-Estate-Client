@@ -11,6 +11,7 @@ import { Observable } from 'rxjs';
 import { ApiResponse } from '../../../core/model/response/ApiResponse';
 import { companyStripeCustomer } from '../model/CompanyStripeCustomer';
 import { DashboardStatistics } from '../model/dashboardStatitics';
+import { PropertyStatisticsDto } from '../model/PropertiesStatisticsDto';
 @Injectable({ providedIn: 'root' })
 export class CompanyDashboardService {
   constructor(private http: HttpClient) {}
@@ -61,5 +62,8 @@ export class CompanyDashboardService {
     return this.http.get<SubscriptionPackage>(
       `${environment.apiUrl}Company/get-subscription-package`
     );
+  }
+  getPropertiesStatistics(params: string): Observable<PropertyStatisticsDto> {
+    return this.http.get<PropertyStatisticsDto>(`${environment.apiUrl}Property/properties/statistics?${params}`);
   }
 }
