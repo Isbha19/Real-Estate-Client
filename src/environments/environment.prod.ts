@@ -1,4 +1,6 @@
 export const environment = {
-    apiUrl:'api/',
+    apiUrl:'https://localhost:7230/api/',
+    hubUrl:'https://localhost:7230/hubs/',
     userKey:'RealEstateAppUser'
+
 };
