@@ -2,7 +2,6 @@
 node_modules/
 
 # Output directories
-dist/
 build/
 
 # Cache directories
