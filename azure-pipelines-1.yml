@@ -21,7 +21,7 @@ steps:
 
 
 - script: |
-    ng build 
+    ng build --verbose
   displayName: 'ng build'
 - task: CopyFiles@2
   inputs:
