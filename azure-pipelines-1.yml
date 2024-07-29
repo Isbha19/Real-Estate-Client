@@ -16,6 +16,11 @@ steps:
   displayName: 'npm install and angular'
 
 - script: |
+    npm install @angular-devkit/build-angular
+  displayName: 'Install Angular Build DevKit'
+
+
+- script: |
     ng build 
   displayName: 'ng build'
 - task: CopyFiles@2
