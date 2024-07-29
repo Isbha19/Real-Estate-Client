@@ -1,6 +1,6 @@
 export const environment = {
-    apiUrl:'https://localhost:7230/api/',
-    hubUrl:'https://localhost:7230/hubs/',
+    apiUrl:'https://estahub.azurewebsites.net/api/',
+    hubUrl:'https://estahub.azurewebsites.net/hubs/',
     userKey:'RealEstateAppUser'
 
 };
