@@ -1,0 +1,40 @@
+trigger:
+- main
+
+pool:
+  name: my-computer
+
+steps:
+- task: NodeTool@0
+  inputs:
+    versionSpec: '20.x'
+  displayName: 'Install Node.js'
+
+- script: |
+    npm install -g @angular/cli
+    npm install
+  displayName: 'npm and angular install'
+
+- script: |
+    ng build 
+  displayName: 'ng build'
+
+- task: CopyFiles@2
+  inputs:
+    SourceFolder: '$(Build.SourcesDirectory)/dist/Real-Estate-Client'
+    Contents: '**'
+    TargetFolder: '$(Build.ArtifactStagingDirectory)'
+
+- task: PublishBuildArtifacts@1
+  inputs:
+    PathtoPublish: '$(Build.ArtifactStagingDirectory)'
+    ArtifactName: 'drop'
+    publishLocation: 'Container'
+
+- task: AzureRmWebAppDeployment@4
+  inputs:
+    ConnectionType: 'AzureRM'
+    azureSubscription: 'Free Trial(3ea4a42b-c018-4a3e-a795-f56f04860693)'
+    appType: 'webAppLinux'
+    WebAppName: 'Estahub-Project'
+    packageForLinux: '$(Build.ArtifactStagingDirectory)'
