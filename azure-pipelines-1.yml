@@ -13,10 +13,11 @@ steps:
 - script: |
     npm install -g @angular/cli
     npm install
-     ng build 
-  displayName: 'npm install and build'
+  displayName: 'npm install and angular'
 
-
+- script: |
+    ng build 
+  displayName: 'ng build'
 - task: CopyFiles@2
   inputs:
     SourceFolder: '$(Build.SourcesDirectory)/dist/Real-Estate-Client'
