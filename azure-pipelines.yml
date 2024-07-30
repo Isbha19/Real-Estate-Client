@@ -1,0 +1,29 @@
+trigger:
+- main
+
+pool:
+  name: 'my-computer'
+
+steps:
+- task: NodeTool@0
+  inputs:
+    versionSpec: '10.x'
+  displayName: 'Install Node.js'
+
+- script: |
+    npm install -g @angular/cli
+    npm install
+    ng build --prod
+  displayName: 'npm install and build'
+
+- task: CopyFiles@2
+  inputs:
+    contents: 'dist/Real-Estate-Client/browser'
+    targetFolder: '$(Build.ArtifactStagingDirectory)'
+  displayName: 'Copy files to artifact staging directory'
+
+- task: PublishBuildArtifacts@1
+  inputs:
+    PathtoPublish: '$(Build.ArtifactStagingDirectory)'
+    ArtifactName: 'drop'
+  displayName: 'Publish Artifact'
