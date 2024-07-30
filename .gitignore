@@ -3,6 +3,7 @@ node_modules/
 
 # Output directories
 build/
+dist/
 
 # Cache directories
 .angular/

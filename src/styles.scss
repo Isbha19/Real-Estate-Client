@@ -4,48 +4,7 @@
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 @import 'ngx-toastr/toastr';
-@import url('https://fonts.gstatic.com');
-@import url('https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;600&family=Inter:wght@700;800&display=swap');
-@import url('https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css');
-@import '@ctrl/ngx-emoji-mart/picker';
-@import 'assets/lib/animate/animate.min.css';
-@import 'assets/lib/owlcarousel/assets/owl.carousel.min.css';
-@import 'assets/css/bootstrap.min.css';
 
-@import 'assets/css/style.css';
-@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap');
-@import url('https://fonts.googleapis.com/icon?family=Material+Icons');
-@import url('https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback');
-@import 'assets/admin/plugins/fontawesome-free/css/all.min.css';
-@import 'assets/admin/dist/css/AdminLTE.min.css';
-
-// Import Ionicons
-@import url('https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css');
-
-// Import Tempusdominus Bootstrap 4
-@import 'assets/admin/plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css';
-
-// Import iCheck
-@import 'assets/admin/plugins/icheck-bootstrap/icheck-bootstrap.min.css';
-
-// Import JQVMap
-@import 'assets/admin/plugins/jqvmap/jqvmap.min.css';
-
-// Import AdminLTE Theme style
-
-// Import overlayScrollbars
-@import 'assets/admin/plugins/overlayScrollbars/css/OverlayScrollbars.min.css';
-
-// Import Daterange picker
-@import 'assets/admin/plugins/daterangepicker/daterangepicker.css';
-
-// Import Summernote
-@import 'assets/admin/plugins/summernote/summernote-bs4.min.css';
-
-// Import DataTables & Plugins
-@import 'assets/admin/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css';
-@import 'assets/admin/plugins/datatables-responsive/css/responsive.bootstrap4.min.css';
-@import 'assets/admin/plugins/datatables-buttons/css/buttons.bootstrap4.min.css';
 
 .facebook-login-btn {
     background-color: #3B5998; /* Facebook blue color */
