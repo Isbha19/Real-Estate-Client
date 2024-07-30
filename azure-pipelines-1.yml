@@ -25,7 +25,7 @@ steps:
   displayName: 'ng build'
 - task: CopyFiles@2
   inputs:
-    SourceFolder: '$(Build.SourcesDirectory)/dist/Real-Estate-Client'
+    SourceFolder: '$(Build.SourcesDirectory)/dist/Real-Estate-Client/browser'
     Contents: '**'
     TargetFolder: '$(Build.ArtifactStagingDirectory)'
 
