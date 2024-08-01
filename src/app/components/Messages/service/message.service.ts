@@ -23,7 +23,9 @@ public isPopupOpen=false
   createHubConnection(user:User,otherUsername:string){
     this.hubConnection=new HubConnectionBuilder()
     .withUrl(this.huburl+'message?user='+otherUsername,{
-      accessTokenFactory:()=>user.jwt
+      accessTokenFactory:()=>user.jwt,
+      withCredentials: false
+
     })
     .withAutomaticReconnect()
     .build()

@@ -25,6 +25,8 @@ export class SignalRService {
     this.hubConnection = new HubConnectionBuilder()
       .withUrl(this.hubUrl + 'presence', {
         accessTokenFactory: () => user.jwt,
+        withCredentials: false
+
       })
       .withAutomaticReconnect()
       .build();
