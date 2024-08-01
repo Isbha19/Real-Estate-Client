@@ -18,6 +18,7 @@ export class NotificationService {
     this.hubConnection=new HubConnectionBuilder()
     .withUrl(this.huburl+'notification', {
       accessTokenFactory: () => user.jwt,
+      withCredentials: false
     })
     .withAutomaticReconnect()
     .build();
