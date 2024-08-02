@@ -21,24 +21,28 @@
         <!-- Plan Features -->
       
         <!-- "Basic" Plan -->
-        <div class="pricing-plan">
-          <h2 class="plan-title">Starter</h2>
+        <div class="pricing-plan"  *ngFor="let plan of packages">
+          <h2 class="plan-title">{{plan.name}}</h2>
 
           <div class="plan-cost">
-            <p class="plan-price">AED 100</p>
+            <p class="plan-price">AED {{plan.price}}</p>
             <span>|</span> 
           </div>
           <ul class="plan-features">
-            <li>Limited to 5 listings</li>
+            <li>
+              <span *ngIf="plan.numberOfListings <= 5">Limited to </span>
+              {{ plan.numberOfListings }} Listings
+            </li>            
             <li>Listing Management</li>
             <li>Agent Management</li>
             <li><span>Priority placement</span></li>
             <li><span>Advanced features</span></li>
+            <li>Premium Badge</li>
           </ul>
-          <a style="cursor: pointer;" class="btn-plan" (click)="validateAndProceedToPayment('https://buy.stripe.com/test_9AQ00ZfZxao16oo7sw')">Select Plan</a>
+          <a style="cursor: pointer;" class="btn-plan" (click)="validateAndProceedToPayment(plan.paymentLink)">Select Plan</a>
         </div>
         <!-- "Premium" Plan -->
-        <div class="pricing-plan featured-plan">
+        <!-- <div class="pricing-plan featured-plan">
           <div class="featured-ribbon">Best Value</div>
           <h2 class="plan-title">Basic</h2>
           <div class="plan-cost">
@@ -55,9 +59,9 @@
             <li><span>Advanced features</span></li>
           </ul>
           <a style="cursor: pointer;" class="btn-plan cta" (click)="validateAndProceedToPayment('https://buy.stripe.com/test_dR68xvaFd0NraEE9AA')">Select Plan</a>
-        </div>
+        </div> -->
         <!-- "Ultmate" Plan -->
-        <div class="pricing-plan">
+        <!-- <div class="pricing-plan">
           <h2 class="plan-title">Premium </h2>
           <div class="plan-cost">
             <p class="plan-price">AED 700</p>
@@ -75,7 +79,10 @@
             <li>Premium Badge</li>
           </ul>
           <a style="cursor: pointer;" class="btn-plan" (click)="validateAndProceedToPayment('https://buy.stripe.com/test_6oEeVT4gPgMpbII003')">Select Plan</a>
-        </div>
+        </div> -->
       </div>
     </section>
   </div>
+
+
+  
