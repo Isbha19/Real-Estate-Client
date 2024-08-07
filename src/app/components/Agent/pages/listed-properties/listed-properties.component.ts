@@ -54,20 +54,25 @@ this.router.navigateByUrl('list-property')
     });
 
     dialogRef.afterClosed().subscribe((result:PropertyRevenue) => {
-      console.log(JSON.stringify(result)+"sen");
       
       result.PropertyId=this.selectedPropertyId
-      this.agentPropertyService.markPropertyAsSold(result).subscribe(
-        response => {
+      this.agentPropertyService.markPropertyAsSold(result).subscribe({
+        next: (response) => {
           console.log('Property marked as sold successfully', response);
-          this.loadData();
-          // Handle successful response
-        },
-        error => {
-          console.error('Error marking property as sold', error);
-          // Handle error response
+          const property = this.properties.find(p => p.propertyId === this.selectedPropertyId);
+          console.log("property FOUNDDD"+property);
+          
+          if (property) {
+            property.isSold = true;
+            property.revenue = result.Revenue;
+            property.soldTo = result.SoldToUserId;
+          }
+        },error:()=>{
+          console.error('Error marking property as sold');
+
         }
-      );
+      })
+   
       // if (result) {
       //   this.propertyService.markAsSold(property.id, result).subscribe(
       //     (response) => {

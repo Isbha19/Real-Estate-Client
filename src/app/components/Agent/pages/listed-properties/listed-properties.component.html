@@ -92,6 +92,8 @@
                         class="btn btn-warning btn-sm me-1"
                         (click)="openSoldPropertyForm(property.propertyId)"
                         *ngIf="!property.isSold"
+                        [disabled]="!property.isVerified"
+
                       >
                         Mark as Sold
                       </button>
