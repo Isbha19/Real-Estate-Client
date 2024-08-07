@@ -301,6 +301,8 @@ export class ListPropertyFormComponent {
 
       this.agentService.addProperty(formData).subscribe({
         next: (response: ApiResponse) => {
+          localStorage.removeItem('listPropertyForm');
+
           this.toastr.success(response.message);
           this.router.navigateByUrl('/');
         },error:()=>{
