@@ -75,7 +75,7 @@ export class RegisterComponent {
         '',
         [
           Validators.required,
-          Validators.minLength(1),
+          Validators.minLength(3),
           Validators.maxLength(15),
           Validators.pattern("^[-'a-zA-Z]+$"),
         ],
@@ -84,7 +84,6 @@ export class RegisterComponent {
         '',
         [
           Validators.required,
-          Validators.minLength(3),
           Validators.maxLength(15),
           Validators.pattern("^[-'a-zA-Z]+$"),
         ],

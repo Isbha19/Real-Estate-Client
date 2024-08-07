@@ -14,6 +14,7 @@ import { User } from '../../../../core/model/account/user';
 import { LoginResponse } from '../../../../core/model/response/LoginResponse';
 import { CustomerPortalComponentComponent } from '../../../Company/pages/customer-portal-component/customer-portal-component.component';
 import { BooleanInput } from '@angular/cdk/coercion';
+import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 
 @Component({
   selector: 'app-navbar',
@@ -24,7 +25,9 @@ import { BooleanInput } from '@angular/cdk/coercion';
 })
 export class NavbarComponent {
 constructor(private dialog:MatDialog,
-  public accountService:AccountService
+  public accountService:AccountService,
+  private breakpointObserver: BreakpointObserver
+
 ){}
  LoginPopUp(){
 this.OpenPopUp(LoginComponent)
@@ -34,10 +37,11 @@ this.OpenPopUp(LoginComponent)
 this.OpenPopUp(RegisterComponent)
   }
   OpenPopUp(Component:ComponentType<unknown>){
- this.dialog.open(Component,{
-  width:'60%',
-  
-})
+    let isMobile = this.breakpointObserver.isMatched('(max-width: 767px)');
+    
+    this.dialog.open(Component, {
+      width: isMobile ? '80%' : '60%',
+    });
   }
   Logout(){
     this.accountService.logout();
