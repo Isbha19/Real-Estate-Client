@@ -7,6 +7,7 @@ import { NgxPaginationModule } from 'ngx-pagination';
 import { Router, RouterLink } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
 import {PropertyRevenue} from './../../model/propertyRevenue'
+import { ToastrService } from 'ngx-toastr';
 @Component({
   selector: 'app-listed-properties',
   standalone: true,
@@ -25,8 +26,8 @@ export class ListedPropertiesComponent {
   constructor(private agentPropertyService:AgentPropertyService,
     private datePipe: DatePipe,
 private router:Router,
-private dialog: MatDialog
-
+private dialog: MatDialog,
+private toastr:ToastrService
   ){
 
   }
@@ -55,21 +56,13 @@ this.router.navigateByUrl('list-property')
 
     dialogRef.afterClosed().subscribe((result:PropertyRevenue) => {
       
-      result.PropertyId=this.selectedPropertyId
+      result.PropertyId=this.selectedPropertyId      
       this.agentPropertyService.markPropertyAsSold(result).subscribe({
         next: (response) => {
-          console.log('Property marked as sold successfully', response);
-          const property = this.properties.find(p => p.propertyId === this.selectedPropertyId);
-          console.log("property FOUNDDD"+property);
-          
-          if (property) {
-            property.isSold = true;
-            property.revenue = result.Revenue;
-            property.soldTo = result.SoldToUserId;
-          }
-        },error:()=>{
-          console.error('Error marking property as sold');
-
+          this.toastr.success(response.message);
+          this.loadData();
+        },error:(error)=>{
+          console.error('Error marking property as sold'+error);
         }
       })
    
