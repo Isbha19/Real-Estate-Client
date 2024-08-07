@@ -38,6 +38,12 @@ export class LoginComponent {
   errorMessages: string[] = [];
   submitted: boolean = false;
   resendEmail = false;
+  showPassword = false;
+
+
+  togglePasswordVisibility() {
+    this.showPassword = !this.showPassword;
+  }
   constructor(
     private formBuilder: FormBuilder,
     private accountService: AccountService,

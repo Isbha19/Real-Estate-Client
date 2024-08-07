@@ -40,7 +40,11 @@ export class RegisterComponent {
   registerForm: FormGroup = new FormGroup({});
   errorMessages: string[] = [];
   submitted: boolean = false;
+  showPassword = false;
 
+  togglePasswordVisibility() {
+    this.showPassword = !this.showPassword;
+  }
   constructor(
     private formBuilder: FormBuilder,
     private accountService: AccountService,
@@ -71,7 +75,7 @@ export class RegisterComponent {
         '',
         [
           Validators.required,
-          Validators.minLength(3),
+          Validators.minLength(1),
           Validators.maxLength(15),
           Validators.pattern("^[-'a-zA-Z]+$"),
         ],

@@ -122,7 +122,6 @@ showEmoji=false;
   enableEmoji(){
 
       this.showEmoji = !this.showEmoji;
-      console.log('showEmoji:', this.showEmoji);
   }
   onTyping(event: Event) {
     const inputValue = (event.target as HTMLInputElement).value;

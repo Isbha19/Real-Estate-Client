@@ -5,6 +5,7 @@ html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 @import 'ngx-toastr/toastr';
 
+@import '@ctrl/ngx-emoji-mart/picker';
 
 .facebook-login-btn {
     background-color: #3B5998; /* Facebook blue color */
