@@ -1,6 +1,6 @@
 export const environment = {
     production: true,
-    apiUrl:'https://estahub.azurewebsites.net/api/',
-    hubUrl:'https://estahub.azurewebsites.net/hubs/',
+    apiUrl:'https://estahubapi-hwftf5gdayaqgahg.eastus-01.azurewebsites.net/api/',
+    hubUrl:'https://estahubapi-hwftf5gdayaqgahg.eastus-01.azurewebsites.net/hubs/',
     userKey:'RealEstateAppUser'
 };
